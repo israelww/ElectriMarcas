@@ -12,10 +12,6 @@ import HelloWorld from './components/HelloWorld.vue'
     </a>
   </div>
   <HelloWorld msg="Vite + Vue" />
-  <body>
-    <h1>Electrimarca</h1>
-    <h2>Tu tienda de confianza</h2>
-  </body>
 </template>
 
 <style scoped>
