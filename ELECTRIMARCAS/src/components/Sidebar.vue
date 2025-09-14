@@ -31,15 +31,15 @@
             </router-link>
 
             <!-- Enlace a información sobre la aplicación -->
-            <router-link class="button" to="/acerca-de">
+            <router-link class="button" to="/estadisticas">
                 <span class="material-icons">description</span>
-                <span class="text">Acerca de la app</span>
+                <span class="text">Estadisticas</span>
             </router-link>
 
             <!-- Enlace duplicado - necesita corrección -->
-            <router-link class="button" to="/Acerca-de">
+            <router-link class="button" to="/Consejos-de-Ahorro">
                 <span class="material-icons">group</span>
-                <span class="text">Acerca de la app</span>
+                <span class="text">Consejos de Ahorro</span>
             </router-link>
 
             <!-- Enlace duplicado - necesita corrección -->
