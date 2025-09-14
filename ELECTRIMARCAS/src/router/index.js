@@ -1,6 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Inicio from '../views/Inicio/Inicio.vue'
-import IniciodeSesion from '../views/IniciodeSesion/Inicio_de_Sesion.vue'
+import {createRouter, createWebHistory} from 'vue-router'
+import Inicio from '../views/Inicio.vue'
+
 
 const router = createRouter({
   history: createWebHistory(),
@@ -10,11 +10,7 @@ const router = createRouter({
       name: 'Inicio',
       component: Inicio
     },
-    {
-      path: '/inicio_de_sesion',
-      name: 'IniciodeSesion',
-      component: IniciodeSesion
-    },
+    
   ]
 })
 
