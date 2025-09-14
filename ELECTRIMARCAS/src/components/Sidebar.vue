@@ -13,27 +13,27 @@
 
         <h3>Menu</h3>
         <nav class="menu">
-            <router-link class="button" to="/">
+            <router-link class="button" to="/inicio">
                 <span class="material-icons">home</span>
                 <span class="text">Inicio</span>
             </router-link>
-            
-            <router-link class="button" to="/">
+
+            <router-link class="button" to="/mis-dispositivos">
                 <span class="material-icons">devices</span>
                 <span class="text">Mis Dispositivos</span>
             </router-link>
-        
-            <router-link class="button" to="/">
+
+            <router-link class="button" to="/acerca-de">
                 <span class="material-icons">description</span>
                 <span class="text">Acerca de la app</span>
             </router-link>
-           
-            <router-link class="button" to="/">
+
+            <router-link class="button" to="/Acerca-de">
                 <span class="material-icons">group</span>
                 <span class="text">Acerca de la app</span>
             </router-link>
-            
-            <router-link class="button" to="/">
+
+            <router-link class="button" to="/Acerca-de">
                 <span class="material-icons">dehaze</span>
                 <span class="text">Acerca de la app</span>
             </router-link>
@@ -57,175 +57,174 @@ const ToggleMenu = () => {
     
 <style lang="scss" scoped>
     /* Estilos para el Sidebar */
-    aside {
-        display: flex;
-        flex-direction: column;
-        width: calc(2rem + 32px);
-        min-height: 100vh;
-        height: 100%;
-        overflow: hidden;
-        position: sticky;
-        top: 0;
-        left: 0;
+		aside {
+			display: flex;
+			flex-direction: column;
+			background-color: var(--dark);
+			color: var(--light);
+			width: calc(2rem + 32px);
+			overflow: hidden;
+			min-height: 100vh;
+			padding: 1rem;
+			transition: width 0.2s ease-in-out;
+			position: static;
 
-        background-color: var(--dark);
-        color: var(--light);
+			&.is-expanded {
+				width: var(--sidebar-width);
+			}
 
-        transition: 0.2s ease-out;
+			@media (max-width: 1024px) {
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 99;
+				height: 100vh;
+				width: calc(2rem + 32px);
+				&.is-expanded {
+					width: var(--sidebar-width);
+					box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+				}
+			}
+			@media (max-width: 768px) {
+				&.is-expanded {
+					width: 280px;
+				}
+			}
+			@media (max-width: 480px) {
+				&.is-expanded {
+					width: 100vw;
+				}
+			}
 
-        @media (max-width: 768px) {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 99;
-        }
+		.flex {
+			flex: 1 1 0%;
+		}
 
-    
+		.logo {
+			margin-bottom: 1rem;
 
-    .logo {
-        margin-bottom: 1rem;
+		img {
+			width: 2rem;
+		}
+	}
 
-        img {
-            width: 2rem;
-            
-        }
-    }
+	.menu-toggle-wrap {
+		display: flex;
+		justify-content: flex-end;
+		margin-bottom: 1rem;
 
-    .menu-toggle-wrap {
-        display: flex;
-        justify-content: flex-end;
-        margin-bottom: 1rem;
+		position: relative;
+		top: 0;
+		transition: 0.2s ease-in-out;
 
-        position: relative;
-        top: 0;
-        transition: 0.2s ease-out;
+		.menu-toggle {
+			transition: 0.2s ease-in-out;
+			.material-icons {
+				font-size: 2rem;
+				color: var(--light);
+				transition: 0.2s ease-out;
+			}
+			
+			&:hover {
+				.material-icons {
+					color: var(--primary);
+					transform: translateX(0.5rem);
+				}
+			}
+		}
+	}
 
-        .menu-toggle{
-            transition: 0.2s ease-out;
+	h3, .button .text {
+		opacity: 0;
+		transition: opacity 0.3s ease-in-out;
+	}
 
-            .material-icons{
-                font-size: 2rem;
-                color: var(--light);
-                
-            }
-        }
-        
-        
-    }
+	h3 {
+		color: var(--grey);
+		font-size: 0.875rem;
+		margin-bottom: 0.5rem;
+		text-transform: uppercase;
+	}
 
-    h3, .button .text {
-        opacity: 0;
-        visibility: hidden;
-        display: none;
-        transition: 0.3s ease-out;
-    }
+	.menu {
+		margin: 0 -1rem;
 
-    h3 {
-        padding: 0 0.8rem;
-        margin-bottom: 1rem;
-        font-size: 1rem;
-    }
+		.button {
+			display: flex;
+			align-items: center;
+			text-decoration: none;
 
-    .menu {
-        flex: 1 1 0;
-        .button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            padding: 0.8rem;
-            color: var(--light);
-            transition: 0.2s ease-out;
+			transition: 0.2s ease-in-out;
+			padding: 0.5rem 1rem;
 
-            &:not(.is-expanded) {
-                padding: 0.8rem 0.15rem;
-            }
+			.material-icons {
+				font-size: 2rem;
+				color: var(--light);
+				transition: 0.2s ease-in-out;
+			}
+			.text {
+				color: var(--light);
+				transition: 0.2s ease-in-out;
+			}
 
-            .material-icons {
-                font-size: 2rem;
-                transition: 0.2s ease-out;
-                margin-right: 0;
-                width: 2rem;
-                text-align: center;
-            }
+			&:hover {
+				background-color: var(--dark-alt);
 
-            .text {
-                transition: 0.3s ease-out;
-            }
+				.material-icons, .text {
+					color: var(--primary);
+				}
+			}
 
-            &:hover {
-                background-color: var(--dark-alt);
-                .material-icons, .text {
-                    color: var(--primary);
-                }
-            }
+			&.router-link-exact-active {
+				background-color: var(--dark-alt);
+				border-right: 5px solid var(--primary);
 
-            &.router-link-exact-active {
-                background-color: var(--dark-alt);
-                border-right: 5px solid var(--primary);
-                .material-icons, .text {
-                    color: var(--primary);
-                }
-            }
-        }
-    }
+				.material-icons, .text {
+					color: var(--primary);
+				}
+			}
+		}
+	}
 
-    &.is-expanded {
-        width: var(--sidebar-width);
-        
-        h3, .button .text {
-            opacity: 1;
-            align-items: center;
-            justify-content: center;
-            visibility: visible;
-            display: block;
-        }
+	.footer {
+		opacity: 0;
+		transition: opacity 0.3s ease-in-out;
 
-        .button {
-            justify-content: flex-start;
-            align-items: center;
-            width: 100%;
-            box-sizing: border-box;
-            padding: 0.8rem 1rem 0.8rem 1.5rem;
-            gap: 1rem;
-            .material-icons {
-                min-width: 2rem;
-                text-align: center;
-                margin: 0;
-            }
-        }
-        
-        .menu-toggle-wrap {
-            top: -3rem;
-            .menu-toggle {
-                transform: rotate(-180deg);
-            }
-        }
-    }
+		p {
+			font-size: 0.875rem;
+			color: var(--grey);
+		}
+	}
 
-    .menu{
-        margin: 0 -1rem;
-    }
-    &.is-expanded {
-        width: var(--sidebar-width);
-        .menu-toggle-wrap {
-            top: -3rem ;
-            .menu-toggle {
-                transform: rotate(-180deg);
-            }
+	&.is-expanded {
+		width: var(--sidebar-width);
 
-        }
+		.menu-toggle-wrap {
+			top: -3rem;
+			
+			.menu-toggle {
+				transform: rotate(-180deg);
+			}
+		}
 
-    }
+		h3, .button .text {
+			opacity: 1;
+		}
 
-    h3, .button .text{
-        opacity: 1;
-       
-    }
+		.button {
+			.material-icons {
+				margin-right: 1rem;
+			}
+		}
 
-    @media (max-width: 768px) {
-        position: fixed;
-        z-index: 99;
-    }
+		.footer {
+			opacity: 0;
+		}
+	}
+
+	@media (max-width: 1024px) {
+		position: absolute;
+		z-index: 99;
+	}
 }
 </style>
