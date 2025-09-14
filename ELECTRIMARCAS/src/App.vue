@@ -9,13 +9,52 @@
     <!-- Área principal de contenido donde se renderizan las vistas -->
     <main>
       <router-view />
+      
+      <!-- Botón flotante para abrir panel de ayuda -->
+      <button 
+        class="help-toggle-btn" 
+        @click="toggleHelpPanel"
+        :title="showHelpPanel ? 'Cerrar ayuda (Ctrl+H)' : 'Abrir ayuda (Ctrl+H)'"
+      >
+        <span class="material-icons">
+          {{ showHelpPanel ? 'help' : 'help_outline' }}
+        </span>
+      </button>
     </main>
+
+    <!-- Panel de ayuda -->
+    <HelpPanel 
+      :isVisible="showHelpPanel" 
+      @close="closeHelpPanel"
+      @toggle="toggleHelpPanel"
+    />
   </nav>
 </template>
 
 <script setup>
-// Importación del componente Sidebar
+// Importación del componente Sidebar y HelpPanel
+import { ref } from 'vue'
 import Sidebar from './components/Sidebar.vue'
+import HelpPanel from './components/HelpPanel.vue'
+
+/**
+ * Estado reactivo para controlar la visibilidad del panel de ayuda
+ */
+const showHelpPanel = ref(false)
+
+/**
+ * Función para alternar la visibilidad del panel de ayuda
+ */
+const toggleHelpPanel = () => {
+  showHelpPanel.value = !showHelpPanel.value
+}
+
+/**
+ * Función para cerrar el panel de ayuda
+ */
+const closeHelpPanel = () => {
+  showHelpPanel.value = false
+}
 </script>
 <style lang="scss">
 /* ===========================================
@@ -76,6 +115,39 @@ main {
   background-color: white;
   min-height: 100vh;
   transition: margin-left 0.2s ease-in-out;
+  position: relative; /* Para posicionar el botón flotante */
+}
+
+/* ===========================================
+   BOTÓN FLOTANTE DE AYUDA
+   =========================================== */
+.help-toggle-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 56px;
+  height: 56px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 900;
+}
+
+.help-toggle-btn:hover {
+  background: #3ea832;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.help-toggle-btn .material-icons {
+  font-size: 24px;
 }
 
 /* ===========================================
@@ -99,6 +171,17 @@ main {
   main {
     padding: 1rem;
     margin-left: calc(2rem + 32px); /* Espacio para el sidebar contraído */
+  }
+  
+  .help-toggle-btn {
+    bottom: 1rem;
+    right: 1rem;
+    width: 48px;
+    height: 48px;
+  }
+  
+  .help-toggle-btn .material-icons {
+    font-size: 20px;
   }
 }
 </style>
