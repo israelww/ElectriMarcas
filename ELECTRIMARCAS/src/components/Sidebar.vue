@@ -10,6 +10,38 @@
                 <span class="material-icons">double_arrow</span>
              </button>
         </nav>
+
+        <h3>Menu</h3>
+        <nav class="menu">
+            <router-link class="button" to="/">
+                <span class="material-icons">home</span>
+                <span class="text">Inicio</span>
+            </router-link>
+            
+            <router-link class="button" to="/">
+                <span class="material-icons">devices</span>
+                <span class="text">Mis Dispositivos</span>
+            </router-link>
+        
+            <router-link class="button" to="/">
+                <span class="material-icons">description</span>
+                <span class="text">Acerca de la app</span>
+            </router-link>
+           
+            <router-link class="button" to="/">
+                <span class="material-icons">group</span>
+                <span class="text">Acerca de la app</span>
+            </router-link>
+            
+            <router-link class="button" to="/">
+                <span class="material-icons">dehaze</span>
+                <span class="text">Acerca de la app</span>
+            </router-link>
+            
+            
+
+        </nav>
+
     </aside>
 </template>
 
@@ -30,7 +62,11 @@ const ToggleMenu = () => {
         flex-direction: column;
         width: calc(2rem + 32px);
         min-height: 100vh;
+        height: 100%;
         overflow: hidden;
+        position: sticky;
+        top: 0;
+        left: 0;
 
         background-color: var(--dark);
         color: var(--light);
@@ -39,7 +75,9 @@ const ToggleMenu = () => {
 
         @media (max-width: 768px) {
             position: fixed;
-            z-index: 10;
+            top: 0;
+            left: 0;
+            z-index: 99;
         }
 
     
@@ -75,7 +113,99 @@ const ToggleMenu = () => {
         
     }
 
+    h3, .button .text {
+        opacity: 0;
+        visibility: hidden;
+        display: none;
+        transition: 0.3s ease-out;
+    }
 
+    h3 {
+        padding: 0 0.8rem;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+    }
+
+    .menu {
+        flex: 1 1 0;
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 0.8rem;
+            color: var(--light);
+            transition: 0.2s ease-out;
+
+            &:not(.is-expanded) {
+                padding: 0.8rem 0.15rem;
+            }
+
+            .material-icons {
+                font-size: 2rem;
+                transition: 0.2s ease-out;
+                margin-right: 0;
+                width: 2rem;
+                text-align: center;
+            }
+
+            .text {
+                transition: 0.3s ease-out;
+            }
+
+            &:hover {
+                background-color: var(--dark-alt);
+                .material-icons, .text {
+                    color: var(--primary);
+                }
+            }
+
+            &.router-link-exact-active {
+                background-color: var(--dark-alt);
+                border-right: 5px solid var(--primary);
+                .material-icons, .text {
+                    color: var(--primary);
+                }
+            }
+        }
+    }
+
+    &.is-expanded {
+        width: var(--sidebar-width);
+        
+        h3, .button .text {
+            opacity: 1;
+            align-items: center;
+            justify-content: center;
+            visibility: visible;
+            display: block;
+        }
+
+        .button {
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.8rem 1rem 0.8rem 1.5rem;
+            gap: 1rem;
+            .material-icons {
+                min-width: 2rem;
+                text-align: center;
+                margin: 0;
+            }
+        }
+        
+        .menu-toggle-wrap {
+            top: -3rem;
+            .menu-toggle {
+                transform: rotate(-180deg);
+            }
+        }
+    }
+
+    .menu{
+        margin: 0 -1rem;
+    }
     &.is-expanded {
         width: var(--sidebar-width);
         .menu-toggle-wrap {
@@ -86,6 +216,11 @@ const ToggleMenu = () => {
 
         }
 
+    }
+
+    h3, .button .text{
+        opacity: 1;
+       
     }
 
     @media (max-width: 768px) {

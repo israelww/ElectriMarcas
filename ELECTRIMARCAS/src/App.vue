@@ -39,15 +39,18 @@ button {
 
 .app {
   display: flex;
+  min-height: 100vh;
+  width: 100%;
 
   main {
     flex: 1 1 0;
     padding: 2rem;
     background-color: white;
+    min-height: 100vh;
   }
 
   @media(max-width: 768px) {
-    flex-direction: column;
+    padding-left: calc(2rem + 32px);
     padding-top: 6rem;
   }
 }
