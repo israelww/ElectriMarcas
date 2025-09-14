@@ -22,7 +22,7 @@ import Sidebar from './components/Sidebar.vue'
    VARIABLES CSS GLOBALES
    =========================================== */
 :root {
-  --primary: #92c83c;        /* Color primario de la aplicación */
+  --primary: #8aca1c;        /* Color primario de la aplicación */
   --grey: #6b7280;           /* Color gris para texto secundario */
   --dark: #1e293b;           /* Color oscuro para el sidebar */
   --dark-alt: #334155;       /* Color oscuro alternativo para hover */
@@ -38,6 +38,11 @@ import Sidebar from './components/Sidebar.vue'
   padding: 0;
   box-sizing: border-box;
   font-family: 'Fira sans', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -60,6 +65,7 @@ button {
 .app {
   display: flex;
   min-height: 100vh;
+  
   width: 100%;
 }
 
