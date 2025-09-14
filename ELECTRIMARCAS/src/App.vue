@@ -1,56 +1,21 @@
-
+<script setup>
+</script>
 
 <template>
-    <span class="app">
-      <!--Sidebar-->
-      <Sidebar></Sidebar>
-        <router-view></router-view>
-    </span>
+    <RouterView />
 </template>
-<script setup>
-import Sidebar from './components/Sidebar.vue'
-</script>
-<style lang="scss">
-:root {
-  --primary: #4ade80;
-  --grey: #6b7280;
-  --dark: #1e293b;
-  --dark-alt: #334155;
-  --light: #f1f5f9;
-  --sidebar-width: 300px;
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Fira sans', sans-serif;
-}
-body {
-  background-color: white;
-  color: #333;
-}
-button {
-  cursor: pointer;
-  appearance: none;
-  border: none;
-  outline: none;
-  background: none;
-}
 
-.app {
-  display: flex;
-
-  main {
-    flex: 1 1 0;
-    padding: 2rem;
-    background-color: white;
-  }
-
-  @media(max-width: 768px) {
-    flex-direction: column;
-    padding-top: 6rem;
-  }
+<style scoped>
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
 }
-
-
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vue:hover {
+  filter: drop-shadow(0 0 2em #42b883aa);
+}
 </style>
