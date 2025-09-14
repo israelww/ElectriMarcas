@@ -36,13 +36,13 @@
                 <span class="text">Estadisticas</span>
             </router-link>
 
-            <!-- Enlace duplicado - necesita corrección -->
+           
             <router-link class="button" to="/Consejos-de-Ahorro">
                 <span class="material-icons">group</span>
                 <span class="text">Consejos de Ahorro</span>
             </router-link>
 
-            <!-- Enlace duplicado - necesita corrección -->
+            
             <router-link class="button" to="/Acerca-de">
                 <span class="material-icons">dehaze</span>
                 <span class="text">Acerca de la app</span>
