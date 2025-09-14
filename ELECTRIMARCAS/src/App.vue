@@ -22,7 +22,7 @@ import Sidebar from './components/Sidebar.vue'
    VARIABLES CSS GLOBALES
    =========================================== */
 :root {
-  --primary: #4ade80;        /* Color primario de la aplicación */
+  --primary: #92c83c;        /* Color primario de la aplicación */
   --grey: #6b7280;           /* Color gris para texto secundario */
   --dark: #1e293b;           /* Color oscuro para el sidebar */
   --dark-alt: #334155;       /* Color oscuro alternativo para hover */

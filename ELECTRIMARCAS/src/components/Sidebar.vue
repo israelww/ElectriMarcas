@@ -3,7 +3,7 @@
     <aside :class="`${is_expanded && 'is-expanded'}`">
         <!-- Header con el logo de la aplicación -->
         <header class="logo">
-            <img src="../assets/vue.svg" alt="Electri Marcas Logo">
+            <img src="../assets/electrimarcas.png" alt="Electri Marcas Logo">
         </header>
 
         <!-- Botón para expandir/contraer el menú -->
