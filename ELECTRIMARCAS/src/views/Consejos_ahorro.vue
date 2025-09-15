@@ -7,6 +7,7 @@
         <h1>Consejos de ahorro</h1>
         <p> Estos consejos te ayudarán a reducir el consumo de energía en tu hogar, 
             ahorrar dinero en tus recibos de luz y contribuir al cuidado del medio ambiente.</p>
+        <nav class="consejos-info">Estos consejos se irán modificando dependiendo en el consumo que realices con los electrodomésticos usados.</nav>
         <nav class="consejos-lista">
             <!-- Lista de consejos -->
             <nav
@@ -76,12 +77,13 @@ export default {
 */
 .consejos {
     padding: 2rem;
+    text-align: center;
 }
 
 .consejos-lista {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 1.2rem;
     margin-top: 1.5rem;
 }
@@ -115,5 +117,11 @@ export default {
 .consejo-descripcion {
     font-size: 1rem;
     line-height: 1.4;
+}
+.consejos-info {
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
+    margin-top: 0.5rem;
 }
 </style>
