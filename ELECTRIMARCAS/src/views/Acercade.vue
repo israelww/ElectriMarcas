@@ -4,7 +4,6 @@
         El título y la introducción van fuera de la tarjeta.
         El detalle principal va dentro de una sola card.
     -->
-    <main class="Acercade-page">
         <section class="Acercade">
             <h1>Acerca de la App</h1>
             <p>
@@ -27,7 +26,6 @@
                 </p>
             </nav>
         </section>
-    </main>
 </template>
 
 <script>
@@ -37,15 +35,10 @@ export default {
 </script>
 
 <style scoped>
-.Acercade-page {
-    padding: 2rem;
-    display: flex;
-    align-items: flex-start;
-}
-
 .Acercade {
     max-width: 750px;
     width: 100%;
+    padding: 2rem;
 }
 
 /* Card */
@@ -66,7 +59,7 @@ export default {
 }
 
 .Acercade-card p {
-    font-size: 1rem;
+    font-size: 1rem; 
     line-height: 1.5;
     color: #444;
     margin-bottom: 1rem;

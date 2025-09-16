@@ -77,13 +77,13 @@ export default {
 */
 .consejos {
     padding: 2rem;
-    text-align: center;
+    text-align: left;
 }
 
 .consejos-lista {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left; /* Alinea las tarjetas a la izquierda */
     gap: 1.2rem;
     margin-top: 1.5rem;
 }
@@ -110,7 +110,7 @@ export default {
     font-size: 1.2rem;
     font-weight: 700;
     display: flex;
-    align-items: center;
+    align-items: left;
     gap: 0.5rem;
 }
 

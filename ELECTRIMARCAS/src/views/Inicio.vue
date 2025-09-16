@@ -1,37 +1,4 @@
 
-
-<template>
-    <!--
-        Vista de categorías de electrodomésticos.
-        Cada categoría se muestra como una tarjeta.
-        Los electrodomésticos de cada categoría se cargarán dinámicamente desde la base de datos.
-    -->
-    <section class="inicio">
-        <h1>Categorías de Electrodomésticos</h1>
-        <p>Añade un electrodoméstico a su respectiva categoría con sus datos para su calcular su consumo.</p>
-        <nav class="categorias-lista">
-            <!-- Lista de categorías fijas -->
-            <nav
-                v-for="categoria in categorias"
-                :key="categoria.id"
-                class="categoria-card">
-                <h2>{{ categoria.nombre }}</h2>
-                <p class="categoria-descripcion">{{ categoria.descripcion }}</p><br>
-                <!--
-                    Aquí se mostrarán los electrodomésticos de la categoría,
-                    obtenidos desde la base de datos en el futuro.
-                -->
-                <nav class="electrodomesticos-placeholder">
-                    <em>Electrodomésticos de esta categoría se cargarán aquí.</em>
-                </nav>
-                <br>
-                <input type="button" value="Añadir Electrodoméstico" class="add-button">
-            </nav>
-            
-        </nav>
-    </section>
-</template>
-
 <script>
 //
 // Componente de vista de categorías de electrodomésticos.
@@ -69,12 +36,44 @@ export default {
                     nombre: 'Cuidado Personal',
                     descripcion: 'Electrodomésticos para el cuidado y bienestar personal.',
                 },
-                // Puedes agregar más categorías aquí
+                // Se pueden agregar más categorías aquí
             ],
         };
     },
 };
 </script>
+
+<template>
+    <!--
+        Vista de categorías de electrodomésticos.
+        Cada categoría se muestra como una tarjeta.
+        Los electrodomésticos de cada categoría se cargarán dinámicamente desde la base de datos.
+    -->
+    <section class="inicio">
+        <h1>Categorías de Electrodomésticos</h1>
+        <p>Añade un electrodoméstico a su respectiva categoría con sus datos para su calcular su consumo.</p>
+        <nav class="categorias-lista">
+            <!-- Lista de categorías fijas -->
+            <nav
+                v-for="categoria in categorias"
+                :key="categoria.id"
+                class="categoria-card">
+                <h2>{{ categoria.nombre }}</h2>
+                <p class="categoria-descripcion">{{ categoria.descripcion }}</p><br>
+                <!--
+                    Aquí se mostrarán los electrodomésticos de la categoría,
+                    obtenidos desde la base de datos en el futuro.
+                -->
+                <nav class="electrodomesticos-placeholder">
+                    <em>Electrodomésticos de esta categoría se cargarán aquí.</em>
+                </nav>
+                <br>
+                <input type="button" value="Añadir Electrodoméstico" class="add-button">
+            </nav>
+            
+        </nav>
+    </section>
+</template>
 
 <style scoped>
 /*
@@ -96,7 +95,6 @@ export default {
     gap: 0;
     margin-top: 2rem;
 }
-
 
 .categoria-card {
     background: #fff;
