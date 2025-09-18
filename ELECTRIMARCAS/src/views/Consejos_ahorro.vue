@@ -76,6 +76,8 @@ export default {
     .consejo-card: Tarjeta individual de cada consejo.
 */
 .consejos {
+    max-width: 750px;
+    width: 100%;
     padding: 2rem;
     text-align: left;
 }
