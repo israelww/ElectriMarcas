@@ -85,9 +85,11 @@ export default {
   font-size: 1.2rem;
   margin-top: 20px;
   margin-bottom: 2px;
+  color: white;
 }
 .card-description {
   font-size: 0.9rem;
+  color: white;
 
 }
 .card-actions {
