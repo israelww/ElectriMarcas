@@ -1,11 +1,8 @@
 
 <script>
-//
 // Componente de vista de categorías de electrodomésticos.
-// Las categorías están definidas de forma fija.
-// Los electrodomésticos se cargarán dinámicamente desde la base de datos en el futuro.
-//
 import Card from '../components/Card.vue'
+import Formulario from '../components/formulario.vue'
 import Refrigerador from '../assets/refrigerator.png' 
 import Lavadora from '../assets/lavadora.png'
 import Tv from '../assets/tv.png'
@@ -13,11 +10,9 @@ import Aire from '../assets/aire.png'
 import Plancha from '../assets/plancha.png'
 export default {
     name: 'Inicio',
-    components:{Card},
-    
+    components: { Card, Formulario },
     data() {
         return {
-            // Lista fija de categorías de electrodomésticos
             categorias: [
                 {
                     id: 1,
@@ -71,20 +66,44 @@ export default {
                 },
                 // Se pueden agregar más categorías aquí
             ],
-            methods: {
-                removeCard(categoriaId, cardIndex) {
-                const categoria = this.categorias.find(c => c.id === categoriaId);
-                    if (categoria) {
-                    categoria.cards.splice(cardIndex, 1); // elimina la card
-                    }
-                }
-            },
-        
-        };
-        
 
+            // Estado para mostrar el formulario y categoría seleccionada
+            showForm: false,
+            categoriaSeleccionada: null,
+        };
     },
-    
+    methods: {
+        removeCard(categoriaId, cardIndex) {
+            const categoria = this.categorias.find(c => c.id === categoriaId);
+            if (categoria) {
+                categoria.cards.splice(cardIndex, 1);
+            }
+        },
+        abrirFormulario(categoriaId) {
+            this.categoriaSeleccionada = categoriaId;
+            this.showForm = true;
+        },
+        cerrarFormulario() {
+            this.showForm = false;
+            this.categoriaSeleccionada = null;
+        },
+        agregarDispositivo(dispositivo) {
+            // Añade el dispositivo a la categoría seleccionada
+            const categoria = this.categorias.find(c => c.id === this.categoriaSeleccionada);
+            if (categoria) {
+                categoria.cards.push({
+                    title: dispositivo.nombre,
+                    description: dispositivo.descripcion,
+                    image: '', // Puedes pedir imagen en el formulario si lo deseas
+                    backgroundColor1: '#B31C00',
+                    backgroundColor2: '#FF2B00',
+                    voltaje: dispositivo.voltaje,
+                    potencia: dispositivo.potencia,
+                });
+            }
+            this.cerrarFormulario();
+        },
+    },
 };
 </script>
 
@@ -117,12 +136,23 @@ export default {
                     @remove="removeCard(categoria.id,idx)"
                 />
                 <br>
+<<<<<<< Updated upstream
                 <router-link class="add-button" to="/Nuevo_dispositivo">
                     <span class="textoBotonAniadir">Añadir dispositivo</span>
                 </router-link>
+=======
+                <input type="button" value="Añadir Electrodoméstico no registrado" class="add-button" @click="abrirFormulario(categoria.id)">
+
+>>>>>>> Stashed changes
             </nav>
-            
         </nav>
+    <!-- Formulario modal -->
+    <Formulario
+      :visible="showForm"
+      :categorias="categorias.map(c => c.nombre)"
+      @close="cerrarFormulario"
+      @submit="agregarDispositivo"
+    />
     </section>
 </template>
 
