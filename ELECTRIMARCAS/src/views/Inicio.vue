@@ -117,7 +117,9 @@ export default {
                     @remove="removeCard(categoria.id,idx)"
                 />
                 <br>
-                <input type="button" value="Añadir Electrodoméstico" class="add-button">
+                <router-link class="add-button" to="/Nuevo_dispositivo">
+                    <span class="textoBotonAniadir">Añadir dispositivo</span>
+                </router-link>
             </nav>
             
         </nav>
@@ -195,8 +197,6 @@ export default {
     
 }
 
-
-
 .electrodomesticos-placeholder {
     font-size: 0.95rem;
     color: #888;
@@ -205,13 +205,17 @@ export default {
 }
 .add-button {
     background-color: var(--primary);
-    color: rgb(26, 25, 25);
     border: none;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.2s;
+    text-decoration: none;
+}
+
+.textoBotonAniadir{
+    color: white;
 }
 
 </style>
