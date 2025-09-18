@@ -55,6 +55,7 @@ export default {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   transition: transform 0.2s;
   display: flex;
+  max-width: 700px;
   
 }
 

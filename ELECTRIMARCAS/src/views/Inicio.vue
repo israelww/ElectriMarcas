@@ -136,14 +136,12 @@ export default {
                     @remove="removeCard(categoria.id,idx)"
                 />
                 <br>
-<<<<<<< Updated upstream
                 <router-link class="add-button" to="/Nuevo_dispositivo">
                     <span class="textoBotonAniadir">Añadir dispositivo</span>
                 </router-link>
-=======
-                <input type="button" value="Añadir Electrodoméstico no registrado" class="add-button" @click="abrirFormulario(categoria.id)">
+                <br>
+                <!-- Botón para abrir el formulario modal -->
 
->>>>>>> Stashed changes
             </nav>
         </nav>
     <!-- Formulario modal -->
