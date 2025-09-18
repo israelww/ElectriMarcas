@@ -54,6 +54,7 @@ import Lavadora from "../assets/lavadora.png"
 import Aire from "../assets/aire.png"
 import Plancha from "../assets/plancha.png"
 export default {
+  // Cambiar primero la categoria para que con base en la categoria se muestren los dispositivos
   name: "NuevoDispositivo",
   components: { Buscador, Card, Formulario },
   data() {

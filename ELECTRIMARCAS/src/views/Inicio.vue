@@ -1,6 +1,9 @@
 
+
 <script>
 // Componente de vista de categorías de electrodomésticos.
+// Falta hacer un panel a la izquierda en añadir dispositivo que acumule los dispositivos añadidos y al dar click en guardar
+// se añadan todos a la categoría correspondiente y con sus respectivos datos (voltaje, potencia, etc.)
 import Card from '../components/Card.vue'
 import Formulario from '../components/formulario.vue'
 import Refrigerador from '../assets/refrigerator.png' 
