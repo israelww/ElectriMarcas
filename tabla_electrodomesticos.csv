@@ -1,0 +1,441 @@
+nombre_categoria,nombre_electrodomestico,nombre_marca,nombre_modelo,año_fabricacion,descripcion,voltaje,potencia
+limpieza,Secadora,Bosch,Serie 4 WTG86400UC,2021,"Secadora marca Bosch modelo Serie 4 WTG86400UC, eficiente y de uso doméstico.",220,2527
+limpieza,Secadora,LG,DLE3500W,2016,"Secadora marca LG modelo DLE3500W, eficiente y de uso doméstico.",220,2037
+limpieza,Hidrolavadora,Karcher,K4 Full Control,2015,"Hidrolavadora marca Karcher modelo K4 Full Control, eficiente y de uso doméstico.",127,1483
+limpieza,Vaporeta,Karcher,SC 3,2022,"Vaporeta marca Karcher modelo SC 3, eficiente y de uso doméstico.",240,1810
+limpieza,Aspiradora,iRobot,Roomba s9,2024,"Aspiradora marca iRobot modelo Roomba s9, eficiente y de uso doméstico.",120,1000
+limpieza,Vaporeta,Polti,Vaporella,2015,"Vaporeta marca Polti modelo Vaporella, eficiente y de uso doméstico.",240,1223
+limpieza,Plancha,Rowenta,DW5080,2017,"Plancha marca Rowenta modelo DW5080, eficiente y de uso doméstico.",240,2214
+limpieza,Aspiradora,Hoover,WindTunnel 2 UH72630,2016,"Aspiradora marca Hoover modelo WindTunnel 2 UH72630, eficiente y de uso doméstico.",120,870
+limpieza,Hidrolavadora,Karcher,K4 Full Control,2016,"Hidrolavadora marca Karcher modelo K4 Full Control, eficiente y de uso doméstico.",127,2453
+limpieza,Aspiradora,Roborock,S7,2024,"Aspiradora marca Roborock modelo S7, eficiente y de uso doméstico.",240,849
+limpieza,Aspiradora,Dyson,V8 Absolute,2023,"Aspiradora marca Dyson modelo V8 Absolute, eficiente y de uso doméstico.",220,924
+limpieza,Aspiradora,Shark,Navigator Lift-Away NV352,2015,"Aspiradora marca Shark modelo Navigator Lift-Away NV352, eficiente y de uso doméstico.",127,1348
+limpieza,Secadora,Whirlpool,WED4815EW,2017,"Secadora marca Whirlpool modelo WED4815EW, eficiente y de uso doméstico.",220,2395
+limpieza,Lavavajillas,Whirlpool,WDF330PAHW,2021,"Lavavajillas marca Whirlpool modelo WDF330PAHW, eficiente y de uso doméstico.",220,1622
+limpieza,Plancha,Rowenta,DW5080,2023,"Plancha marca Rowenta modelo DW5080, eficiente y de uso doméstico.",220,1796
+limpieza,Lavadora,Whirlpool,WTW5000DW,2024,"Lavadora marca Whirlpool modelo WTW5000DW, eficiente y de uso doméstico.",240,1765
+limpieza,Lavavajillas,GE,GDT665SSNSS,2019,"Lavavajillas marca GE modelo GDT665SSNSS, eficiente y de uso doméstico.",120,1967
+limpieza,Vaporeta,Karcher,SC 3,2021,"Vaporeta marca Karcher modelo SC 3, eficiente y de uso doméstico.",240,1973
+limpieza,Secadora,Samsung,DV42H5000EW,2021,"Secadora marca Samsung modelo DV42H5000EW, eficiente y de uso doméstico.",220,2611
+limpieza,Secadora,Whirlpool,WED4815EW,2019,"Secadora marca Whirlpool modelo WED4815EW, eficiente y de uso doméstico.",220,4467
+limpieza,Lavadora,Samsung,WA50R5400AV,2022,"Lavadora marca Samsung modelo WA50R5400AV, eficiente y de uso doméstico.",120,1262
+limpieza,Lavadora,Whirlpool,WTW5000DW,2024,"Lavadora marca Whirlpool modelo WTW5000DW, eficiente y de uso doméstico.",120,1216
+limpieza,Secadora,Bosch,Serie 4 WTG86400UC,2019,"Secadora marca Bosch modelo Serie 4 WTG86400UC, eficiente y de uso doméstico.",120,1271
+limpieza,Lavadora,Samsung,WA50R5400AV,2019,"Lavadora marca Samsung modelo WA50R5400AV, eficiente y de uso doméstico.",220,1295
+limpieza,Lavadora,Whirlpool,WTW5000DW,2021,"Lavadora marca Whirlpool modelo WTW5000DW, eficiente y de uso doméstico.",127,1543
+limpieza,Vaporeta,Polti,Vaporella,2017,"Vaporeta marca Polti modelo Vaporella, eficiente y de uso doméstico.",127,1726
+limpieza,Lavadora,Samsung,WA50R5400AV,2024,"Lavadora marca Samsung modelo WA50R5400AV, eficiente y de uso doméstico.",127,1219
+limpieza,Lavadora,Bosch,Serie 6 WAU28PH9ES,2025,"Lavadora marca Bosch modelo Serie 6 WAU28PH9ES, eficiente y de uso doméstico.",240,614
+limpieza,Plancha,Black+Decker,D3030,2015,"Plancha marca Black+Decker modelo D3030, eficiente y de uso doméstico.",127,2652
+limpieza,Secadora,Whirlpool,WED4815EW,2025,"Secadora marca Whirlpool modelo WED4815EW, eficiente y de uso doméstico.",240,1437
+limpieza,Lavavajillas,Bosch,Serie 4 SMS46KW02E,2018,"Lavavajillas marca Bosch modelo Serie 4 SMS46KW02E, eficiente y de uso doméstico.",127,1624
+limpieza,Lavadora,Samsung,WA50R5400AV,2015,"Lavadora marca Samsung modelo WA50R5400AV, eficiente y de uso doméstico.",120,1803
+limpieza,Secadora,Bosch,Serie 4 WTG86400UC,2019,"Secadora marca Bosch modelo Serie 4 WTG86400UC, eficiente y de uso doméstico.",220,1960
+limpieza,Lavavajillas,Mabe,LP8000WG,2022,"Lavavajillas marca Mabe modelo LP8000WG, eficiente y de uso doméstico.",120,1855
+limpieza,Aspiradora,Miele,Classic C1,2017,"Aspiradora marca Miele modelo Classic C1, eficiente y de uso doméstico.",220,703
+limpieza,Plancha,Philips,GC5039/30,2022,"Plancha marca Philips modelo GC5039/30, eficiente y de uso doméstico.",127,1752
+limpieza,Secadora,Whirlpool,WED4815EW,2020,"Secadora marca Whirlpool modelo WED4815EW, eficiente y de uso doméstico.",127,806
+limpieza,Lavadora,LG,F4J6VY2W,2023,"Lavadora marca LG modelo F4J6VY2W, eficiente y de uso doméstico.",220,1762
+limpieza,Lavavajillas,Bosch,Serie 4 SMS46KW02E,2024,"Lavavajillas marca Bosch modelo Serie 4 SMS46KW02E, eficiente y de uso doméstico.",120,1466
+limpieza,Lavavajillas,Mabe,LP8000WG,2022,"Lavavajillas marca Mabe modelo LP8000WG, eficiente y de uso doméstico.",220,2163
+limpieza,Plancha,Rowenta,DW5080,2024,"Plancha marca Rowenta modelo DW5080, eficiente y de uso doméstico.",127,1358
+limpieza,Hidrolavadora,Sun Joe,SPX3000,2015,"Hidrolavadora marca Sun Joe modelo SPX3000, eficiente y de uso doméstico.",127,2067
+limpieza,Lavadora,Bosch,Serie 6 WAU28PH9ES,2017,"Lavadora marca Bosch modelo Serie 6 WAU28PH9ES, eficiente y de uso doméstico.",240,1024
+limpieza,Plancha,Black+Decker,D3030,2015,"Plancha marca Black+Decker modelo D3030, eficiente y de uso doméstico.",240,1020
+limpieza,Lavadora,Samsung,WA50R5400AV,2018,"Lavadora marca Samsung modelo WA50R5400AV, eficiente y de uso doméstico.",240,1245
+limpieza,Vaporeta,Bissell,PowerFresh 1940,2017,"Vaporeta marca Bissell modelo PowerFresh 1940, eficiente y de uso doméstico.",120,1146
+limpieza,Plancha,Philips,GC5039/30,2018,"Plancha marca Philips modelo GC5039/30, eficiente y de uso doméstico.",220,1146
+limpieza,Hidrolavadora,Bosch,EasyAquatak 120,2018,"Hidrolavadora marca Bosch modelo EasyAquatak 120, eficiente y de uso doméstico.",127,2063
+limpieza,Hidrolavadora,Karcher,K4 Full Control,2017,"Hidrolavadora marca Karcher modelo K4 Full Control, eficiente y de uso doméstico.",220,1544
+limpieza,Vaporeta,Karcher,SC 3,2021,"Vaporeta marca Karcher modelo SC 3, eficiente y de uso doméstico.",220,1465
+limpieza,Aspiradora,Xiaomi,Mi Handheld Vacuum,2022,"Aspiradora marca Xiaomi modelo Mi Handheld Vacuum, eficiente y de uso doméstico.",120,1443
+limpieza,Vaporeta,Karcher,SC 3,2021,"Vaporeta marca Karcher modelo SC 3, eficiente y de uso doméstico.",120,1568
+limpieza,Hidrolavadora,Karcher,K4 Full Control,2017,"Hidrolavadora marca Karcher modelo K4 Full Control, eficiente y de uso doméstico.",240,1341
+limpieza,Lavadora,Whirlpool,WTW5000DW,2017,"Lavadora marca Whirlpool modelo WTW5000DW, eficiente y de uso doméstico.",240,1021
+limpieza,Lavavajillas,Bosch,Serie 4 SMS46KW02E,2020,"Lavavajillas marca Bosch modelo Serie 4 SMS46KW02E, eficiente y de uso doméstico.",127,1892
+limpieza,Aspiradora,Roborock,S7,2016,"Aspiradora marca Roborock modelo S7, eficiente y de uso doméstico.",220,1228
+limpieza,Lavadora,Bosch,Serie 6 WAU28PH9ES,2017,"Lavadora marca Bosch modelo Serie 6 WAU28PH9ES, eficiente y de uso doméstico.",127,1427
+limpieza,Vaporeta,Polti,Vaporella,2021,"Vaporeta marca Polti modelo Vaporella, eficiente y de uso doméstico.",240,1781
+limpieza,Plancha,Oster,GCSTBS5802,2016,"Plancha marca Oster modelo GCSTBS5802, eficiente y de uso doméstico.",127,1793
+limpieza,Secadora,Samsung,DV42H5000EW,2020,"Secadora marca Samsung modelo DV42H5000EW, eficiente y de uso doméstico.",120,4641
+limpieza,Lavadora,Whirlpool,WTW5000DW,2015,"Lavadora marca Whirlpool modelo WTW5000DW, eficiente y de uso doméstico.",120,1794
+limpieza,Plancha,Black+Decker,D3030,2025,"Plancha marca Black+Decker modelo D3030, eficiente y de uso doméstico.",220,1808
+limpieza,Lavadora,LG,F4J6VY2W,2016,"Lavadora marca LG modelo F4J6VY2W, eficiente y de uso doméstico.",240,1883
+limpieza,Hidrolavadora,Bosch,EasyAquatak 120,2018,"Hidrolavadora marca Bosch modelo EasyAquatak 120, eficiente y de uso doméstico.",127,1472
+limpieza,Aspiradora,Dyson,V8 Absolute,2021,"Aspiradora marca Dyson modelo V8 Absolute, eficiente y de uso doméstico.",120,754
+limpieza,Vaporeta,Karcher,SC 3,2019,"Vaporeta marca Karcher modelo SC 3, eficiente y de uso doméstico.",220,1457
+limpieza,Secadora,Bosch,Serie 4 WTG86400UC,2025,"Secadora marca Bosch modelo Serie 4 WTG86400UC, eficiente y de uso doméstico.",120,3252
+limpieza,Aspiradora,Dyson,V15 Detect,2020,"Aspiradora marca Dyson modelo V15 Detect, eficiente y de uso doméstico.",120,1743
+limpieza,Lavavajillas,Bosch,SPS2HKW58E,2016,"Lavavajillas marca Bosch modelo SPS2HKW58E, eficiente y de uso doméstico.",120,2086
+limpieza,Aspiradora,Shark,Navigator Lift-Away NV352,2018,"Aspiradora marca Shark modelo Navigator Lift-Away NV352, eficiente y de uso doméstico.",240,1341
+limpieza,Plancha,Philips,GC5039/30,2021,"Plancha marca Philips modelo GC5039/30, eficiente y de uso doméstico.",120,2183
+limpieza,Lavadora,Samsung,WA50R5400AV,2022,"Lavadora marca Samsung modelo WA50R5400AV, eficiente y de uso doméstico.",127,884
+limpieza,Aspiradora,iRobot,Roomba s9,2017,"Aspiradora marca iRobot modelo Roomba s9, eficiente y de uso doméstico.",220,251
+limpieza,Lavavajillas,Mabe,LP8000WG,2023,"Lavavajillas marca Mabe modelo LP8000WG, eficiente y de uso doméstico.",220,1626
+limpieza,Lavadora,Maytag,MVWC565FW,2023,"Lavadora marca Maytag modelo MVWC565FW, eficiente y de uso doméstico.",240,761
+limpieza,Lavadora,LG,F4J6VY2W,2024,"Lavadora marca LG modelo F4J6VY2W, eficiente y de uso doméstico.",127,723
+limpieza,Secadora,Samsung,DV42H5000EW,2016,"Secadora marca Samsung modelo DV42H5000EW, eficiente y de uso doméstico.",120,1942
+limpieza,Lavadora,Maytag,MVWC565FW,2017,"Lavadora marca Maytag modelo MVWC565FW, eficiente y de uso doméstico.",127,837
+limpieza,Lavavajillas,GE,GDT665SSNSS,2023,"Lavavajillas marca GE modelo GDT665SSNSS, eficiente y de uso doméstico.",220,1817
+limpieza,Secadora,Bosch,Serie 4 WTG86400UC,2020,"Secadora marca Bosch modelo Serie 4 WTG86400UC, eficiente y de uso doméstico.",120,3696
+limpieza,Lavavajillas,GE,GDT665SSNSS,2016,"Lavavajillas marca GE modelo GDT665SSNSS, eficiente y de uso doméstico.",220,2383
+limpieza,Aspiradora,Roborock,S7,2021,"Aspiradora marca Roborock modelo S7, eficiente y de uso doméstico.",240,1149
+limpieza,Plancha,Philips,GC5039/30,2020,"Plancha marca Philips modelo GC5039/30, eficiente y de uso doméstico.",120,2570
+limpieza,Lavadora,Maytag,MVWC565FW,2020,"Lavadora marca Maytag modelo MVWC565FW, eficiente y de uso doméstico.",127,1013
+limpieza,Lavadora,Samsung,WA50R5400AV,2017,"Lavadora marca Samsung modelo WA50R5400AV, eficiente y de uso doméstico.",120,1827
+limpieza,Lavavajillas,Bosch,Serie 4 SMS46KW02E,2021,"Lavavajillas marca Bosch modelo Serie 4 SMS46KW02E, eficiente y de uso doméstico.",120,1751
+limpieza,Hidrolavadora,Karcher,K4 Full Control,2021,"Hidrolavadora marca Karcher modelo K4 Full Control, eficiente y de uso doméstico.",127,1976
+limpieza,Vaporeta,Polti,Vaporella,2017,"Vaporeta marca Polti modelo Vaporella, eficiente y de uso doméstico.",120,1308
+limpieza,Vaporeta,Polti,Vaporella,2019,"Vaporeta marca Polti modelo Vaporella, eficiente y de uso doméstico.",127,1247
+limpieza,Lavadora,Bosch,Serie 6 WAU28PH9ES,2024,"Lavadora marca Bosch modelo Serie 6 WAU28PH9ES, eficiente y de uso doméstico.",127,875
+limpieza,Aspiradora,Dyson,V8 Absolute,2018,"Aspiradora marca Dyson modelo V8 Absolute, eficiente y de uso doméstico.",240,1872
+limpieza,Hidrolavadora,Karcher,K4 Full Control,2021,"Hidrolavadora marca Karcher modelo K4 Full Control, eficiente y de uso doméstico.",220,1873
+limpieza,Secadora,LG,DLE3500W,2020,"Secadora marca LG modelo DLE3500W, eficiente y de uso doméstico.",120,1074
+limpieza,Secadora,Whirlpool,WED4815EW,2024,"Secadora marca Whirlpool modelo WED4815EW, eficiente y de uso doméstico.",120,2239
+limpieza,Plancha,Oster,GCSTBS5802,2019,"Plancha marca Oster modelo GCSTBS5802, eficiente y de uso doméstico.",127,1181
+limpieza,Secadora,LG,DLE3500W,2019,"Secadora marca LG modelo DLE3500W, eficiente y de uso doméstico.",120,4246
+limpieza,Hidrolavadora,Karcher,K4 Full Control,2016,"Hidrolavadora marca Karcher modelo K4 Full Control, eficiente y de uso doméstico.",220,2302
+limpieza,Secadora,LG,DLE3500W,2020,"Secadora marca LG modelo DLE3500W, eficiente y de uso doméstico.",240,4203
+limpieza,Hidrolavadora,Sun Joe,SPX3000,2023,"Hidrolavadora marca Sun Joe modelo SPX3000, eficiente y de uso doméstico.",240,2257
+limpieza,Vaporeta,Karcher,SC 3,2016,"Vaporeta marca Karcher modelo SC 3, eficiente y de uso doméstico.",127,1605
+limpieza,Aspiradora,Dyson,V15 Detect,2022,"Aspiradora marca Dyson modelo V15 Detect, eficiente y de uso doméstico.",127,1413
+limpieza,Lavadora,Bosch,Serie 6 WAU28PH9ES,2021,"Lavadora marca Bosch modelo Serie 6 WAU28PH9ES, eficiente y de uso doméstico.",240,1313
+limpieza,Lavadora,Samsung,WA50R5400AV,2015,"Lavadora marca Samsung modelo WA50R5400AV, eficiente y de uso doméstico.",240,607
+limpieza,Vaporeta,Bissell,PowerFresh 1940,2016,"Vaporeta marca Bissell modelo PowerFresh 1940, eficiente y de uso doméstico.",127,1596
+limpieza,Aspiradora,Hoover,WindTunnel 2 UH72630,2021,"Aspiradora marca Hoover modelo WindTunnel 2 UH72630, eficiente y de uso doméstico.",240,1343
+limpieza,Aspiradora,Dyson,V15 Detect,2016,"Aspiradora marca Dyson modelo V15 Detect, eficiente y de uso doméstico.",240,101
+limpieza,Plancha,Oster,GCSTBS5802,2020,"Plancha marca Oster modelo GCSTBS5802, eficiente y de uso doméstico.",127,2948
+limpieza,Lavadora,Bosch,Serie 6 WAU28PH9ES,2016,"Lavadora marca Bosch modelo Serie 6 WAU28PH9ES, eficiente y de uso doméstico.",120,1585
+limpieza,Plancha,Rowenta,DW5080,2025,"Plancha marca Rowenta modelo DW5080, eficiente y de uso doméstico.",127,2177
+limpieza,Vaporeta,Bissell,PowerFresh 1940,2016,"Vaporeta marca Bissell modelo PowerFresh 1940, eficiente y de uso doméstico.",127,1244
+limpieza,Aspiradora,Dyson,V15 Detect,2019,"Aspiradora marca Dyson modelo V15 Detect, eficiente y de uso doméstico.",240,1969
+limpieza,Aspiradora,Roborock,S7,2016,"Aspiradora marca Roborock modelo S7, eficiente y de uso doméstico.",240,1058
+limpieza,Hidrolavadora,Bosch,EasyAquatak 120,2016,"Hidrolavadora marca Bosch modelo EasyAquatak 120, eficiente y de uso doméstico.",120,1453
+limpieza,Lavadora,Maytag,MVWC565FW,2018,"Lavadora marca Maytag modelo MVWC565FW, eficiente y de uso doméstico.",120,1901
+limpieza,Plancha,Rowenta,DW5080,2019,"Plancha marca Rowenta modelo DW5080, eficiente y de uso doméstico.",220,2184
+limpieza,Aspiradora,Shark,Navigator Lift-Away NV352,2020,"Aspiradora marca Shark modelo Navigator Lift-Away NV352, eficiente y de uso doméstico.",127,1020
+limpieza,Aspiradora,iRobot,Roomba s9,2020,"Aspiradora marca iRobot modelo Roomba s9, eficiente y de uso doméstico.",120,662
+limpieza,Lavadora,Bosch,Serie 6 WAU28PH9ES,2015,"Lavadora marca Bosch modelo Serie 6 WAU28PH9ES, eficiente y de uso doméstico.",220,844
+limpieza,Plancha,Black+Decker,D3030,2018,"Plancha marca Black+Decker modelo D3030, eficiente y de uso doméstico.",127,1759
+limpieza,Secadora,Samsung,DV42H5000EW,2020,"Secadora marca Samsung modelo DV42H5000EW, eficiente y de uso doméstico.",120,1304
+limpieza,Lavavajillas,Mabe,LP8000WG,2025,"Lavavajillas marca Mabe modelo LP8000WG, eficiente y de uso doméstico.",120,2126
+limpieza,Vaporeta,Polti,Vaporella,2023,"Vaporeta marca Polti modelo Vaporella, eficiente y de uso doméstico.",240,1119
+limpieza,Lavavajillas,Bosch,SPS2HKW58E,2018,"Lavavajillas marca Bosch modelo SPS2HKW58E, eficiente y de uso doméstico.",120,2059
+limpieza,Lavadora,Whirlpool,WTW5000DW,2015,"Lavadora marca Whirlpool modelo WTW5000DW, eficiente y de uso doméstico.",240,978
+limpieza,Lavadora,LG,F4J6VY2W,2024,"Lavadora marca LG modelo F4J6VY2W, eficiente y de uso doméstico.",127,1397
+limpieza,Vaporeta,Karcher,SC 3,2017,"Vaporeta marca Karcher modelo SC 3, eficiente y de uso doméstico.",240,1525
+limpieza,Aspiradora,Dyson,V8 Absolute,2023,"Aspiradora marca Dyson modelo V8 Absolute, eficiente y de uso doméstico.",220,1081
+limpieza,Secadora,LG,DLE3500W,2022,"Secadora marca LG modelo DLE3500W, eficiente y de uso doméstico.",120,3143
+limpieza,Aspiradora,iRobot,Roomba s9,2015,"Aspiradora marca iRobot modelo Roomba s9, eficiente y de uso doméstico.",240,690
+limpieza,Lavavajillas,Bosch,SPS2HKW58E,2022,"Lavavajillas marca Bosch modelo SPS2HKW58E, eficiente y de uso doméstico.",120,1384
+limpieza,Lavavajillas,Bosch,Serie 4 SMS46KW02E,2023,"Lavavajillas marca Bosch modelo Serie 4 SMS46KW02E, eficiente y de uso doméstico.",120,2273
+limpieza,Aspiradora,Miele,Classic C1,2016,"Aspiradora marca Miele modelo Classic C1, eficiente y de uso doméstico.",220,1604
+limpieza,Vaporeta,Polti,Vaporella,2018,"Vaporeta marca Polti modelo Vaporella, eficiente y de uso doméstico.",240,1108
+limpieza,Hidrolavadora,Bosch,EasyAquatak 120,2018,"Hidrolavadora marca Bosch modelo EasyAquatak 120, eficiente y de uso doméstico.",127,1804
+limpieza,Vaporeta,Bissell,PowerFresh 1940,2018,"Vaporeta marca Bissell modelo PowerFresh 1940, eficiente y de uso doméstico.",240,1194
+limpieza,Aspiradora,iRobot,Roomba s9,2015,"Aspiradora marca iRobot modelo Roomba s9, eficiente y de uso doméstico.",240,1545
+limpieza,Vaporeta,Polti,Vaporella,2016,"Vaporeta marca Polti modelo Vaporella, eficiente y de uso doméstico.",120,1573
+limpieza,Aspiradora,Xiaomi,Mi Handheld Vacuum,2020,"Aspiradora marca Xiaomi modelo Mi Handheld Vacuum, eficiente y de uso doméstico.",127,1419
+limpieza,Plancha,Black+Decker,D3030,2019,"Plancha marca Black+Decker modelo D3030, eficiente y de uso doméstico.",120,2016
+limpieza,Aspiradora,Shark,Navigator Lift-Away NV352,2022,"Aspiradora marca Shark modelo Navigator Lift-Away NV352, eficiente y de uso doméstico.",127,1909
+limpieza,Plancha,Black+Decker,D3030,2018,"Plancha marca Black+Decker modelo D3030, eficiente y de uso doméstico.",220,1235
+limpieza,Plancha,Philips,GC5039/30,2021,"Plancha marca Philips modelo GC5039/30, eficiente y de uso doméstico.",220,2888
+limpieza,Aspiradora,Dyson,V15 Detect,2015,"Aspiradora marca Dyson modelo V15 Detect, eficiente y de uso doméstico.",120,607
+limpieza,Lavadora,Samsung,WA50R5400AV,2025,"Lavadora marca Samsung modelo WA50R5400AV, eficiente y de uso doméstico.",127,797
+limpieza,Vaporeta,Bissell,PowerFresh 1940,2021,"Vaporeta marca Bissell modelo PowerFresh 1940, eficiente y de uso doméstico.",120,1735
+limpieza,Vaporeta,Karcher,SC 3,2021,"Vaporeta marca Karcher modelo SC 3, eficiente y de uso doméstico.",127,1097
+limpieza,Secadora,Samsung,DV42H5000EW,2023,"Secadora marca Samsung modelo DV42H5000EW, eficiente y de uso doméstico.",240,1482
+limpieza,Plancha,Black+Decker,D3030,2024,"Plancha marca Black+Decker modelo D3030, eficiente y de uso doméstico.",120,1731
+limpieza,Vaporeta,Polti,Vaporella,2022,"Vaporeta marca Polti modelo Vaporella, eficiente y de uso doméstico.",220,1463
+limpieza,Vaporeta,Karcher,SC 3,2023,"Vaporeta marca Karcher modelo SC 3, eficiente y de uso doméstico.",127,1950
+limpieza,Plancha,Oster,GCSTBS5802,2023,"Plancha marca Oster modelo GCSTBS5802, eficiente y de uso doméstico.",120,1768
+limpieza,Plancha,Black+Decker,D3030,2025,"Plancha marca Black+Decker modelo D3030, eficiente y de uso doméstico.",127,1582
+limpieza,Hidrolavadora,Bosch,EasyAquatak 120,2018,"Hidrolavadora marca Bosch modelo EasyAquatak 120, eficiente y de uso doméstico.",220,1470
+limpieza,Vaporeta,Bissell,PowerFresh 1940,2017,"Vaporeta marca Bissell modelo PowerFresh 1940, eficiente y de uso doméstico.",127,1669
+limpieza,Plancha,Black+Decker,D3030,2021,"Plancha marca Black+Decker modelo D3030, eficiente y de uso doméstico.",220,1065
+limpieza,Lavavajillas,Bosch,SPS2HKW58E,2024,"Lavavajillas marca Bosch modelo SPS2HKW58E, eficiente y de uso doméstico.",127,1774
+limpieza,Aspiradora,Miele,Classic C1,2020,"Aspiradora marca Miele modelo Classic C1, eficiente y de uso doméstico.",127,224
+limpieza,Lavadora,Bosch,Serie 6 WAU28PH9ES,2022,"Lavadora marca Bosch modelo Serie 6 WAU28PH9ES, eficiente y de uso doméstico.",127,1243
+limpieza,Hidrolavadora,Karcher,K4 Full Control,2020,"Hidrolavadora marca Karcher modelo K4 Full Control, eficiente y de uso doméstico.",220,1390
+limpieza,Secadora,Whirlpool,WED4815EW,2019,"Secadora marca Whirlpool modelo WED4815EW, eficiente y de uso doméstico.",220,2336
+limpieza,Lavavajillas,Mabe,LP8000WG,2021,"Lavavajillas marca Mabe modelo LP8000WG, eficiente y de uso doméstico.",220,2103
+limpieza,Plancha,Rowenta,DW5080,2019,"Plancha marca Rowenta modelo DW5080, eficiente y de uso doméstico.",127,1177
+limpieza,Aspiradora,Miele,Classic C1,2021,"Aspiradora marca Miele modelo Classic C1, eficiente y de uso doméstico.",120,1304
+limpieza,Aspiradora,Dyson,V15 Detect,2020,"Aspiradora marca Dyson modelo V15 Detect, eficiente y de uso doméstico.",220,1944
+limpieza,Lavadora,LG,F4J6VY2W,2023,"Lavadora marca LG modelo F4J6VY2W, eficiente y de uso doméstico.",240,1832
+limpieza,Lavavajillas,Bosch,SPS2HKW58E,2016,"Lavavajillas marca Bosch modelo SPS2HKW58E, eficiente y de uso doméstico.",127,1897
+limpieza,Lavavajillas,Whirlpool,WDF330PAHW,2025,"Lavavajillas marca Whirlpool modelo WDF330PAHW, eficiente y de uso doméstico.",240,2242
+limpieza,Vaporeta,Bissell,PowerFresh 1940,2021,"Vaporeta marca Bissell modelo PowerFresh 1940, eficiente y de uso doméstico.",220,1738
+limpieza,Lavavajillas,Bosch,Serie 4 SMS46KW02E,2025,"Lavavajillas marca Bosch modelo Serie 4 SMS46KW02E, eficiente y de uso doméstico.",240,1429
+limpieza,Vaporeta,Polti,Vaporella,2024,"Vaporeta marca Polti modelo Vaporella, eficiente y de uso doméstico.",240,1345
+limpieza,Secadora,Bosch,Serie 4 WTG86400UC,2019,"Secadora marca Bosch modelo Serie 4 WTG86400UC, eficiente y de uso doméstico.",220,1726
+limpieza,Secadora,Whirlpool,WED4815EW,2019,"Secadora marca Whirlpool modelo WED4815EW, eficiente y de uso doméstico.",240,3141
+limpieza,Lavavajillas,GE,GDT665SSNSS,2022,"Lavavajillas marca GE modelo GDT665SSNSS, eficiente y de uso doméstico.",120,1732
+limpieza,Plancha,Oster,GCSTBS5802,2019,"Plancha marca Oster modelo GCSTBS5802, eficiente y de uso doméstico.",127,2011
+limpieza,Hidrolavadora,Karcher,K4 Full Control,2019,"Hidrolavadora marca Karcher modelo K4 Full Control, eficiente y de uso doméstico.",240,2012
+limpieza,Plancha,Philips,GC5039/30,2024,"Plancha marca Philips modelo GC5039/30, eficiente y de uso doméstico.",220,1625
+limpieza,Plancha,Philips,GC5039/30,2017,"Plancha marca Philips modelo GC5039/30, eficiente y de uso doméstico.",120,1941
+limpieza,Secadora,Whirlpool,WED4815EW,2019,"Secadora marca Whirlpool modelo WED4815EW, eficiente y de uso doméstico.",240,631
+limpieza,Plancha,Black+Decker,D3030,2015,"Plancha marca Black+Decker modelo D3030, eficiente y de uso doméstico.",240,2217
+limpieza,Lavavajillas,GE,GDT665SSNSS,2017,"Lavavajillas marca GE modelo GDT665SSNSS, eficiente y de uso doméstico.",127,1475
+limpieza,Aspiradora,Roborock,S7,2023,"Aspiradora marca Roborock modelo S7, eficiente y de uso doméstico.",220,151
+limpieza,Hidrolavadora,Karcher,K4 Full Control,2023,"Hidrolavadora marca Karcher modelo K4 Full Control, eficiente y de uso doméstico.",220,1789
+limpieza,Lavavajillas,Bosch,Serie 4 SMS46KW02E,2021,"Lavavajillas marca Bosch modelo Serie 4 SMS46KW02E, eficiente y de uso doméstico.",120,1678
+limpieza,Plancha,Black+Decker,D3030,2016,"Plancha marca Black+Decker modelo D3030, eficiente y de uso doméstico.",240,1011
+limpieza,Vaporeta,Polti,Vaporella,2022,"Vaporeta marca Polti modelo Vaporella, eficiente y de uso doméstico.",120,1012
+limpieza,Plancha,Philips,GC5039/30,2017,"Plancha marca Philips modelo GC5039/30, eficiente y de uso doméstico.",220,2775
+limpieza,Lavadora,Bosch,Serie 6 WAU28PH9ES,2023,"Lavadora marca Bosch modelo Serie 6 WAU28PH9ES, eficiente y de uso doméstico.",220,976
+limpieza,Aspiradora,iRobot,Roomba s9,2022,"Aspiradora marca iRobot modelo Roomba s9, eficiente y de uso doméstico.",240,432
+limpieza,Plancha,Philips,GC5039/30,2023,"Plancha marca Philips modelo GC5039/30, eficiente y de uso doméstico.",120,1980
+limpieza,Vaporeta,Polti,Vaporella,2022,"Vaporeta marca Polti modelo Vaporella, eficiente y de uso doméstico.",220,1189
+limpieza,Plancha,Oster,GCSTBS5802,2022,"Plancha marca Oster modelo GCSTBS5802, eficiente y de uso doméstico.",120,2850
+limpieza,Aspiradora,Hoover,WindTunnel 2 UH72630,2024,"Aspiradora marca Hoover modelo WindTunnel 2 UH72630, eficiente y de uso doméstico.",240,884
+limpieza,Secadora,Samsung,DV42H5000EW,2024,"Secadora marca Samsung modelo DV42H5000EW, eficiente y de uso doméstico.",127,4584
+limpieza,Vaporeta,Polti,Vaporella,2025,"Vaporeta marca Polti modelo Vaporella, eficiente y de uso doméstico.",120,1225
+limpieza,Hidrolavadora,Karcher,K4 Full Control,2018,"Hidrolavadora marca Karcher modelo K4 Full Control, eficiente y de uso doméstico.",120,2399
+limpieza,Lavavajillas,Bosch,SPS2HKW58E,2015,"Lavavajillas marca Bosch modelo SPS2HKW58E, eficiente y de uso doméstico.",120,2073
+limpieza,Lavadora,Samsung,WA50R5400AV,2024,"Lavadora marca Samsung modelo WA50R5400AV, eficiente y de uso doméstico.",127,942
+limpieza,Hidrolavadora,Bosch,EasyAquatak 120,2017,"Hidrolavadora marca Bosch modelo EasyAquatak 120, eficiente y de uso doméstico.",240,2028
+limpieza,Aspiradora,Dyson,V15 Detect,2017,"Aspiradora marca Dyson modelo V15 Detect, eficiente y de uso doméstico.",220,430
+limpieza,Aspiradora,Xiaomi,Mi Handheld Vacuum,2018,"Aspiradora marca Xiaomi modelo Mi Handheld Vacuum, eficiente y de uso doméstico.",220,645
+limpieza,Secadora,Whirlpool,WED4815EW,2020,"Secadora marca Whirlpool modelo WED4815EW, eficiente y de uso doméstico.",127,3564
+limpieza,Secadora,Bosch,Serie 4 WTG86400UC,2018,"Secadora marca Bosch modelo Serie 4 WTG86400UC, eficiente y de uso doméstico.",240,781
+limpieza,Vaporeta,Karcher,SC 3,2019,"Vaporeta marca Karcher modelo SC 3, eficiente y de uso doméstico.",127,1431
+limpieza,Vaporeta,Polti,Vaporella,2025,"Vaporeta marca Polti modelo Vaporella, eficiente y de uso doméstico.",220,1631
+limpieza,Secadora,Samsung,DV42H5000EW,2025,"Secadora marca Samsung modelo DV42H5000EW, eficiente y de uso doméstico.",240,2255
+limpieza,Lavadora,Maytag,MVWC565FW,2015,"Lavadora marca Maytag modelo MVWC565FW, eficiente y de uso doméstico.",220,1564
+limpieza,Lavadora,LG,F4J6VY2W,2017,"Lavadora marca LG modelo F4J6VY2W, eficiente y de uso doméstico.",240,512
+limpieza,Plancha,Oster,GCSTBS5802,2021,"Plancha marca Oster modelo GCSTBS5802, eficiente y de uso doméstico.",120,1599
+limpieza,Aspiradora,Hoover,WindTunnel 2 UH72630,2018,"Aspiradora marca Hoover modelo WindTunnel 2 UH72630, eficiente y de uso doméstico.",220,599
+limpieza,Secadora,Whirlpool,WED4815EW,2016,"Secadora marca Whirlpool modelo WED4815EW, eficiente y de uso doméstico.",120,2513
+limpieza,Lavadora,Whirlpool,WTW5000DW,2022,"Lavadora marca Whirlpool modelo WTW5000DW, eficiente y de uso doméstico.",220,916
+limpieza,Lavavajillas,GE,GDT665SSNSS,2025,"Lavavajillas marca GE modelo GDT665SSNSS, eficiente y de uso doméstico.",240,2385
+limpieza,Hidrolavadora,Karcher,K4 Full Control,2018,"Hidrolavadora marca Karcher modelo K4 Full Control, eficiente y de uso doméstico.",127,1561
+limpieza,Lavadora,Samsung,WA50R5400AV,2024,"Lavadora marca Samsung modelo WA50R5400AV, eficiente y de uso doméstico.",120,1973
+limpieza,Vaporeta,Polti,Vaporella,2016,"Vaporeta marca Polti modelo Vaporella, eficiente y de uso doméstico.",120,1976
+limpieza,Lavavajillas,GE,GDT665SSNSS,2020,"Lavavajillas marca GE modelo GDT665SSNSS, eficiente y de uso doméstico.",127,1961
+limpieza,Lavadora,LG,F4J6VY2W,2025,"Lavadora marca LG modelo F4J6VY2W, eficiente y de uso doméstico.",120,889
+limpieza,Lavadora,Samsung,WA50R5400AV,2019,"Lavadora marca Samsung modelo WA50R5400AV, eficiente y de uso doméstico.",127,1699
+limpieza,Hidrolavadora,Karcher,K4 Full Control,2025,"Hidrolavadora marca Karcher modelo K4 Full Control, eficiente y de uso doméstico.",120,1606
+limpieza,Plancha,Black+Decker,D3030,2021,"Plancha marca Black+Decker modelo D3030, eficiente y de uso doméstico.",220,2308
+cocina,Licuadora,Black+Decker,Crush Master BL2010BP,2017,"Licuadora marca Black+Decker modelo Crush Master BL2010BP, ideal para cocina doméstica.",120,564
+cocina,Licuadora,Hamilton Beach,Power Elite 58148A,2018,"Licuadora marca Hamilton Beach modelo Power Elite 58148A, ideal para cocina doméstica.",120,202
+cocina,Horno Electrico,Hamilton Beach,31103DA,2020,"Horno Electrico marca Hamilton Beach modelo 31103DA, ideal para cocina doméstica.",120,2491
+cocina,Cafetera,Hamilton Beach,FlexBrew 49976,2015,"Cafetera marca Hamilton Beach modelo FlexBrew 49976, ideal para cocina doméstica.",240,1033
+cocina,Cafetera,DeLonghi,Magnifica ESAM3300,2020,"Cafetera marca DeLonghi modelo Magnifica ESAM3300, ideal para cocina doméstica.",127,1327
+cocina,Refrigerador,Bosch,Serie 6 KGN36XI3P,2023,"Refrigerador marca Bosch modelo Serie 6 KGN36XI3P, ideal para cocina doméstica.",240,306
+cocina,Cafetera,Hamilton Beach,FlexBrew 49976,2015,"Cafetera marca Hamilton Beach modelo FlexBrew 49976, ideal para cocina doméstica.",127,1046
+cocina,Licuadora,Philips,HR3652/00 Avance,2022,"Licuadora marca Philips modelo HR3652/00 Avance, ideal para cocina doméstica.",120,887
+cocina,Horno Electrico,Cuisinart,TOB-260N1,2023,"Horno Electrico marca Cuisinart modelo TOB-260N1, ideal para cocina doméstica.",127,1284
+cocina,Microondas,Whirlpool,WMH31017HS,2020,"Microondas marca Whirlpool modelo WMH31017HS, ideal para cocina doméstica.",127,1044
+cocina,Licuadora,Oster,Classic BLST4655,2022,"Licuadora marca Oster modelo Classic BLST4655, ideal para cocina doméstica.",220,835
+cocina,Tostadora,Hamilton Beach,22796,2023,"Tostadora marca Hamilton Beach modelo 22796, ideal para cocina doméstica.",220,1130
+cocina,Licuadora,Black+Decker,Crush Master BL2010BP,2023,"Licuadora marca Black+Decker modelo Crush Master BL2010BP, ideal para cocina doméstica.",120,1146
+cocina,Refrigerador,Samsung,Family Hub RF28R7551SR,2016,"Refrigerador marca Samsung modelo Family Hub RF28R7551SR, ideal para cocina doméstica.",220,213
+cocina,Cafetera,Hamilton Beach,FlexBrew 49976,2015,"Cafetera marca Hamilton Beach modelo FlexBrew 49976, ideal para cocina doméstica.",127,1287
+cocina,Cafetera,DeLonghi,Magnifica ESAM3300,2016,"Cafetera marca DeLonghi modelo Magnifica ESAM3300, ideal para cocina doméstica.",220,1186
+cocina,Horno Electrico,Cuisinart,TOB-260N1,2022,"Horno Electrico marca Cuisinart modelo TOB-260N1, ideal para cocina doméstica.",240,2388
+cocina,Horno Electrico,Black+Decker,TO3250XSB,2023,"Horno Electrico marca Black+Decker modelo TO3250XSB, ideal para cocina doméstica.",240,1708
+cocina,Cafetera,Mr. Coffee,12-Cup Coffee Maker,2019,"Cafetera marca Mr. Coffee modelo 12-Cup Coffee Maker, ideal para cocina doméstica.",240,883
+cocina,Tostadora,Hamilton Beach,22796,2017,"Tostadora marca Hamilton Beach modelo 22796, ideal para cocina doméstica.",220,1373
+cocina,Licuadora,Hamilton Beach,Power Elite 58148A,2015,"Licuadora marca Hamilton Beach modelo Power Elite 58148A, ideal para cocina doméstica.",240,896
+cocina,Microondas,Daewoo,KOR-7LREM,2019,"Microondas marca Daewoo modelo KOR-7LREM, ideal para cocina doméstica.",240,1186
+cocina,Tostadora,Oster,TSSTTRJB30R,2017,"Tostadora marca Oster modelo TSSTTRJB30R, ideal para cocina doméstica.",240,777
+cocina,Horno Electrico,Cuisinart,TOB-260N1,2016,"Horno Electrico marca Cuisinart modelo TOB-260N1, ideal para cocina doméstica.",127,2124
+cocina,Tostadora,Hamilton Beach,22796,2024,"Tostadora marca Hamilton Beach modelo 22796, ideal para cocina doméstica.",240,837
+cocina,Licuadora,Philips,HR3652/00 Avance,2017,"Licuadora marca Philips modelo HR3652/00 Avance, ideal para cocina doméstica.",240,406
+cocina,Horno Electrico,Black+Decker,TO3250XSB,2018,"Horno Electrico marca Black+Decker modelo TO3250XSB, ideal para cocina doméstica.",220,1877
+cocina,Horno Electrico,Hamilton Beach,31103DA,2022,"Horno Electrico marca Hamilton Beach modelo 31103DA, ideal para cocina doméstica.",220,1353
+cocina,Cafetera,Mr. Coffee,12-Cup Coffee Maker,2025,"Cafetera marca Mr. Coffee modelo 12-Cup Coffee Maker, ideal para cocina doméstica.",120,1137
+cocina,Horno Electrico,Oster,TSSTTVMNDG,2015,"Horno Electrico marca Oster modelo TSSTTVMNDG, ideal para cocina doméstica.",127,1917
+cocina,Refrigerador,Samsung,Family Hub RF28R7551SR,2015,"Refrigerador marca Samsung modelo Family Hub RF28R7551SR, ideal para cocina doméstica.",120,234
+cocina,Batidora,KitchenAid,Artisan KSM150,2022,"Batidora marca KitchenAid modelo Artisan KSM150, ideal para cocina doméstica.",220,716
+cocina,Batidora,Philips,HR3741/00,2021,"Batidora marca Philips modelo HR3741/00, ideal para cocina doméstica.",127,636
+cocina,Microondas,LG,NeoChef MH8265CIS,2016,"Microondas marca LG modelo NeoChef MH8265CIS, ideal para cocina doméstica.",220,1171
+cocina,Refrigerador,Whirlpool,WRS325SDHZ,2016,"Refrigerador marca Whirlpool modelo WRS325SDHZ, ideal para cocina doméstica.",220,177
+cocina,Batidora,Cuisinart,SM-50BK,2015,"Batidora marca Cuisinart modelo SM-50BK, ideal para cocina doméstica.",120,375
+cocina,Batidora,KitchenAid,Artisan KSM150,2023,"Batidora marca KitchenAid modelo Artisan KSM150, ideal para cocina doméstica.",127,710
+cocina,Horno Electrico,Black+Decker,TO3250XSB,2016,"Horno Electrico marca Black+Decker modelo TO3250XSB, ideal para cocina doméstica.",120,1011
+cocina,Microondas,Daewoo,KOR-7LREM,2025,"Microondas marca Daewoo modelo KOR-7LREM, ideal para cocina doméstica.",220,968
+cocina,Batidora,Oster,FPSTSMPL1,2017,"Batidora marca Oster modelo FPSTSMPL1, ideal para cocina doméstica.",220,681
+cocina,Horno Electrico,Cuisinart,TOB-260N1,2015,"Horno Electrico marca Cuisinart modelo TOB-260N1, ideal para cocina doméstica.",220,1287
+cocina,Horno Electrico,Cuisinart,TOB-260N1,2016,"Horno Electrico marca Cuisinart modelo TOB-260N1, ideal para cocina doméstica.",220,1696
+cocina,Licuadora,Nutribullet,Pro 900,2019,"Licuadora marca Nutribullet modelo Pro 900, ideal para cocina doméstica.",120,1081
+cocina,Cafetera,DeLonghi,Magnifica ESAM3300,2022,"Cafetera marca DeLonghi modelo Magnifica ESAM3300, ideal para cocina doméstica.",220,1027
+cocina,Licuadora,Oster,Classic BLST4655,2024,"Licuadora marca Oster modelo Classic BLST4655, ideal para cocina doméstica.",240,782
+cocina,Licuadora,Oster,Classic BLST4655,2019,"Licuadora marca Oster modelo Classic BLST4655, ideal para cocina doméstica.",127,252
+cocina,Horno Electrico,Cuisinart,TOB-260N1,2015,"Horno Electrico marca Cuisinart modelo TOB-260N1, ideal para cocina doméstica.",120,2453
+cocina,Tostadora,Cuisinart,CPT-180,2017,"Tostadora marca Cuisinart modelo CPT-180, ideal para cocina doméstica.",127,1493
+cocina,Tostadora,Breville,BTA820XL,2023,"Tostadora marca Breville modelo BTA820XL, ideal para cocina doméstica.",120,1249
+cocina,Horno Electrico,Oster,TSSTTVMNDG,2019,"Horno Electrico marca Oster modelo TSSTTVMNDG, ideal para cocina doméstica.",127,2105
+cocina,Horno Electrico,Cuisinart,TOB-260N1,2020,"Horno Electrico marca Cuisinart modelo TOB-260N1, ideal para cocina doméstica.",240,1554
+cocina,Tostadora,Oster,TSSTTRJB30R,2015,"Tostadora marca Oster modelo TSSTTRJB30R, ideal para cocina doméstica.",120,1113
+cocina,Horno Electrico,Cuisinart,TOB-260N1,2025,"Horno Electrico marca Cuisinart modelo TOB-260N1, ideal para cocina doméstica.",240,1517
+cocina,Licuadora,Hamilton Beach,Power Elite 58148A,2018,"Licuadora marca Hamilton Beach modelo Power Elite 58148A, ideal para cocina doméstica.",220,864
+cocina,Refrigerador,LG,InstaView Door-in-Door,2025,"Refrigerador marca LG modelo InstaView Door-in-Door, ideal para cocina doméstica.",120,257
+cocina,Cafetera,Mr. Coffee,12-Cup Coffee Maker,2016,"Cafetera marca Mr. Coffee modelo 12-Cup Coffee Maker, ideal para cocina doméstica.",120,1367
+cocina,Microondas,Daewoo,KOR-7LREM,2016,"Microondas marca Daewoo modelo KOR-7LREM, ideal para cocina doméstica.",127,1046
+cocina,Refrigerador,Bosch,Serie 6 KGN36XI3P,2024,"Refrigerador marca Bosch modelo Serie 6 KGN36XI3P, ideal para cocina doméstica.",120,327
+cocina,Cafetera,Nespresso,VertuoPlus,2019,"Cafetera marca Nespresso modelo VertuoPlus, ideal para cocina doméstica.",120,889
+cocina,Microondas,Daewoo,KOR-7LREM,2019,"Microondas marca Daewoo modelo KOR-7LREM, ideal para cocina doméstica.",127,1139
+cocina,Licuadora,Hamilton Beach,Power Elite 58148A,2016,"Licuadora marca Hamilton Beach modelo Power Elite 58148A, ideal para cocina doméstica.",120,1128
+cocina,Licuadora,Philips,HR3652/00 Avance,2016,"Licuadora marca Philips modelo HR3652/00 Avance, ideal para cocina doméstica.",220,1134
+cocina,Licuadora,Nutribullet,Pro 900,2019,"Licuadora marca Nutribullet modelo Pro 900, ideal para cocina doméstica.",120,305
+cocina,Cafetera,Mr. Coffee,12-Cup Coffee Maker,2020,"Cafetera marca Mr. Coffee modelo 12-Cup Coffee Maker, ideal para cocina doméstica.",220,686
+cocina,Horno Electrico,Breville,BOV800XL,2021,"Horno Electrico marca Breville modelo BOV800XL, ideal para cocina doméstica.",220,2051
+cocina,Refrigerador,Bosch,Serie 6 KGN36XI3P,2025,"Refrigerador marca Bosch modelo Serie 6 KGN36XI3P, ideal para cocina doméstica.",220,131
+cocina,Cafetera,Hamilton Beach,FlexBrew 49976,2018,"Cafetera marca Hamilton Beach modelo FlexBrew 49976, ideal para cocina doméstica.",127,1020
+cocina,Licuadora,Oster,Classic BLST4655,2016,"Licuadora marca Oster modelo Classic BLST4655, ideal para cocina doméstica.",120,245
+cocina,Refrigerador,Mabe,RME360FYCU,2022,"Refrigerador marca Mabe modelo RME360FYCU, ideal para cocina doméstica.",240,217
+cocina,Tostadora,Breville,BTA820XL,2022,"Tostadora marca Breville modelo BTA820XL, ideal para cocina doméstica.",240,987
+cocina,Batidora,Oster,FPSTSMPL1,2024,"Batidora marca Oster modelo FPSTSMPL1, ideal para cocina doméstica.",120,231
+cocina,Licuadora,Black+Decker,Crush Master BL2010BP,2022,"Licuadora marca Black+Decker modelo Crush Master BL2010BP, ideal para cocina doméstica.",220,710
+cocina,Licuadora,Black+Decker,Crush Master BL2010BP,2021,"Licuadora marca Black+Decker modelo Crush Master BL2010BP, ideal para cocina doméstica.",127,674
+cocina,Cafetera,Hamilton Beach,FlexBrew 49976,2018,"Cafetera marca Hamilton Beach modelo FlexBrew 49976, ideal para cocina doméstica.",127,828
+cocina,Horno Electrico,Oster,TSSTTVMNDG,2015,"Horno Electrico marca Oster modelo TSSTTVMNDG, ideal para cocina doméstica.",240,2040
+cocina,Microondas,Panasonic,NN-SN966S,2015,"Microondas marca Panasonic modelo NN-SN966S, ideal para cocina doméstica.",240,1135
+cocina,Cafetera,Hamilton Beach,FlexBrew 49976,2016,"Cafetera marca Hamilton Beach modelo FlexBrew 49976, ideal para cocina doméstica.",127,936
+cocina,Horno Electrico,Oster,TSSTTVMNDG,2023,"Horno Electrico marca Oster modelo TSSTTVMNDG, ideal para cocina doméstica.",127,1842
+cocina,Microondas,Whirlpool,WMH31017HS,2015,"Microondas marca Whirlpool modelo WMH31017HS, ideal para cocina doméstica.",120,817
+cocina,Refrigerador,Samsung,Family Hub RF28R7551SR,2021,"Refrigerador marca Samsung modelo Family Hub RF28R7551SR, ideal para cocina doméstica.",127,139
+cocina,Refrigerador,Samsung,Family Hub RF28R7551SR,2015,"Refrigerador marca Samsung modelo Family Hub RF28R7551SR, ideal para cocina doméstica.",220,149
+cocina,Cafetera,DeLonghi,Magnifica ESAM3300,2023,"Cafetera marca DeLonghi modelo Magnifica ESAM3300, ideal para cocina doméstica.",220,891
+cocina,Cafetera,Mr. Coffee,12-Cup Coffee Maker,2020,"Cafetera marca Mr. Coffee modelo 12-Cup Coffee Maker, ideal para cocina doméstica.",120,1249
+cocina,Batidora,Cuisinart,SM-50BK,2015,"Batidora marca Cuisinart modelo SM-50BK, ideal para cocina doméstica.",120,613
+cocina,Licuadora,Nutribullet,Pro 900,2022,"Licuadora marca Nutribullet modelo Pro 900, ideal para cocina doméstica.",120,1142
+cocina,Refrigerador,LG,InstaView Door-in-Door,2015,"Refrigerador marca LG modelo InstaView Door-in-Door, ideal para cocina doméstica.",220,119
+cocina,Batidora,Cuisinart,SM-50BK,2016,"Batidora marca Cuisinart modelo SM-50BK, ideal para cocina doméstica.",220,408
+cocina,Horno Electrico,Hamilton Beach,31103DA,2018,"Horno Electrico marca Hamilton Beach modelo 31103DA, ideal para cocina doméstica.",220,1660
+cocina,Tostadora,Cuisinart,CPT-180,2019,"Tostadora marca Cuisinart modelo CPT-180, ideal para cocina doméstica.",120,1034
+cocina,Cafetera,Keurig,K-Elite,2018,"Cafetera marca Keurig modelo K-Elite, ideal para cocina doméstica.",127,928
+cocina,Cafetera,Hamilton Beach,FlexBrew 49976,2024,"Cafetera marca Hamilton Beach modelo FlexBrew 49976, ideal para cocina doméstica.",120,635
+cocina,Cafetera,Nespresso,VertuoPlus,2024,"Cafetera marca Nespresso modelo VertuoPlus, ideal para cocina doméstica.",127,1312
+cocina,Licuadora,Oster,Classic BLST4655,2016,"Licuadora marca Oster modelo Classic BLST4655, ideal para cocina doméstica.",220,692
+cocina,Microondas,LG,NeoChef MH8265CIS,2015,"Microondas marca LG modelo NeoChef MH8265CIS, ideal para cocina doméstica.",120,1062
+cocina,Microondas,Whirlpool,WMH31017HS,2024,"Microondas marca Whirlpool modelo WMH31017HS, ideal para cocina doméstica.",120,711
+cocina,Horno Electrico,Black+Decker,TO3250XSB,2019,"Horno Electrico marca Black+Decker modelo TO3250XSB, ideal para cocina doméstica.",120,1935
+cocina,Tostadora,Breville,BTA820XL,2020,"Tostadora marca Breville modelo BTA820XL, ideal para cocina doméstica.",220,967
+cocina,Tostadora,Cuisinart,CPT-180,2017,"Tostadora marca Cuisinart modelo CPT-180, ideal para cocina doméstica.",240,1060
+cocina,Tostadora,Oster,TSSTTRJB30R,2025,"Tostadora marca Oster modelo TSSTTRJB30R, ideal para cocina doméstica.",127,1472
+cocina,Cafetera,Mr. Coffee,12-Cup Coffee Maker,2016,"Cafetera marca Mr. Coffee modelo 12-Cup Coffee Maker, ideal para cocina doméstica.",220,849
+cocina,Batidora,Hamilton Beach,63391,2020,"Batidora marca Hamilton Beach modelo 63391, ideal para cocina doméstica.",240,353
+cocina,Horno Electrico,Breville,BOV800XL,2017,"Horno Electrico marca Breville modelo BOV800XL, ideal para cocina doméstica.",220,1903
+cocina,Licuadora,Oster,Classic BLST4655,2019,"Licuadora marca Oster modelo Classic BLST4655, ideal para cocina doméstica.",220,861
+cocina,Refrigerador,LG,InstaView Door-in-Door,2019,"Refrigerador marca LG modelo InstaView Door-in-Door, ideal para cocina doméstica.",220,332
+cocina,Microondas,Daewoo,KOR-7LREM,2016,"Microondas marca Daewoo modelo KOR-7LREM, ideal para cocina doméstica.",120,1113
+cocina,Microondas,Panasonic,NN-SN966S,2018,"Microondas marca Panasonic modelo NN-SN966S, ideal para cocina doméstica.",120,1082
+cocina,Refrigerador,LG,InstaView Door-in-Door,2022,"Refrigerador marca LG modelo InstaView Door-in-Door, ideal para cocina doméstica.",220,144
+cocina,Microondas,LG,NeoChef MH8265CIS,2022,"Microondas marca LG modelo NeoChef MH8265CIS, ideal para cocina doméstica.",240,1062
+cocina,Batidora,Cuisinart,SM-50BK,2019,"Batidora marca Cuisinart modelo SM-50BK, ideal para cocina doméstica.",127,720
+cocina,Microondas,LG,NeoChef MH8265CIS,2020,"Microondas marca LG modelo NeoChef MH8265CIS, ideal para cocina doméstica.",220,855
+cocina,Batidora,Hamilton Beach,63391,2019,"Batidora marca Hamilton Beach modelo 63391, ideal para cocina doméstica.",127,360
+cocina,Licuadora,Nutribullet,Pro 900,2015,"Licuadora marca Nutribullet modelo Pro 900, ideal para cocina doméstica.",220,967
+cocina,Cafetera,Keurig,K-Elite,2019,"Cafetera marca Keurig modelo K-Elite, ideal para cocina doméstica.",220,1177
+cocina,Licuadora,Black+Decker,Crush Master BL2010BP,2024,"Licuadora marca Black+Decker modelo Crush Master BL2010BP, ideal para cocina doméstica.",127,355
+cocina,Tostadora,Cuisinart,CPT-180,2018,"Tostadora marca Cuisinart modelo CPT-180, ideal para cocina doméstica.",127,768
+cocina,Licuadora,Nutribullet,Pro 900,2021,"Licuadora marca Nutribullet modelo Pro 900, ideal para cocina doméstica.",240,1106
+cocina,Batidora,Cuisinart,SM-50BK,2020,"Batidora marca Cuisinart modelo SM-50BK, ideal para cocina doméstica.",120,203
+cocina,Horno Electrico,Black+Decker,TO3250XSB,2017,"Horno Electrico marca Black+Decker modelo TO3250XSB, ideal para cocina doméstica.",120,2091
+cocina,Refrigerador,Mabe,RME360FYCU,2021,"Refrigerador marca Mabe modelo RME360FYCU, ideal para cocina doméstica.",120,321
+cocina,Tostadora,Breville,BTA820XL,2019,"Tostadora marca Breville modelo BTA820XL, ideal para cocina doméstica.",127,688
+cocina,Licuadora,Hamilton Beach,Power Elite 58148A,2015,"Licuadora marca Hamilton Beach modelo Power Elite 58148A, ideal para cocina doméstica.",127,1029
+cocina,Microondas,Samsung,MG402MADXBB,2022,"Microondas marca Samsung modelo MG402MADXBB, ideal para cocina doméstica.",120,865
+cocina,Tostadora,Cuisinart,CPT-180,2018,"Tostadora marca Cuisinart modelo CPT-180, ideal para cocina doméstica.",240,1363
+cocina,Horno Electrico,Breville,BOV800XL,2016,"Horno Electrico marca Breville modelo BOV800XL, ideal para cocina doméstica.",120,2080
+cocina,Licuadora,Oster,Classic BLST4655,2015,"Licuadora marca Oster modelo Classic BLST4655, ideal para cocina doméstica.",127,1003
+cocina,Horno Electrico,Cuisinart,TOB-260N1,2023,"Horno Electrico marca Cuisinart modelo TOB-260N1, ideal para cocina doméstica.",120,2292
+cocina,Licuadora,Black+Decker,Crush Master BL2010BP,2016,"Licuadora marca Black+Decker modelo Crush Master BL2010BP, ideal para cocina doméstica.",120,460
+cocina,Cafetera,Keurig,K-Elite,2018,"Cafetera marca Keurig modelo K-Elite, ideal para cocina doméstica.",120,640
+cocina,Tostadora,Oster,TSSTTRJB30R,2024,"Tostadora marca Oster modelo TSSTTRJB30R, ideal para cocina doméstica.",220,1055
+cocina,Licuadora,Hamilton Beach,Power Elite 58148A,2017,"Licuadora marca Hamilton Beach modelo Power Elite 58148A, ideal para cocina doméstica.",240,919
+cocina,Batidora,Oster,FPSTSMPL1,2021,"Batidora marca Oster modelo FPSTSMPL1, ideal para cocina doméstica.",120,549
+cocina,Microondas,Whirlpool,WMH31017HS,2020,"Microondas marca Whirlpool modelo WMH31017HS, ideal para cocina doméstica.",120,1001
+cocina,Cafetera,DeLonghi,Magnifica ESAM3300,2015,"Cafetera marca DeLonghi modelo Magnifica ESAM3300, ideal para cocina doméstica.",127,1349
+cocina,Refrigerador,Bosch,Serie 6 KGN36XI3P,2016,"Refrigerador marca Bosch modelo Serie 6 KGN36XI3P, ideal para cocina doméstica.",127,392
+cocina,Tostadora,Hamilton Beach,22796,2023,"Tostadora marca Hamilton Beach modelo 22796, ideal para cocina doméstica.",127,740
+cocina,Refrigerador,Samsung,Family Hub RF28R7551SR,2019,"Refrigerador marca Samsung modelo Family Hub RF28R7551SR, ideal para cocina doméstica.",220,351
+cocina,Microondas,Whirlpool,WMH31017HS,2020,"Microondas marca Whirlpool modelo WMH31017HS, ideal para cocina doméstica.",240,894
+cocina,Refrigerador,LG,InstaView Door-in-Door,2018,"Refrigerador marca LG modelo InstaView Door-in-Door, ideal para cocina doméstica.",220,230
+cocina,Licuadora,Oster,Classic BLST4655,2020,"Licuadora marca Oster modelo Classic BLST4655, ideal para cocina doméstica.",120,205
+cocina,Licuadora,Nutribullet,Pro 900,2020,"Licuadora marca Nutribullet modelo Pro 900, ideal para cocina doméstica.",240,354
+cocina,Tostadora,Cuisinart,CPT-180,2025,"Tostadora marca Cuisinart modelo CPT-180, ideal para cocina doméstica.",240,1237
+cocina,Batidora,Philips,HR3741/00,2024,"Batidora marca Philips modelo HR3741/00, ideal para cocina doméstica.",240,390
+cocina,Licuadora,Black+Decker,Crush Master BL2010BP,2021,"Licuadora marca Black+Decker modelo Crush Master BL2010BP, ideal para cocina doméstica.",240,225
+cocina,Refrigerador,Whirlpool,WRS325SDHZ,2021,"Refrigerador marca Whirlpool modelo WRS325SDHZ, ideal para cocina doméstica.",220,305
+cocina,Tostadora,Oster,TSSTTRJB30R,2025,"Tostadora marca Oster modelo TSSTTRJB30R, ideal para cocina doméstica.",120,819
+cocina,Tostadora,Oster,TSSTTRJB30R,2017,"Tostadora marca Oster modelo TSSTTRJB30R, ideal para cocina doméstica.",120,1064
+cocina,Batidora,Philips,HR3741/00,2021,"Batidora marca Philips modelo HR3741/00, ideal para cocina doméstica.",240,724
+cocina,Microondas,Samsung,MG402MADXBB,2021,"Microondas marca Samsung modelo MG402MADXBB, ideal para cocina doméstica.",240,867
+cocina,Batidora,Oster,FPSTSMPL1,2016,"Batidora marca Oster modelo FPSTSMPL1, ideal para cocina doméstica.",127,521
+cocina,Refrigerador,Mabe,RME360FYCU,2017,"Refrigerador marca Mabe modelo RME360FYCU, ideal para cocina doméstica.",240,276
+cocina,Batidora,Hamilton Beach,63391,2018,"Batidora marca Hamilton Beach modelo 63391, ideal para cocina doméstica.",120,203
+cocina,Batidora,KitchenAid,Artisan KSM150,2016,"Batidora marca KitchenAid modelo Artisan KSM150, ideal para cocina doméstica.",220,220
+cocina,Licuadora,Black+Decker,Crush Master BL2010BP,2018,"Licuadora marca Black+Decker modelo Crush Master BL2010BP, ideal para cocina doméstica.",220,766
+cocina,Refrigerador,Samsung,Family Hub RF28R7551SR,2025,"Refrigerador marca Samsung modelo Family Hub RF28R7551SR, ideal para cocina doméstica.",127,272
+cocina,Batidora,Cuisinart,SM-50BK,2016,"Batidora marca Cuisinart modelo SM-50BK, ideal para cocina doméstica.",220,370
+cocina,Licuadora,Philips,HR3652/00 Avance,2021,"Licuadora marca Philips modelo HR3652/00 Avance, ideal para cocina doméstica.",240,424
+cocina,Licuadora,Philips,HR3652/00 Avance,2024,"Licuadora marca Philips modelo HR3652/00 Avance, ideal para cocina doméstica.",120,768
+cocina,Refrigerador,LG,InstaView Door-in-Door,2019,"Refrigerador marca LG modelo InstaView Door-in-Door, ideal para cocina doméstica.",240,106
+cocina,Licuadora,Oster,Classic BLST4655,2024,"Licuadora marca Oster modelo Classic BLST4655, ideal para cocina doméstica.",120,585
+cocina,Horno Electrico,Cuisinart,TOB-260N1,2023,"Horno Electrico marca Cuisinart modelo TOB-260N1, ideal para cocina doméstica.",240,1884
+cocina,Batidora,KitchenAid,Artisan KSM150,2018,"Batidora marca KitchenAid modelo Artisan KSM150, ideal para cocina doméstica.",220,295
+cocina,Tostadora,Breville,BTA820XL,2020,"Tostadora marca Breville modelo BTA820XL, ideal para cocina doméstica.",120,847
+cocina,Licuadora,Oster,Classic BLST4655,2015,"Licuadora marca Oster modelo Classic BLST4655, ideal para cocina doméstica.",240,421
+cocina,Horno Electrico,Hamilton Beach,31103DA,2024,"Horno Electrico marca Hamilton Beach modelo 31103DA, ideal para cocina doméstica.",240,2041
+cocina,Refrigerador,Whirlpool,WRS325SDHZ,2022,"Refrigerador marca Whirlpool modelo WRS325SDHZ, ideal para cocina doméstica.",120,305
+cocina,Microondas,Panasonic,NN-SN966S,2016,"Microondas marca Panasonic modelo NN-SN966S, ideal para cocina doméstica.",240,953
+cocina,Refrigerador,Whirlpool,WRS325SDHZ,2018,"Refrigerador marca Whirlpool modelo WRS325SDHZ, ideal para cocina doméstica.",120,127
+cocina,Cafetera,Mr. Coffee,12-Cup Coffee Maker,2020,"Cafetera marca Mr. Coffee modelo 12-Cup Coffee Maker, ideal para cocina doméstica.",220,725
+cocina,Cafetera,DeLonghi,Magnifica ESAM3300,2025,"Cafetera marca DeLonghi modelo Magnifica ESAM3300, ideal para cocina doméstica.",240,1342
+cocina,Tostadora,Oster,TSSTTRJB30R,2021,"Tostadora marca Oster modelo TSSTTRJB30R, ideal para cocina doméstica.",220,1341
+cocina,Cafetera,Nespresso,VertuoPlus,2020,"Cafetera marca Nespresso modelo VertuoPlus, ideal para cocina doméstica.",220,1007
+cocina,Cafetera,DeLonghi,Magnifica ESAM3300,2024,"Cafetera marca DeLonghi modelo Magnifica ESAM3300, ideal para cocina doméstica.",127,1414
+cocina,Cafetera,Hamilton Beach,FlexBrew 49976,2024,"Cafetera marca Hamilton Beach modelo FlexBrew 49976, ideal para cocina doméstica.",220,1313
+cocina,Refrigerador,Whirlpool,WRS325SDHZ,2015,"Refrigerador marca Whirlpool modelo WRS325SDHZ, ideal para cocina doméstica.",240,320
+cocina,Licuadora,Nutribullet,Pro 900,2016,"Licuadora marca Nutribullet modelo Pro 900, ideal para cocina doméstica.",127,380
+cocina,Tostadora,Black+Decker,TR1278B,2019,"Tostadora marca Black+Decker modelo TR1278B, ideal para cocina doméstica.",220,1415
+cocina,Horno Electrico,Breville,BOV800XL,2018,"Horno Electrico marca Breville modelo BOV800XL, ideal para cocina doméstica.",240,1302
+cocina,Tostadora,Oster,TSSTTRJB30R,2020,"Tostadora marca Oster modelo TSSTTRJB30R, ideal para cocina doméstica.",220,864
+cocina,Microondas,Panasonic,NN-SN966S,2019,"Microondas marca Panasonic modelo NN-SN966S, ideal para cocina doméstica.",240,799
+cocina,Tostadora,Black+Decker,TR1278B,2015,"Tostadora marca Black+Decker modelo TR1278B, ideal para cocina doméstica.",127,1225
+cocina,Cafetera,Hamilton Beach,FlexBrew 49976,2025,"Cafetera marca Hamilton Beach modelo FlexBrew 49976, ideal para cocina doméstica.",127,725
+cocina,Horno Electrico,Black+Decker,TO3250XSB,2017,"Horno Electrico marca Black+Decker modelo TO3250XSB, ideal para cocina doméstica.",127,1017
+cocina,Licuadora,Philips,HR3652/00 Avance,2021,"Licuadora marca Philips modelo HR3652/00 Avance, ideal para cocina doméstica.",220,879
+cocina,Licuadora,Oster,Classic BLST4655,2017,"Licuadora marca Oster modelo Classic BLST4655, ideal para cocina doméstica.",220,1109
+cocina,Refrigerador,Samsung,Family Hub RF28R7551SR,2017,"Refrigerador marca Samsung modelo Family Hub RF28R7551SR, ideal para cocina doméstica.",240,375
+cocina,Tostadora,Oster,TSSTTRJB30R,2019,"Tostadora marca Oster modelo TSSTTRJB30R, ideal para cocina doméstica.",127,1323
+cocina,Refrigerador,LG,InstaView Door-in-Door,2018,"Refrigerador marca LG modelo InstaView Door-in-Door, ideal para cocina doméstica.",220,110
+cocina,Batidora,Oster,FPSTSMPL1,2017,"Batidora marca Oster modelo FPSTSMPL1, ideal para cocina doméstica.",120,303
+cocina,Cafetera,Hamilton Beach,FlexBrew 49976,2020,"Cafetera marca Hamilton Beach modelo FlexBrew 49976, ideal para cocina doméstica.",127,1178
+cocina,Cafetera,Nespresso,VertuoPlus,2024,"Cafetera marca Nespresso modelo VertuoPlus, ideal para cocina doméstica.",120,1174
+cocina,Batidora,Oster,FPSTSMPL1,2021,"Batidora marca Oster modelo FPSTSMPL1, ideal para cocina doméstica.",120,660
+cocina,Licuadora,Black+Decker,Crush Master BL2010BP,2022,"Licuadora marca Black+Decker modelo Crush Master BL2010BP, ideal para cocina doméstica.",127,623
+cocina,Tostadora,Cuisinart,CPT-180,2015,"Tostadora marca Cuisinart modelo CPT-180, ideal para cocina doméstica.",220,842
+cocina,Licuadora,Nutribullet,Pro 900,2015,"Licuadora marca Nutribullet modelo Pro 900, ideal para cocina doméstica.",240,793
+cocina,Refrigerador,Samsung,Family Hub RF28R7551SR,2017,"Refrigerador marca Samsung modelo Family Hub RF28R7551SR, ideal para cocina doméstica.",120,181
+cocina,Tostadora,Hamilton Beach,22796,2021,"Tostadora marca Hamilton Beach modelo 22796, ideal para cocina doméstica.",120,1222
+cocina,Tostadora,Breville,BTA820XL,2021,"Tostadora marca Breville modelo BTA820XL, ideal para cocina doméstica.",120,1391
+cocina,Horno Electrico,Breville,BOV800XL,2018,"Horno Electrico marca Breville modelo BOV800XL, ideal para cocina doméstica.",120,1638
+cocina,Batidora,KitchenAid,Artisan KSM150,2016,"Batidora marca KitchenAid modelo Artisan KSM150, ideal para cocina doméstica.",120,341
+cocina,Batidora,Hamilton Beach,63391,2018,"Batidora marca Hamilton Beach modelo 63391, ideal para cocina doméstica.",120,156
+cocina,Cafetera,Keurig,K-Elite,2024,"Cafetera marca Keurig modelo K-Elite, ideal para cocina doméstica.",240,1370
+cocina,Horno Electrico,Oster,TSSTTVMNDG,2023,"Horno Electrico marca Oster modelo TSSTTVMNDG, ideal para cocina doméstica.",220,1733
+cocina,Licuadora,Nutribullet,Pro 900,2017,"Licuadora marca Nutribullet modelo Pro 900, ideal para cocina doméstica.",120,671
+cocina,Refrigerador,LG,InstaView Door-in-Door,2015,"Refrigerador marca LG modelo InstaView Door-in-Door, ideal para cocina doméstica.",240,250
+cocina,Tostadora,Hamilton Beach,22796,2022,"Tostadora marca Hamilton Beach modelo 22796, ideal para cocina doméstica.",240,895
+cocina,Tostadora,Cuisinart,CPT-180,2025,"Tostadora marca Cuisinart modelo CPT-180, ideal para cocina doméstica.",240,1331
+cocina,Cafetera,DeLonghi,Magnifica ESAM3300,2025,"Cafetera marca DeLonghi modelo Magnifica ESAM3300, ideal para cocina doméstica.",220,836
+cocina,Microondas,Samsung,MG402MADXBB,2016,"Microondas marca Samsung modelo MG402MADXBB, ideal para cocina doméstica.",220,1016
+cocina,Refrigerador,Samsung,Family Hub RF28R7551SR,2015,"Refrigerador marca Samsung modelo Family Hub RF28R7551SR, ideal para cocina doméstica.",127,113
+cocina,Horno Electrico,Oster,TSSTTVMNDG,2019,"Horno Electrico marca Oster modelo TSSTTVMNDG, ideal para cocina doméstica.",220,2469
+cocina,Tostadora,Breville,BTA820XL,2023,"Tostadora marca Breville modelo BTA820XL, ideal para cocina doméstica.",240,1335
+cocina,Licuadora,Black+Decker,Crush Master BL2010BP,2025,"Licuadora marca Black+Decker modelo Crush Master BL2010BP, ideal para cocina doméstica.",220,1028
+cocina,Refrigerador,Mabe,RME360FYCU,2022,"Refrigerador marca Mabe modelo RME360FYCU, ideal para cocina doméstica.",240,202
+cocina,Licuadora,Black+Decker,Crush Master BL2010BP,2021,"Licuadora marca Black+Decker modelo Crush Master BL2010BP, ideal para cocina doméstica.",120,1054
+cocina,Licuadora,Philips,HR3652/00 Avance,2021,"Licuadora marca Philips modelo HR3652/00 Avance, ideal para cocina doméstica.",127,816
+cocina,Batidora,Cuisinart,SM-50BK,2023,"Batidora marca Cuisinart modelo SM-50BK, ideal para cocina doméstica.",127,445
+cocina,Refrigerador,Mabe,RME360FYCU,2024,"Refrigerador marca Mabe modelo RME360FYCU, ideal para cocina doméstica.",120,381
+cocina,Horno Electrico,Breville,BOV800XL,2015,"Horno Electrico marca Breville modelo BOV800XL, ideal para cocina doméstica.",240,1115
+cocina,Licuadora,Black+Decker,Crush Master BL2010BP,2022,"Licuadora marca Black+Decker modelo Crush Master BL2010BP, ideal para cocina doméstica.",127,545
+cocina,Licuadora,Nutribullet,Pro 900,2022,"Licuadora marca Nutribullet modelo Pro 900, ideal para cocina doméstica.",220,459
