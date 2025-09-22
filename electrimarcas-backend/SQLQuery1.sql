@@ -11,7 +11,7 @@ CREATE TABLE categoria(
 SELECT * from categoria
 
 --Tabla temporal para almacenar datos de un electrodomestico
-#create table temp_electrodomestico(,
+create table #temp_electrodomestico(
 	nombre_categoria varchar(50) not null,
 	id_electrodomestico char(6) not null,
 	nombre_electrodomestico varchar(60) not null,
@@ -20,11 +20,10 @@ SELECT * from categoria
 	id_modelo char(6) not null,
 	nombre_modelo varchar(40) not null,
 	año_fabricacion int not null,
-	descripcion varchar(60) not null,
+	descripcion varchar(150) not null,
 	voltaje varchar(10) not null,
-	potencia  not null,
+	potencia varchar(10) not null,
 )
-
 
 create table marca(
 	id_marca char(6) not null,
@@ -53,8 +52,10 @@ ALTEr COLUMN costo_kwh int not null
 insert into tarifa values('T01','Sinaloa','Verano',800,'2025-06-01')
 insert into tarifa values('T02','Sinaloa','Invierno',0.1250,'2025-12-01')
 
+/*
 T01 - Sinaloa - Verano - 600 - 2023-06-01
 T02 - Sinaloa - Invierno - 0.1250 - 2023-12-01
+*/
 
 create table consumo(
 	id_consumo char(6) not null,
@@ -81,7 +82,9 @@ create table electrodomestico(
 )
 
 insert into categoria values('C01','Cocina')
+go
 insert into categoria values('C02','Limpieza')
+go
 insert into categoria values('C03','Entretenimiento')
 go
 insert into categoria values('C04','Climatizacion')
@@ -121,5 +124,16 @@ add nombre_electrodomestico varchar(60) not null;
 ALTER TABLE electrodomestico
 add descripcion varchar(60) not null;
 
-select* from electrodomestico
+select * from electrodomestico
 
+SELECT * FROM #temp_electrodomestico
+
+BULK INSERT #temp_electrodomestico
+FROM 'C:\\tabla_electrodomesticos.csv'
+WITH (
+    FORMAT = 'CSV',
+    FIRSTROW = 2,              -- omitir encabezado si el CSV lo tiene
+    FIELDTERMINATOR = ',',     -- separador de columnas
+    ROWTERMINATOR = '\n',      -- salto de línea
+    TABLOCK
+);
