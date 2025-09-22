@@ -94,6 +94,51 @@ go
 
 SELECT * FROM categoria
 
+-- ================================
+-- Tabla de municipios y su tarifa base
+-- ================================
+CREATE TABLE tarifa_municipios (
+    id SERIAL PRIMARY KEY,
+    estado VARCHAR(64) NOT NULL,          -- "Sinaloa"
+    municipio VARCHAR(64) NOT NULL,       -- "Culiacán"
+    clave_tarifa_base VARCHAR(3) NOT NULL,-- '1D', '1E', '1F'
+    inicio_verano CHAR(4),                -- '0501' (01 mayo) se tiene que checar, solo depende de mes y dia 
+    fin_verano CHAR(4)                    -- '1031' (31 octubre)
+);
+
+-- ================================
+-- Tabla de planes tarifarios
+-- (cada versión según temporada/mes)
+-- ================================
+CREATE TABLE planes_tarifa (
+    id SERIAL PRIMARY KEY,
+    clave_tarifa VARCHAR(3) NOT NULL,     -- '1D', '1E', '1F', 'DAC'
+    es_verano BOOLEAN NOT NULL,           -- TRUE = verano, FALSE = fuera de verano
+    vigente_desde DATE NOT NULL,          -- Fecha inicio vigencia
+    vigente_hasta DATE,                   -- Fecha fin vigencia (NULL = actual)
+    notas TEXT
+);
+
+-- ================================
+-- Tabla de bloques de consumo por plan
+-- ================================
+CREATE TABLE bloques_tarifa (
+    id SERIAL PRIMARY KEY,
+    id_plan INT REFERENCES planes_tarifa(id),
+    orden_bloque INT NOT NULL,            -- 1=básico, 2=intermedio, 3=excedente
+    limite_kwh INT,                       -- NULL = sin límite (excedente)
+    precio_mxn DECIMAL(10,4) NOT NULL     -- precio $/kWh
+);
+
+-- ================================
+-- Tabla de reglas DAC
+-- (límites promedio mensual)
+-- ================================
+CREATE TABLE reglas_dac (
+    clave_tarifa_base VARCHAR(3) PRIMARY KEY,
+    limite_promedio_mensual_kwh INT NOT NULL
+);
+
 
 -- Cambiar la longitud de varchar en tablas existentes
 ALTER TABLE categoria 
