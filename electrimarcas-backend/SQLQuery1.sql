@@ -1,17 +1,26 @@
+drop database if exists ELECTRIMARCAS 
 create database ELECTRIMARCAS
 go
 use ELECTRIMARCAS
 go
 
 CREATE TABLE categoria(
-	id_categoria char(3) not null,
+	id_categoria char(6) not null,
 	nombre_categoria varchar(50)not null ,
 	PRIMARY KEY(id_categoria)
 )
+INSERT INTO categoria (id_categoria, nombre_categoria) VALUES
+('C01', 'cocina'),
+('C02', 'limpieza'),
+('C03', 'entretenimiento'),
+('C04', 'climatizacion'),
+('C05', 'cuidado')
 SELECT * from categoria
 
 --Tabla temporal para almacenar datos de un electrodomestico
+select * from #temp_electrodomestico
 create table #temp_electrodomestico(
+	id_categoria char(6) not null,
 	nombre_categoria varchar(50) not null,
 	id_electrodomestico char(6) not null,
 	nombre_electrodomestico varchar(60) not null,
@@ -70,7 +79,7 @@ create table consumo(
 
 create table electrodomestico(
 	id_electrodomestico char(6) not null,
-	id_categoria char(3) not null,
+	id_categoria char(6) not null,
 	id_modelo char(6) not null,
 	voltaje INT not null,
 	potencia INT not null,
@@ -81,18 +90,9 @@ create table electrodomestico(
 	FOREIGN KEY(id_modelo) references modelo(id_modelo)
 )
 
-insert into categoria values('C01','Cocina')
-go
-insert into categoria values('C02','Limpieza')
-go
-insert into categoria values('C03','Entretenimiento')
-go
-insert into categoria values('C04','Climatizacion')
-go
-insert into categoria values('C05','Cuidado Personal')
-go
+alter table electrodomestico
+ALTEr COLUMN descripcion varchar(200) 
 
-SELECT * FROM categoria
 
 -- ================================
 -- Tabla de municipios y su tarifa base
@@ -142,7 +142,7 @@ CREATE TABLE reglas_dac (
 
 -- Cambiar la longitud de varchar en tablas existentes
 ALTER TABLE categoria 
-ALTER COLUMN nombre_categoria VARCHAR(50) NOT NULL;
+ALTER COLUMN id_categoria char(6);
 
 ALTER TABLE marca 
 ALTER COLUMN nombre_marca VARCHAR(30) NOT NULL;
@@ -167,14 +167,14 @@ ALTER TABLE electrodomestico
 add nombre_electrodomestico varchar(60) not null;
 
 ALTER TABLE electrodomestico
-add descripcion varchar(60) not null;
+add descripcion varchar(150) not null;
 
 select * from electrodomestico
 
 SELECT * FROM #temp_electrodomestico
 
 BULK INSERT #temp_electrodomestico
-FROM 'C:\\tabla_electrodomesticos.csv'
+FROM 'C:\csv\tabla_electrodomesticos.csv'
 WITH (
     FORMAT = 'CSV',
     FIRSTROW = 2,              -- omitir encabezado si el CSV lo tiene
@@ -182,3 +182,4 @@ WITH (
     ROWTERMINATOR = '\n',      -- salto de línea
     TABLOCK
 );
+
