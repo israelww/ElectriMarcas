@@ -124,24 +124,69 @@ INSERT INTO tarifa_municipios (id_tarifa_municipios, estado, municipio, clave_ta
 
 -- Insertar los planes tarifarios (Verano y Fuera de Verano)
 -- Asumimos que los planes actuales son vigentes desde inicio de 2025.
-INSERT INTO planes_tarifa (clave_tarifa, es_verano, vigente_desde, notas) VALUES
-('1F', TRUE, '2025-01-01', 'Tarifa 1F para temporada de verano.'),
-('1F', FALSE, '2025-01-01', 'Tarifa 1F para fuera de verano.');
+-- 1D
+INSERT INTO planes_tarifa (id_planes_tarifa, clave_tarifa, es_verano, vigente_desde, notas) VALUES
+(101, '1D', 0, '2025-01-01', N'1D fuera de verano'),
+(102, '1D', 1, '2025-05-01', N'1D verano');
+
+-- 1E
+INSERT INTO planes_tarifa (id_planes_tarifa, clave_tarifa, es_verano, vigente_desde, notas) VALUES
+(201, '1E', 0, '2025-01-01', N'1E fuera de verano'),
+(202, '1E', 1, '2025-05-01', N'1E verano');
+
+-- 1F
+INSERT INTO planes_tarifa (id_planes_tarifa, clave_tarifa, es_verano, vigente_desde, notas) VALUES
+(301, '1F', 0, '2025-01-01', N'1F fuera de verano'),
+(302, '1F', 1, '2025-05-01', N'1F verano');
+
+-- DAC 
+INSERT INTO planes_tarifa (id_planes_tarifa, clave_tarifa, es_verano, vigente_desde, notas) VALUES
+(401, 'DAC', 0, '2025-01-01', N'Doméstica de Alto Consumo');
+
+-- Bloques 1D VERANO (estructura 4 bloques, mismo límite que 1F, precios distintos)
+INSERT INTO bloques_tarifa (id_planes_tarifa, orden_bloque, limite_kwh, precio_mxn) VALUES
+(102, 1, 175, 0.9770),   -- Básico: Primeros 175 kWh 
+(102, 2, 400, 1.1310),   -- Intermedio Bajo: Siguientes 225 kWh (175+225=400)
+(102, 3, 600, 1.4590),   -- Intermedio Alto: Siguientes 200 kWh (400+200=600)
+(102, 4,  NULL, 3.8890); -- Excedente
+
+-- Bloques 1D FUERA DE VERANO (3 bloques, tipo T1)
+INSERT INTO bloques_tarifa (id_planes_tarifa, orden_bloque, limite_kwh, precio_mxn) VALUES
+(101, 1,   75, 1.1030),   -- Básico: Primeros 75 kWh
+(101, 2,  200, 1.3400),   -- Intermedio: Siguientes 125 kWh (75+125=200)
+(101, 3,  NULL,3.9170);   -- Excedente
+
+-- Bloques 1E VERANO
+INSERT INTO bloques_tarifa (id_planes_tarifa, orden_bloque, limite_kwh, precio_mxn) VALUES
+(202, 1, 300, 0.8890),   -- Básico: Primeros 300 kWh
+(202, 2, 750, 1.0120),   -- Intermedio Bajo: Siguientes 450 kWh (300+450=750)
+(202, 3, 900, 1.3130),   -- Intermedio Alto: Siguientes 150 kWh (750+150=900)
+(202, 4, NULL,3.8890);   -- Excedente
+
+-- Bloques 1E FUERA DE VERANO
+INSERT INTO bloques_tarifa (id_planes_tarifa, orden_bloque, limite_kwh, precio_mxn) VALUES
+(201, 1,   75, 1.0950),   -- Básico: Primeros 75 kWh
+(201, 2,  200, 1.3300),   -- Intermedio: Siguientes 125 kWh (75+125=200)
+(201, 3,  NULL,3.8890);   -- Excedente
 
 -- Insertar los bloques de consumo para el plan de VERANO (1F)
--- (ID del plan de verano es 1)
-INSERT INTO bloques_tarifa (id_plan, orden_bloque, limite_kwh, precio_mxn) VALUES
-(1, 1, 300, 0.5950),   -- Básico: Primeros 300 kWh
-(1, 2, 1200, 0.7410),  -- Intermedio Bajo: Siguientes 900 kWh (300+900=1200)
-(1, 3, 2500, 1.8040),  -- Intermedio Alto: Siguientes 1300 kWh (1200+1300=2500)
-(1, 4, NULL, 2.8590);  -- Excedente: kWh adicionales
+-- (ID del plan de verano es 302)
+INSERT INTO bloques_tarifa (id_planes_tarifa, orden_bloque, limite_kwh, precio_mxn) VALUES
+(302, 1, 300, 0.8150),   -- Básico: Primeros 300 kWh
+(302, 1, 1200, 0.9960),  -- Intermedio Bajo: Siguientes 900 kWh (300+900=1200)
+(302, 3, 2500, 2.4230),  -- Intermedio Alto: Siguientes 1300 kWh (1200+1300=2500)
+(302, 4, NULL, 3.8330);  -- Excedente: kWh adicionales
 
 -- Insertar los bloques de consumo para el plan FUERA DE VERANO (1F)
--- (ID del plan fuera de verano es 2)
-INSERT INTO bloques_tarifa (id_plan, orden_bloque, limite_kwh, precio_mxn) VALUES
-(2, 1, 75, 0.8090),    -- Básico: Primeros 75 kWh
-(2, 2, 200, 0.9760),   -- Intermedio: Siguientes 125 kWh (75+125=200)
-(2, 3, NULL, 2.8590);   -- Excedente: kWh adicionales
+-- (ID del plan fuera de verano es 301)
+INSERT INTO bloques_tarifa (id_planes_tarifa, orden_bloque, limite_kwh, precio_mxn) VALUES
+(301, 1, 75,  1.1030),    -- Básico: Primeros 75 kWh
+(301, 2, 200, 1.3400),   -- Intermedio: Siguientes 125 kWh (75+125=200)
+(301, 3, NULL,3.9170);   -- Excedente: kWh adicionales
+
+-- Insertar el Bloque DAC (precio único por todo el consumo)
+INSERT INTO bloques_tarifa (id_planes_tarifa, orden_bloque, limite_kwh, precio_mxn) VALUES
+(601, 1, NULL, 6.0100);  -- Todo el consumo se cobra a tarifa plana
 
 -- Insertar regla para Tarifa Doméstica de Alto Consumo (DAC)
 INSERT INTO reglas_dac (clave_tarifa_base, limite_promedio_mensual_kwh) VALUES
@@ -191,7 +236,7 @@ SELECT * FROM marca;
 SELECT * FROM modelo;
 SELECT * FROM electrodomestico;
 SELECT * FROM tarifa_municipios;
-SELECT * FROM planes_tarifa;z
+SELECT * FROM planes_tarifa;
 SELECT * FROM bloques_tarfia;
 SELECT * FROM reglas_dac;
 SELECT * FROM consumo;

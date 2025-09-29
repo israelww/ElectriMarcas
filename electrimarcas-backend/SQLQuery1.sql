@@ -124,11 +124,11 @@ CREATE TABLE planes_tarifa (
 -- ================================
 CREATE TABLE bloques_tarifa (
     id_bloques_tarifa INT PRIMARY KEY,                   -- número asignado manualmente
-    id_plan INT NOT NULL,                 -- FK a planes_tarifa
+    id_planes_tarifa INT NOT NULL,                 -- FK a planes_tarifa
     orden_bloque INT NOT NULL,            -- 1=básico, 2=intermedio, 3=excedente
     limite_kwh INT,                       -- NULL = sin límite (excedente)
     precio_mxn DECIMAL(10,4) NOT NULL,    -- precio $/kWh
-    FOREIGN KEY (id_plan) REFERENCES planes_tarifa(id_planes_tarifa)
+    FOREIGN KEY (id_planes_tarifa) REFERENCES planes_tarifa(id_planes_tarifa)
 );
 
 -- ================================
