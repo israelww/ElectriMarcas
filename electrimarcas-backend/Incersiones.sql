@@ -103,22 +103,24 @@ select * from electrodomestico
 INSERT INTO tarifa_municipios (id_tarifa_municipios, estado, municipio, clave_tarifa_base, inicio_verano, fin_verano) VALUES
 (1,  'Sinaloa', 'Ahome',             '1F', '0501', '1031'),
 (2,  'Sinaloa', 'Angostura',         '1F', '0501', '1031'),
-(3,  'Sinaloa', 'Badiraguato',       '1F', '0501', '1031'),
-(4,  'Sinaloa', 'Concordia',         '1F', '0501', '1031'),
-(5,  'Sinaloa', 'Cosalá',            '1F', '0501', '1031'),
+(3,  'Sinaloa', 'Badiraguato',       '1E', '0501', '1031'),
+(4,  'Sinaloa', 'Concordia',         '1D', '0501', '1031'),
+(5,  'Sinaloa', 'Cosalá',            '1D', '0501', '1031'),
 (6,  'Sinaloa', 'Culiacán',          '1F', '0501', '1031'),
 (7,  'Sinaloa', 'Choix',             '1F', '0501', '1031'),
-(8,  'Sinaloa', 'Elota',             '1F', '0501', '1031'),
-(9,  'Sinaloa', 'Escuinapa',         '1F', '0501', '1031'),
+(8,  'Sinaloa', 'Elota',             '1E', '0501', '1031'),
+(9,  'Sinaloa', 'Escuinapa',         '1E', '0501', '1031'),
 (10, 'Sinaloa', 'El Fuerte',         '1F', '0501', '1031'),
 (11, 'Sinaloa', 'Guasave',           '1F', '0501', '1031'),
-(12, 'Sinaloa', 'Mazatlán',          '1F', '0501', '1031'),
+(12, 'Sinaloa', 'Mazatlán',          '1E', '0501', '1031'),
 (13, 'Sinaloa', 'Mocorito',          '1F', '0501', '1031'),
-(14, 'Sinaloa', 'Rosario',           '1F', '0501', '1031'),
+(14, 'Sinaloa', 'Rosario',           '1E', '0501', '1031'),
 (15, 'Sinaloa', 'Salvador Alvarado', '1F', '0501', '1031'),
-(16, 'Sinaloa', 'San Ignacio',       '1F', '0501', '1031'),
+(16, 'Sinaloa', 'San Ignacio',       '1E', '0501', '1031'),
 (17, 'Sinaloa', 'Sinaloa',           '1F', '0501', '1031'),
-(18, 'Sinaloa', 'Navolato',          '1F', '0501', '1031');
+(18, 'Sinaloa', 'Navolato',          '1F', '0501', '1031'),
+(19, 'Sinaloa', 'El Dorado',         '1F', '0501', '1031'),
+(20, 'Sinaloa', 'Juan José Ríos',    '1F', '0501', '1031');
 
 -- Insertar los planes tarifarios (Verano y Fuera de Verano)
 -- Asumimos que los planes actuales son vigentes desde inicio de 2025.
