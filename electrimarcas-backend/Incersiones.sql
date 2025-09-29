@@ -20,7 +20,7 @@ create table #temp_electrodomestico(
 
 -- Insertar datos
 BULK INSERT #temp_electrodomestico
-FROM 'C:\USB Santiago\Semestre 7 Tec\Taller de Investigación II\ElectriMarcas\tabla_electrodomesticos.csv'
+FROM 'C:\csv\tabla_electrodomesticos.csv'
 WITH (
     FORMAT = 'CSV',
     FIRSTROW = 2,              -- omitir encabezado si el CSV lo tiene
