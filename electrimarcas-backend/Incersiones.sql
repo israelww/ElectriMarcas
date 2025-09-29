@@ -2,6 +2,33 @@
 USE ELECTRIMARCAS;
 GO
 
+-- Crear la tabla de temp_electrodomesticos
+create table #temp_electrodomestico(
+	id_categoria char(6) not null,
+	nombre_categoria varchar(50) not null,
+	id_electrodomestico char(6) not null,
+	nombre_electrodomestico varchar(60) not null,
+	id_marca char(6) not null,
+	nombre_marca varchar(30) not null,
+	id_modelo char(6) not null,
+	nombre_modelo varchar(40) not null,
+	año_fabricacion int not null,
+	descripcion varchar(150) not null,
+	voltaje varchar(10) not null,
+	potencia varchar(10) not null,
+)
+
+-- Insertar datos
+BULK INSERT #temp_electrodomestico
+FROM 'C:\USB Santiago\Semestre 7 Tec\Taller de Investigación II\ElectriMarcas\tabla_electrodomesticos.csv'
+WITH (
+    FORMAT = 'CSV',
+    FIRSTROW = 2,              -- omitir encabezado si el CSV lo tiene
+    FIELDTERMINATOR = ',',     -- separador de columnas
+    ROWTERMINATOR = '\n',      -- salto de línea
+    TABLOCK
+);
+
 -- ===================================================================
 -- INSERTS PARA DATOS MAESTROS (Catálogos)
 -- Se insertan los datos que no dependen de otros.
@@ -145,8 +172,8 @@ SELECT * FROM marca;
 SELECT * FROM modelo;
 SELECT * FROM electrodomestico;
 SELECT * FROM tarifa_municipios;
-SELECT * FROM planes_tarifa;
-SELECT * FROM bloques_tarifa;
+SELECT * FROM planes_tarifa;z
+SELECT * FROM bloques_tarfia;
 SELECT * FROM reglas_dac;
 SELECT * FROM consumo;
 GO

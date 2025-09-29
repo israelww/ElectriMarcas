@@ -1,3 +1,4 @@
+USE master
 drop database if exists ELECTRIMARCAS 
 create database ELECTRIMARCAS
 go
@@ -9,6 +10,7 @@ CREATE TABLE categoria(
 	nombre_categoria varchar(50)not null ,
 	PRIMARY KEY(id_categoria)
 )
+
 INSERT INTO categoria (id_categoria, nombre_categoria) VALUES
 ('C01', 'cocina'),
 ('C02', 'limpieza'),
@@ -18,7 +20,6 @@ INSERT INTO categoria (id_categoria, nombre_categoria) VALUES
 SELECT * from categoria
 
 --Tabla temporal para almacenar datos de un electrodomestico
-select * from #temp_electrodomestico
 create table #temp_electrodomestico(
 	id_categoria char(6) not null,
 	nombre_categoria varchar(50) not null,
@@ -66,6 +67,22 @@ T01 - Sinaloa - Verano - 600 - 2023-06-01
 T02 - Sinaloa - Invierno - 0.1250 - 2023-12-01
 */
 
+create table electrodomestico(
+	id_electrodomestico char(6) not null,
+	id_categoria char(6) not null,
+	id_modelo char(6) not null,
+	voltaje INT not null,
+	potencia INT not null,
+	nombre_electrodomestico varchar(60) not null,
+	descripcion varchar(150) not null,
+	PRIMARY KEY(id_electrodomestico),
+	FOREIGN KEY(id_categoria) references categoria(id_categoria),
+	FOREIGN KEY(id_modelo) references modelo(id_modelo)
+)
+
+alter table electrodomestico
+ALTEr COLUMN descripcion varchar(200) 
+
 create table consumo(
 	id_consumo char(6) not null,
 	id_electrodomestico char(6) not null,
@@ -77,32 +94,15 @@ create table consumo(
 	FOREIGN KEY(id_tarifa) references tarifa(id_tarifa)
 )
 
-create table electrodomestico(
-	id_electrodomestico char(6) not null,
-	id_categoria char(6) not null,
-	id_modelo char(6) not null,
-	voltaje INT not null,
-	potencia INT not null,
-	nombre_electrodomestico varchar(60) not null,
-	descripcion varchar(60) not null,
-	PRIMARY KEY(id_electrodomestico),
-	FOREIGN KEY(id_categoria) references categoria(id_categoria),
-	FOREIGN KEY(id_modelo) references modelo(id_modelo)
-)
-
-alter table electrodomestico
-ALTEr COLUMN descripcion varchar(200) 
-
-
 -- ================================
 -- Tabla de municipios y su tarifa base
 -- ================================
 CREATE TABLE tarifa_municipios (
-    id SERIAL PRIMARY KEY,
+    id_tarifa_municipios INT PRIMARY KEY,                   -- número asignado manualmente
     estado VARCHAR(64) NOT NULL,          -- "Sinaloa"
     municipio VARCHAR(64) NOT NULL,       -- "Culiacán"
     clave_tarifa_base VARCHAR(3) NOT NULL,-- '1D', '1E', '1F'
-    inicio_verano CHAR(4),                -- '0501' (01 mayo) se tiene que checar, solo depende de mes y dia 
+    inicio_verano CHAR(4),                -- '0501' (01 mayo)
     fin_verano CHAR(4)                    -- '1031' (31 octubre)
 );
 
@@ -111,23 +111,24 @@ CREATE TABLE tarifa_municipios (
 -- (cada versión según temporada/mes)
 -- ================================
 CREATE TABLE planes_tarifa (
-    id SERIAL PRIMARY KEY,
+    id_planes_tarifa INT PRIMARY KEY,                   -- número asignado manualmente
     clave_tarifa VARCHAR(3) NOT NULL,     -- '1D', '1E', '1F', 'DAC'
-    es_verano BOOLEAN NOT NULL,           -- TRUE = verano, FALSE = fuera de verano
+    es_verano BIT NOT NULL,               -- 1 = verano, 0 = fuera de verano
     vigente_desde DATE NOT NULL,          -- Fecha inicio vigencia
-    vigente_hasta DATE,                   -- Fecha fin vigencia (NULL = actual)
-    notas TEXT
+    vigente_hasta DATE,                   -- NULL = actual
+    notas NVARCHAR(MAX)
 );
 
 -- ================================
 -- Tabla de bloques de consumo por plan
 -- ================================
 CREATE TABLE bloques_tarifa (
-    id SERIAL PRIMARY KEY,
-    id_plan INT REFERENCES planes_tarifa(id),
+    id_bloques_tarifa INT PRIMARY KEY,                   -- número asignado manualmente
+    id_plan INT NOT NULL,                 -- FK a planes_tarifa
     orden_bloque INT NOT NULL,            -- 1=básico, 2=intermedio, 3=excedente
     limite_kwh INT,                       -- NULL = sin límite (excedente)
-    precio_mxn DECIMAL(10,4) NOT NULL     -- precio $/kWh
+    precio_mxn DECIMAL(10,4) NOT NULL,    -- precio $/kWh
+    FOREIGN KEY (id_plan) REFERENCES planes_tarifa(id_planes_tarifa)
 );
 
 -- ================================
@@ -138,7 +139,6 @@ CREATE TABLE reglas_dac (
     clave_tarifa_base VARCHAR(3) PRIMARY KEY,
     limite_promedio_mensual_kwh INT NOT NULL
 );
-
 
 -- Cambiar la longitud de varchar en tablas existentes
 ALTER TABLE categoria 
@@ -174,7 +174,7 @@ select * from electrodomestico
 SELECT * FROM #temp_electrodomestico
 
 BULK INSERT #temp_electrodomestico
-FROM 'C:\csv\tabla_electrodomesticos.csv'
+FROM 'C:\USB Santiago\Semestre 7 Tec\Taller de Investigación II\ElectriMarcas\tabla_electrodomesticos.csv'
 WITH (
     FORMAT = 'CSV',
     FIRSTROW = 2,              -- omitir encabezado si el CSV lo tiene
