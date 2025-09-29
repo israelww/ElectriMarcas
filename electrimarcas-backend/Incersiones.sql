@@ -104,6 +104,8 @@ INSERT INTO reglas_dac (clave_tarifa_base, limite_promedio_mensual_kwh) VALUES
 ('1F', 2500);
 GO
 
+ INSERT INTO consumo (id_consumo, id_electrodomestico, horas_uso, dias_uso_mes, id_tarifa)
+VALUES
 --INSERCION DE DATOS EN TABLA CONSUMO 
 -- Tarifa 'T01' (Básica/Residencial)
 ('C00001', 'E00001', 24, 30, 'T01'),  -- Nevera (uso continuo)
