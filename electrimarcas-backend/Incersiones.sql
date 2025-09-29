@@ -2,6 +2,33 @@
 USE ELECTRIMARCAS;
 GO
 
+-- Crear la tabla de temp_electrodomesticos
+create table #temp_electrodomestico(
+	id_categoria char(6) not null,
+	nombre_categoria varchar(50) not null,
+	id_electrodomestico char(6) not null,
+	nombre_electrodomestico varchar(60) not null,
+	id_marca char(6) not null,
+	nombre_marca varchar(30) not null,
+	id_modelo char(6) not null,
+	nombre_modelo varchar(40) not null,
+	año_fabricacion int not null,
+	descripcion varchar(150) not null,
+	voltaje varchar(10) not null,
+	potencia varchar(10) not null,
+)
+
+-- Insertar datos
+BULK INSERT #temp_electrodomestico
+FROM 'C:\USB Santiago\Semestre 7 Tec\Taller de Investigación II\ElectriMarcas\tabla_electrodomesticos.csv'
+WITH (
+    FORMAT = 'CSV',
+    FIRSTROW = 2,              -- omitir encabezado si el CSV lo tiene
+    FIELDTERMINATOR = ',',     -- separador de columnas
+    ROWTERMINATOR = '\n',      -- salto de línea
+    TABLOCK
+);
+
 -- ===================================================================
 -- INSERTS PARA DATOS MAESTROS (Catálogos)
 -- Se insertan los datos que no dependen de otros.
@@ -66,8 +93,6 @@ WHERE NOT EXISTS (SELECT 1 FROM electrodomestico e WHERE e.id_electrodomestico =
 
 select * from electrodomestico
 
-
-
 -- ===================================================================
 -- EJEMPLO DE INSERTS PARA TARIFAS (CFE Tarifa 1F - Sinaloa)
 -- Estos datos son un ejemplo basado en las tarifas de CFE y deben ser actualizados
@@ -75,32 +100,98 @@ select * from electrodomestico
 -- ===================================================================
 
 -- Insertar el municipio y su tarifa base
-INSERT INTO tarifa_municipios (estado, municipio, clave_tarifa_base, inicio_verano, fin_verano) VALUES
-('Sinaloa', 'Culiacán', '1F', '0501', '1031');
+INSERT INTO tarifa_municipios (id_tarifa_municipios, estado, municipio, clave_tarifa_base, inicio_verano, fin_verano) VALUES
+(1,  'Sinaloa', 'Ahome',             '1F', '0501', '1031'),
+(2,  'Sinaloa', 'Angostura',         '1F', '0501', '1031'),
+(3,  'Sinaloa', 'Badiraguato',       '1E', '0501', '1031'),
+(4,  'Sinaloa', 'Concordia',         '1D', '0501', '1031'),
+(5,  'Sinaloa', 'Cosalá',            '1D', '0501', '1031'),
+(6,  'Sinaloa', 'Culiacán',          '1F', '0501', '1031'),
+(7,  'Sinaloa', 'Choix',             '1F', '0501', '1031'),
+(8,  'Sinaloa', 'Elota',             '1E', '0501', '1031'),
+(9,  'Sinaloa', 'Escuinapa',         '1E', '0501', '1031'),
+(10, 'Sinaloa', 'El Fuerte',         '1F', '0501', '1031'),
+(11, 'Sinaloa', 'Guasave',           '1F', '0501', '1031'),
+(12, 'Sinaloa', 'Mazatlán',          '1E', '0501', '1031'),
+(13, 'Sinaloa', 'Mocorito',          '1F', '0501', '1031'),
+(14, 'Sinaloa', 'Rosario',           '1E', '0501', '1031'),
+(15, 'Sinaloa', 'Salvador Alvarado', '1F', '0501', '1031'),
+(16, 'Sinaloa', 'San Ignacio',       '1E', '0501', '1031'),
+(17, 'Sinaloa', 'Sinaloa',           '1F', '0501', '1031'),
+(18, 'Sinaloa', 'Navolato',          '1F', '0501', '1031'),
+(19, 'Sinaloa', 'El Dorado',         '1F', '0501', '1031'),
+(20, 'Sinaloa', 'Juan José Ríos',    '1F', '0501', '1031');
 
 -- Insertar los planes tarifarios (Verano y Fuera de Verano)
 -- Asumimos que los planes actuales son vigentes desde inicio de 2025.
-INSERT INTO planes_tarifa (clave_tarifa, es_verano, vigente_desde, notas) VALUES
-('1F', TRUE, '2025-01-01', 'Tarifa 1F para temporada de verano.'),
-('1F', FALSE, '2025-01-01', 'Tarifa 1F para fuera de verano.');
+-- 1D
+INSERT INTO planes_tarifa (id_planes_tarifa, clave_tarifa, es_verano, vigente_desde, notas) VALUES
+(101, '1D', 0, '2025-01-01', N'1D fuera de verano'),
+(102, '1D', 1, '2025-05-01', N'1D verano');
+
+-- 1E
+INSERT INTO planes_tarifa (id_planes_tarifa, clave_tarifa, es_verano, vigente_desde, notas) VALUES
+(201, '1E', 0, '2025-01-01', N'1E fuera de verano'),
+(202, '1E', 1, '2025-05-01', N'1E verano');
+
+-- 1F
+INSERT INTO planes_tarifa (id_planes_tarifa, clave_tarifa, es_verano, vigente_desde, notas) VALUES
+(301, '1F', 0, '2025-01-01', N'1F fuera de verano'),
+(302, '1F', 1, '2025-05-01', N'1F verano');
+
+-- DAC 
+INSERT INTO planes_tarifa (id_planes_tarifa, clave_tarifa, es_verano, vigente_desde, notas) VALUES
+(401, 'DAC', 0, '2025-01-01', N'Doméstica de Alto Consumo');
+
+-- Bloques 1D VERANO (estructura 4 bloques, mismo límite que 1F, precios distintos)
+INSERT INTO bloques_tarifa (id_planes_tarifa, orden_bloque, limite_kwh, precio_mxn) VALUES
+(102, 1, 175, 0.9770),   -- Básico: Primeros 175 kWh 
+(102, 2, 400, 1.1310),   -- Intermedio Bajo: Siguientes 225 kWh (175+225=400)
+(102, 3, 600, 1.4590),   -- Intermedio Alto: Siguientes 200 kWh (400+200=600)
+(102, 4,  NULL, 3.8890); -- Excedente
+
+-- Bloques 1D FUERA DE VERANO (3 bloques, tipo T1)
+INSERT INTO bloques_tarifa (id_planes_tarifa, orden_bloque, limite_kwh, precio_mxn) VALUES
+(101, 1,   75, 1.1030),   -- Básico: Primeros 75 kWh
+(101, 2,  200, 1.3400),   -- Intermedio: Siguientes 125 kWh (75+125=200)
+(101, 3,  NULL,3.9170);   -- Excedente
+
+-- Bloques 1E VERANO
+INSERT INTO bloques_tarifa (id_planes_tarifa, orden_bloque, limite_kwh, precio_mxn) VALUES
+(202, 1, 300, 0.8890),   -- Básico: Primeros 300 kWh
+(202, 2, 750, 1.0120),   -- Intermedio Bajo: Siguientes 450 kWh (300+450=750)
+(202, 3, 900, 1.3130),   -- Intermedio Alto: Siguientes 150 kWh (750+150=900)
+(202, 4, NULL,3.8890);   -- Excedente
+
+-- Bloques 1E FUERA DE VERANO
+INSERT INTO bloques_tarifa (id_planes_tarifa, orden_bloque, limite_kwh, precio_mxn) VALUES
+(201, 1,   75, 1.0950),   -- Básico: Primeros 75 kWh
+(201, 2,  200, 1.3300),   -- Intermedio: Siguientes 125 kWh (75+125=200)
+(201, 3,  NULL,3.8890);   -- Excedente
 
 -- Insertar los bloques de consumo para el plan de VERANO (1F)
--- (ID del plan de verano es 1)
-INSERT INTO bloques_tarifa (id_plan, orden_bloque, limite_kwh, precio_mxn) VALUES
-(1, 1, 300, 0.5950),   -- Básico: Primeros 300 kWh
-(1, 2, 1200, 0.7410),  -- Intermedio Bajo: Siguientes 900 kWh (300+900=1200)
-(1, 3, 2500, 1.8040),  -- Intermedio Alto: Siguientes 1300 kWh (1200+1300=2500)
-(1, 4, NULL, 2.8590);  -- Excedente: kWh adicionales
+-- (ID del plan de verano es 302)
+INSERT INTO bloques_tarifa (id_planes_tarifa, orden_bloque, limite_kwh, precio_mxn) VALUES
+(302, 1, 300, 0.8150),   -- Básico: Primeros 300 kWh
+(302, 1, 1200, 0.9960),  -- Intermedio Bajo: Siguientes 900 kWh (300+900=1200)
+(302, 3, 2500, 2.4230),  -- Intermedio Alto: Siguientes 1300 kWh (1200+1300=2500)
+(302, 4, NULL, 3.8330);  -- Excedente: kWh adicionales
 
 -- Insertar los bloques de consumo para el plan FUERA DE VERANO (1F)
--- (ID del plan fuera de verano es 2)
-INSERT INTO bloques_tarifa (id_plan, orden_bloque, limite_kwh, precio_mxn) VALUES
-(2, 1, 75, 0.8090),    -- Básico: Primeros 75 kWh
-(2, 2, 200, 0.9760),   -- Intermedio: Siguientes 125 kWh (75+125=200)
-(2, 3, NULL, 2.8590);   -- Excedente: kWh adicionales
+-- (ID del plan fuera de verano es 301)
+INSERT INTO bloques_tarifa (id_planes_tarifa, orden_bloque, limite_kwh, precio_mxn) VALUES
+(301, 1, 75,  1.1030),    -- Básico: Primeros 75 kWh
+(301, 2, 200, 1.3400),   -- Intermedio: Siguientes 125 kWh (75+125=200)
+(301, 3, NULL,3.9170);   -- Excedente: kWh adicionales
+
+-- Insertar el Bloque DAC (precio único por todo el consumo)
+INSERT INTO bloques_tarifa (id_planes_tarifa, orden_bloque, limite_kwh, precio_mxn) VALUES
+(601, 1, NULL, 6.0100);  -- Todo el consumo se cobra a tarifa plana
 
 -- Insertar regla para Tarifa Doméstica de Alto Consumo (DAC)
 INSERT INTO reglas_dac (clave_tarifa_base, limite_promedio_mensual_kwh) VALUES
+('1D', 1000),
+('1E', 2000),
 ('1F', 2500);
 GO
 
@@ -148,7 +239,7 @@ SELECT * FROM modelo;
 SELECT * FROM electrodomestico;
 SELECT * FROM tarifa_municipios;
 SELECT * FROM planes_tarifa;
-SELECT * FROM bloques_tarifa;
+SELECT * FROM bloques_tarfia;
 SELECT * FROM reglas_dac;
 SELECT * FROM consumo;
 GO
