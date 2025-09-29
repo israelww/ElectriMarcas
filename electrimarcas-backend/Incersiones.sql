@@ -104,6 +104,41 @@ INSERT INTO reglas_dac (clave_tarifa_base, limite_promedio_mensual_kwh) VALUES
 ('1F', 2500);
 GO
 
+--INSERCION DE DATOS EN TABLA CONSUMO 
+-- Tarifa 'T01' (Básica/Residencial)
+('C00001', 'E00001', 24, 30, 'T01'),  -- Nevera (uso continuo)
+('C00002', 'E00002', 5, 30, 'T01'),   -- Televisor
+('C00003', 'E00003', 8, 25, 'T01'),   -- PC de escritorio
+('C00004', 'E00004', 12, 30, 'T01'),  -- Iluminación general
+('C00005', 'E00005', 1, 28, 'T01'),   -- Cargador de móvil
+('C00006', 'E00006', 4, 30, 'T01'),   -- Router
+('C00007', 'E00007', 10, 25, 'T01'),  -- Servidor NAS
+('C00008', 'E00008', 1, 30, 'T01'),   -- Tablet de pared
+('C00009', 'E00009', 3, 30, 'T01'),   -- Ventilador
+('C00010', 'E00010', 1, 15, 'T01'),   -- Licuadora
+('C00011', 'E00011', 24, 30, 'T01'),  -- Congelador
+('C00012', 'E00012', 5, 25, 'T01'),   -- Equipo de sonido
+('C00013', 'E00013', 8, 30, 'T01'),   -- Luces exteriores
+('C00014', 'E00014', 0.2, 20, 'T01'), -- Secador de manos
+('C00015', 'E00015', 4, 30, 'T01'),   -- Monitor adicional
+
+-- Tarifa 'T02' (Pico/Especial)
+('C00016', 'E00016', 2, 12, 'T02'),  -- Lavadora
+('C00017', 'E00017', 0.5, 10, 'T02'), -- Microondas
+('C00018', 'E00018', 3, 15, 'T02'),  -- Secadora de ropa
+('C00019', 'E00019', 6, 20, 'T02'),  -- Estufa de inducción
+('C00020', 'E00020', 2, 8, 'T02'),   -- Plancha
+('C00021', 'E00021', 7, 20, 'T02'),  -- Bomba de piscina
+('C00022', 'E00022', 5, 15, 'T02'),  -- Herramienta de taller
+('C00023', 'E00023', 0.5, 5, 'T02'),  -- Batidora profesional
+('C00024', 'E00024', 9, 28, 'T02'),  -- Calentador de agua
+('C00025', 'E00025', 6, 20, 'T02'),  -- Aire acondicionado
+('C00026', 'E00026', 4, 18, 'T02'),  -- Horno eléctrico
+('C00027', 'E00027', 12, 30, 'T02'), -- Lavavajillas
+('C00028', 'E00028', 8, 10, 'T02'),  -- Consola de juegos
+('C00029', 'E00029', 6, 25, 'T02'),  -- Servidor de oficina
+('C00030', 'E00030', 1, 30, 'T02');  -- Impresora (en stand-by)
+
 -- Verificación de los datos insertados
 SELECT * FROM categoria;
 SELECT * FROM marca;
@@ -113,4 +148,5 @@ SELECT * FROM tarifa_municipios;
 SELECT * FROM planes_tarifa;
 SELECT * FROM bloques_tarifa;
 SELECT * FROM reglas_dac;
+SELECT * FROM consumo;
 GO
