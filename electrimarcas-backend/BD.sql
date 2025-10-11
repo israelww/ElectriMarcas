@@ -1,11 +1,9 @@
-
 -- ================================
 -- Creación y uso de la base de datos
 -- ================================
-CREATE DATABASE ELECTRIMARCAS;
+CREATE DATABASE ELECTRIMARCASS;
 GO
-USE ELECTRIMARCAS;
-GO
+
 
 -- ===================================================================
 -- Tablas de Catálogos (Se mantienen sin cambios)
@@ -64,7 +62,9 @@ CREATE TABLE planes_tarifa (
     es_verano BIT NOT NULL, -- 1 = verano, 0 = fuera de verano
     vigente_desde DATE NOT NULL,
     vigente_hasta DATE, -- NULL = actual
-    notas TEXT
+    notas TEXT,
+    id_municipio INT NOT NULL,
+    FOREIGN KEY (id_municipio) REFERENCES tarifa_municipios(id_municipio)
 );
 
 CREATE TABLE bloques_tarifa (
@@ -110,7 +110,18 @@ CREATE TABLE consumo (
     horas_uso_diario DECIMAL(4, 2) NOT NULL,
     dias_uso_mes INT NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
-    FOREIGN KEY (id_electrodomestico) REFERENCES electrodomestico(id_electrodomestico)a
+    FOREIGN KEY (id_electrodomestico) REFERENCES electrodomestico(id_electrodomestico)
 );
+
+ALTER TABLE planes_tarifa
+ADD id_municipio INT NOT NULL;
+
+ALTER TABLE planes_tarifa
+ADD CONSTRAINT FK_planes_tarifa_municipio FOREIGN KEY (id_municipio) REFERENCES tarifa_municipios(id_municipio);
+
+ALTER TABLE tarifa_municipios
+ADD CONSTRAINT FK_tarifa_municipios_reglasdac FOREIGN KEY (clave_tarifa_base) REFERENCES reglas_dac(clave_tarifa_base);
+
+drop CONSTRAINT tarifa
 
 GO
