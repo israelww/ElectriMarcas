@@ -14,6 +14,25 @@ CREATE TABLE categoria (
     nombre_categoria VARCHAR(50) NOT NULL,
     PRIMARY KEY(id_categoria)
 );
+select * from categoria
+
+
+INSERT INTO categoria (id_categoria, nombre_categoria)
+SELECT DISTINCT
+    -- Asumimos un patrón para generar el id_categoria, por ejemplo 'C' + número.
+    -- En un caso real, podrías tener una tabla de mapeo o una lógica más robusta.
+    CASE WHEN tt.nombre_categoria = 'limpieza' THEN 'C01'
+         WHEN tt.nombre_categoria = 'cocina' THEN 'C02'
+         WHEN tt.nombre_categoria = 'entretenimiento' THEN 'C03'
+         WHEN tt.nombre_categoria = 'climatizacion' THEN 'C04'
+         WHEN tt.nombre_categoria = 'cuidado' THEN 'C05'
+    ELSE 'C99' -- Categoría genérica para otros casos
+    END AS id_categoria,
+    tt.nombre_categoria
+FROM #temp_electrodomestico tt
+WHERE NOT EXISTS (SELECT 1 FROM categoria c WHERE c.nombre_categoria = tt.nombre_categoria);
+
+
 
 CREATE TABLE marca (
     id_marca CHAR(6) NOT NULL,
@@ -42,6 +61,72 @@ CREATE TABLE electrodomestico (
     FOREIGN KEY(id_categoria) REFERENCES categoria(id_categoria),
     FOREIGN KEY(id_modelo) REFERENCES modelo(id_modelo)
 );
+
+INSERT INTO categoria (id_categoria, nombre_categoria) VALUES
+('C01', 'cocina'),
+('C02', 'limpieza'),
+('C03', 'entretenimiento'),
+('C04', 'climatizacion'),
+('C05', 'cuidado')
+SELECT * from categoria
+
+--Tabla temporal para almacenar datos de un electrodomestico
+create table #temp_electrodomestico(
+	id_categoria char(6) not null,
+	nombre_categoria varchar(50) not null,
+	id_electrodomestico char(6) not null,
+	nombre_electrodomestico varchar(60) not null,
+	id_marca char(6) not null,
+	nombre_marca varchar(30) not null,
+	id_modelo char(6) not null,
+	nombre_modelo varchar(40) not null,
+	año_fabricacion int not null,
+	descripcion varchar(150) not null,
+	voltaje varchar(10) not null,
+	potencia varchar(10) not null,
+)
+
+BULK INSERT #temp_electrodomestico
+FROM 'C:\csv\tabla_electrodomesticos.csv'
+WITH (
+    FORMAT = 'CSV',
+    FIRSTROW = 2,              -- omitir encabezado si el CSV lo tiene
+    FIELDTERMINATOR = ',',     -- separador de columnas
+    ROWTERMINATOR = '\n',      -- salto de línea
+    TABLOCK
+);
+
+INSERT INTO marca (id_marca, nombre_marca)
+SELECT DISTINCT
+    tt.id_marca,
+    tt.nombre_marca
+FROM #temp_electrodomestico tt
+WHERE NOT EXISTS (SELECT 1 FROM marca m WHERE m.id_marca = tt.id_marca);
+
+INSERT INTO modelo (id_modelo, id_marca, nombre_modelo, año_fabricacion)
+SELECT DISTINCT
+    tt.id_modelo,
+    tt.id_marca,
+    tt.nombre_modelo,
+    tt.año_fabricacion
+FROM #temp_electrodomestico tt
+WHERE NOT EXISTS (SELECT 1 FROM modelo mo WHERE mo.id_modelo = tt.id_modelo);
+
+INSERT INTO electrodomestico (id_electrodomestico, id_categoria, id_modelo, voltaje, potencia, nombre_electrodomestico, descripcion)
+SELECT DISTINCT
+    tt.id_electrodomestico,
+    -- Obtenemos el id_categoria correspondiente al nombre de la categoría.
+    (SELECT c.id_categoria FROM categoria c WHERE c.nombre_categoria = tt.nombre_categoria),
+    tt.id_modelo,
+    CAST(tt.voltaje AS INT),
+    CAST(tt.potencia AS INT),
+    tt.nombre_electrodomestico,
+    tt.descripcion
+FROM #temp_electrodomestico tt
+WHERE NOT EXISTS (SELECT 1 FROM electrodomestico e WHERE e.id_electrodomestico = tt.id_electrodomestico);
+
+ALTER TABLE electrodomestico
+ALTER COLUMN descripcion varchar(150);
 
 -- ================================
 -- NUEVO MODELO DE TARIFAS
@@ -122,6 +207,28 @@ ADD CONSTRAINT FK_planes_tarifa_municipio FOREIGN KEY (id_municipio) REFERENCES 
 ALTER TABLE tarifa_municipios
 ADD CONSTRAINT FK_tarifa_municipios_reglasdac FOREIGN KEY (clave_tarifa_base) REFERENCES reglas_dac(clave_tarifa_base);
 
-drop CONSTRAINT tarifa
-
 GO
+
+INSERT INTO tarifa_municipios (estado, municipio, clave_tarifa_base, inicio_verano, fin_verano) VALUES
+('Sinaloa', 'Ahome',             '1F', '0501', '1031'),
+('Sinaloa', 'Angostura',         '1F', '0501', '1031'),
+('Sinaloa', 'Badiraguato',       '1E', '0501', '1031'),
+('Sinaloa', 'Concordia',         '1D', '0501', '1031'),
+('Sinaloa', 'Cosalá',            '1D', '0501', '1031'),
+('Sinaloa', 'Culiacán',          '1F', '0501', '1031'),
+('Sinaloa', 'Choix',             '1F', '0501', '1031'),
+('Sinaloa', 'Elota',             '1E', '0501', '1031'),
+('Sinaloa', 'Escuinapa',         '1E', '0501', '1031'),
+('Sinaloa', 'El Fuerte',         '1F', '0501', '1031'),
+('Sinaloa', 'Guasave',           '1F', '0501', '1031'),
+('Sinaloa', 'Mazatlán',          '1E', '0501', '1031'),
+('Sinaloa', 'Mocorito',          '1F', '0501', '1031'),
+('Sinaloa', 'Rosario',           '1E', '0501', '1031'),
+('Sinaloa', 'Salvador Alvarado', '1F', '0501', '1031'),
+('Sinaloa', 'San Ignacio',       '1E', '0501', '1031'),
+('Sinaloa', 'Sinaloa',           '1F', '0501', '1031'),
+('Sinaloa', 'Navolato',          '1F', '0501', '1031'),
+('Sinaloa', 'El Dorado',         '1F', '0501', '1031'),
+('Sinaloa', 'Juan José Ríos',    '1F', '0501', '1031');
+
+select * from tarifa_municipios
