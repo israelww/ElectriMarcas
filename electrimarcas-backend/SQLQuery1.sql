@@ -10,20 +10,6 @@ CREATE TABLE categoria(
 	nombre_categoria varchar(50)not null ,
 	PRIMARY KEY(id_categoria)
 )
-INSERT INTO categoria (id_categoria, nombre_categoria)
-SELECT DISTINCT
-    -- Asumimos un patrón para generar el id_categoria, por ejemplo 'C' + número.
-    -- En un caso real, podrías tener una tabla de mapeo o una lógica más robusta.
-    CASE WHEN tt.nombre_categoria = 'limpieza' THEN 'C01'
-         WHEN tt.nombre_categoria = 'cocina' THEN 'C02'
-         WHEN tt.nombre_categoria = 'entretenimiento' THEN 'C03'
-         WHEN tt.nombre_categoria = 'climatizacion' THEN 'C04'
-         WHEN tt.nombre_categoria = 'cuidado' THEN 'C05'
-    ELSE 'C99' -- Categoría genérica para otros casos
-    END AS id_categoria,
-    tt.nombre_categoria
-FROM #temp_electrodomestico tt
-WHERE NOT EXISTS (SELECT 1 FROM categoria c WHERE c.nombre_categoria = tt.nombre_categoria);
 
 INSERT INTO categoria (id_categoria, nombre_categoria) VALUES
 ('C01', 'cocina'),

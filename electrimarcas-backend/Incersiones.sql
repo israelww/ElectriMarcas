@@ -20,7 +20,7 @@ create table #temp_electrodomestico(
 
 -- Insertar datos
 BULK INSERT #temp_electrodomestico
-FROM 'C:\csv\tabla_electrodomesticos.csv'
+FROM 'C:\USB Santiago\Semestre 7 Tec\Taller de Investigación II\ElectriMarcas\tabla_electrodomesticos.csv'
 WITH (
     FORMAT = 'CSV',
     FIRSTROW = 2,              -- omitir encabezado si el CSV lo tiene
@@ -43,13 +43,7 @@ INSERT INTO categoria (id_categoria, nombre_categoria)
 SELECT DISTINCT
     -- Asumimos un patrón para generar el id_categoria, por ejemplo 'C' + número.
     -- En un caso real, podrías tener una tabla de mapeo o una lógica más robusta.
-    CASE WHEN tt.nombre_categoria = 'limpieza' THEN 'C01'
-         WHEN tt.nombre_categoria = 'cocina' THEN 'C02'
-         WHEN tt.nombre_categoria = 'entretenimiento' THEN 'C03'
-         WHEN tt.nombre_categoria = 'climatizacion' THEN 'C04'
-         WHEN tt.nombre_categoria = 'cuidado' THEN 'C05'
-    ELSE 'C99' -- Categoría genérica para otros casos
-    END AS id_categoria,
+    CASE WHEN tt.nombre_categoria = 'limpieza' THEN 'C01' END,
     tt.nombre_categoria
 FROM #temp_electrodomestico tt
 WHERE NOT EXISTS (SELECT 1 FROM categoria c WHERE c.nombre_categoria = tt.nombre_categoria);
@@ -201,10 +195,10 @@ INSERT INTO reglas_dac (clave_tarifa_base, limite_promedio_mensual_kwh) VALUES
 ('1F', 2500);
 GO
 
+ INSERT INTO consumo (id_consumo, id_electrodomestico, horas_uso, dias_uso_mes, id_tarifa)
+VALUES
 --INSERCION DE DATOS EN TABLA CONSUMO 
 -- Tarifa 'T01' (Básica/Residencial)
-INSERT INTO consumo (id_consumo, id_electrodomestico, horas_uso, dias_uso_mes, id_tarifa)
-VALUES
 ('C00001', 'E00001', 24, 30, 'T01'),  -- Nevera (uso continuo)
 ('C00002', 'E00002', 5, 30, 'T01'),   -- Televisor
 ('C00003', 'E00003', 8, 25, 'T01'),   -- PC de escritorio

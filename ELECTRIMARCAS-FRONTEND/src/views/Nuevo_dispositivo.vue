@@ -1,5 +1,3 @@
-
-
 <template>
   <section>
     <header class="header-nuevo">

@@ -1,3 +1,5 @@
+
+
 <script>
 // Componente de vista de categorías de electrodomésticos.
 // Falta hacer un panel a la izquierda en añadir dispositivo que acumule los dispositivos añadidos y al dar click en guardar
@@ -9,7 +11,6 @@ import Lavadora from '../assets/lavadora.png'
 import Tv from '../assets/tv.png'
 import Aire from '../assets/aire.png'
 import Plancha from '../assets/plancha.png'
-
 export default {
     name: 'Inicio',
     components: { Card, Formulario },
@@ -105,10 +106,6 @@ export default {
             }
             this.cerrarFormulario();
         },
-        // Método para ir a inicio de sesión
-        irAInicioSesion() {
-            this.$router.push('/Inicio-Sesion');
-        },
     },
 };
 </script>
@@ -120,11 +117,6 @@ export default {
         Los electrodomésticos de cada categoría se cargarán dinámicamente desde la base de datos.
     -->
     <section class="inicio">
-        <!-- Botón para ir a inicio de sesión -->
-        <button @click="irAInicioSesion" class="login-test-btn">
-            Ir a Inicio de Sesión
-        </button>
-
         <h1>Categorías de Electrodomésticos</h1>
         <p>Añade un electrodoméstico a su respectiva categoría con sus datos para su calcular su consumo.</p>
         <nav class="categorias-lista">
@@ -166,29 +158,6 @@ export default {
 </template>
 
 <style scoped>
-/* Botón de prueba para ir a inicio de sesión */
-.login-test-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 0.75rem 1.25rem;
-    background: linear-gradient(135deg, #66ea9d 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-    z-index: 1000;
-}
-
-.login-test-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
-}
-
 /*
     Estilos para la vista de categorías de electrodomésticos.
     .inicio: Contenedor principal de la vista.
@@ -280,22 +249,4 @@ export default {
     color: white;
 }
 
-/* Responsive para el botón */
-@media (max-width: 768px) {
-    .login-test-btn {
-        top: 10px;
-        right: 10px;
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .login-test-btn {
-        position: static;
-        margin: 0 auto 1rem auto;
-        display: block;
-        width: fit-content;
-    }
-}
 </style>
