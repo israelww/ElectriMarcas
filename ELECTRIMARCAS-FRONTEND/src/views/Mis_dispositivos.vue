@@ -1,3 +1,4 @@
+
 <template>
     <!-- Vista principal de la aplicación -->
     <section class="mis-dispositivos">
