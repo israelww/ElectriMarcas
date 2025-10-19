@@ -6,6 +6,7 @@ import Mis_dispositivos from '../views/Mis_dispositivos.vue'
 import Estadisticas from '../views/Estadisticas.vue'
 import Consejos_ahorro from '../views/Consejos_ahorro.vue'
 import Nuevo_dispositivo from '../views/Nuevo_dispositivo.vue'
+import InicioSesion from '../views/InicioSesion.vue'
 
 /**
  * Configuración del router de Vue
@@ -48,9 +49,15 @@ const router = createRouter({
     },
 
     {
-      path: '/Nuevo_dispositivo',  // Ruta para la página de Consejos de Ahorro
+      path: '/Nuevo_dispositivo',  // Ruta para la página de Nuevo Dispositivo
       name: 'Nuevo Dispositivo',    // Nombre identificador de la ruta
       component: Nuevo_dispositivo     // Componente a renderizar en esta ruta
+    },
+
+    {
+      path: '/inicio-sesion',  // Ruta para la página de Inicio de Sesión
+      name: 'Inicio Sesión',    // Nombre identificador de la ruta
+      component: InicioSesion     // Componente a renderizar en esta ruta
     },
 
     // Aquí se pueden agregar más rutas según sea necesario

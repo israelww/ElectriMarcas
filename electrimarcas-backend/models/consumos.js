@@ -16,4 +16,31 @@ async function fetchConsumoData() {
     }
 }
 
-module.exports = { fetchConsumoData };
+/**
+ * Obtiene la lista COMPLETA de electrodomésticos registrados (para la vista de tarjetas).
+ * @returns {Promise<Array>} Array de todos los electrodomésticos con sus datos clave.
+ */
+async function fetchElectrodomesticosList() {
+    // Consulta simple: Obtener todos los campos necesarios para la Card.
+    const query = `
+        SELECT 
+            id_electrodomestico, 
+            nombre_electrodomestico, 
+            descripcion, 
+            potencia 
+        FROM 
+            electrodomestico 
+        ORDER BY 
+            nombre_electrodomestico;
+    `;
+    try {
+        const result = await pool.query(query);
+        // Usamos result.recordset para SQL Server. Cambia a result.rows si usas PostgreSQL/MySQL.
+        return result.recordset || result.rows || []; 
+    } catch (error) {
+        console.error("❌ Error en la consulta fetchElectrodomesticosList:", error);
+        throw error;
+    }
+}
+
+module.exports = { fetchConsumoData, fetchElectrodomesticosList };

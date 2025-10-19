@@ -23,3 +23,16 @@ export async function getChartData() {
     throw new Error("No se pudo conectar o procesar los datos del servidor.");
   }
 }
+
+export async function getDispositivosList() {
+    try {
+        const response = await axios.get(`${API_URL}/dispositivos-lista`);
+        
+        // Devolvemos el array de objetos Card listos para ser usados
+        return response.data.data; 
+
+    } catch (error) {
+        console.error("Error al obtener la lista de dispositivos:", error);
+        throw new Error("No se pudo cargar la lista de dispositivos desde el servidor.");
+    }
+}

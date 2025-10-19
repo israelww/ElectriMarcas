@@ -2,9 +2,9 @@
 
 <template>
   <!-- Contenedor principal de la aplicación -->
-  <nav class="app">
+  <nav class="app" :class="{ 'no-sidebar': !shouldShowSidebar }">
     <!-- Componente de navegación lateral -->
-    <Sidebar />
+    <Sidebar v-if="shouldShowSidebar" />
     
     <!-- Área principal de contenido donde se renderizan las vistas -->
     <main>
@@ -12,6 +12,7 @@
       
       <!-- Botón flotante para abrir panel de ayuda -->
       <button 
+        v-if="shouldShowSidebar"
         class="help-toggle-btn" 
         @click="toggleHelpPanel"
         :title="showHelpPanel ? 'Cerrar ayuda (Ctrl+H)' : 'Abrir ayuda (Ctrl+H)'"
@@ -24,6 +25,7 @@
 
     <!-- Panel de ayuda -->
     <HelpPanel 
+      v-if="shouldShowSidebar"
       :isVisible="showHelpPanel" 
       @close="closeHelpPanel"
       @toggle="toggleHelpPanel"
@@ -33,7 +35,8 @@
 
 <script setup>
 // Importación del componente Sidebar y HelpPanel
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import Sidebar from './components/Sidebar.vue'
 import HelpPanel from './components/HelpPanel.vue'
 
@@ -41,6 +44,18 @@ import HelpPanel from './components/HelpPanel.vue'
  * Estado reactivo para controlar la visibilidad del panel de ayuda
  */
 const showHelpPanel = ref(false)
+
+/**
+ * Detectar la ruta actual
+ */
+const route = useRoute()
+
+/**
+ * Computed para determinar si debe mostrar el sidebar
+ */
+const shouldShowSidebar = computed(() => {
+  return route.path !== '/Inicio-Sesion'
+})
 
 /**
  * Función para alternar la visibilidad del panel de ayuda
@@ -106,6 +121,15 @@ button {
   min-height: 100vh;
   
   width: 100%;
+}
+
+/* Layout cuando no hay sidebar (p.ej. login) */
+.app.no-sidebar {
+  main {
+    margin-left: 0;
+    padding: 0;
+    width: 100%;
+  }
 }
 
 /* Área principal de contenido */

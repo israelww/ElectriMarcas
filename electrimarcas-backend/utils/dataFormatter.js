@@ -15,4 +15,22 @@ function formatDataForChartJS(datosRaw) {
     ]
   };
 }
+
+function formatDataForCardList(datosRaw) {
+    if (!Array.isArray(datosRaw) || datosRaw.length === 0) {
+        return []; 
+    }
+
+    // Mapeamos los datos de la DB al formato que espera el componente Card
+    return datosRaw.map(item => ({
+        id: item.id,
+        // CRÍTICO: Usar el nombre exacto de la columna de la DB para el título
+        title: item.nombre_electrodomestico, 
+        // Usamos la descripción si existe, sino usamos la potencia
+        description: item.descripcion || `Potencia: ${item.potencia}W`, 
+        image: null, // Dejamos la imagen en null (se gestionará en Vue)
+        backgroundColor1: "#005CB3", // Colores de ejemplo
+        backgroundColor2: "#0084FF"
+    }));
+}
 module.exports = { formatDataForChartJS };

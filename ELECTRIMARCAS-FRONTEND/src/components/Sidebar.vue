@@ -9,7 +9,7 @@
         <!-- Botón para expandir/contraer el menú -->
         <nav class="menu-toggle-wrap">
             <button class="menu-toggle" @click="ToggleMenu">
-                <span class="material-icons">double_arrow</span>
+                <span class="material-icons">dehaze</span>
             </button>
         </nav>
 
@@ -44,7 +44,7 @@
 
             
             <router-link class="button" to="/Acerca-de">
-                <span class="material-icons">dehaze</span>
+                <span class="material-icons">help_outline</span>
                 <span class="text">Acerca de la app</span>
             </router-link>
         </nav>
@@ -52,22 +52,55 @@
 </template>
 
 <script setup>
-// Importación de la función reactiva de Vue
-import { ref } from 'vue'
+	// Importamos funciones de Vue necesarias:
+	// ref -> para crear variables reactivas
+	// onMounted -> se ejecuta cuando el componente se monta en el DOM
+	// onBeforeUnmount -> se ejecuta justo antes de desmontar el componente
+	// watch -> observa cambios en variables reactivas
+	import { ref, onMounted, onBeforeUnmount, watch } from 'vue'   // <-- NUEVO
 
-/**
- * Estado reactivo que controla si el sidebar está expandido o contraído
- * @type {Ref<boolean>}
- */
-const is_expanded = ref(false)
+	// Variable reactiva que controla si el sidebar está expandido o no
+	const is_expanded = ref(false)
 
-/**
- * Función para alternar el estado de expansión del sidebar
- * Cambia el valor de is_expanded entre true y false
- */
-const ToggleMenu = () => {
-    is_expanded.value = !is_expanded.value
-}
+	// Función que alterna el estado del sidebar (expandido <-> contraído)
+	const ToggleMenu = () => {
+	is_expanded.value = !is_expanded.value
+	}
+
+	/* ============================================================
+	NUEVO BLOQUE:
+	Esta función ajusta las clases del <body> según el estado del sidebar.
+	Así logramos que el contenido principal se mueva a la derecha
+	cuando el sidebar está fijo y visible.
+	============================================================ */
+	const applyBodySpacing = (expanded) => {
+	// Agrega una clase base que indica que el body tiene un sidebar activo
+	document.body.classList.add('with-sidebar')
+
+	// Alterna la clase "sidebar-expanded" dependiendo del estado del menú:
+	// - true  → el sidebar está abierto (ancho grande)
+	// - false → el sidebar está cerrado (ancho pequeño)
+	document.body.classList.toggle('sidebar-expanded', !!expanded)
+	}
+
+	// onMounted(): se ejecuta al montar el componente.
+	// Llamamos a applyBodySpacing() para aplicar las clases iniciales
+	// (por si el sidebar inicia expandido o no).
+	onMounted(() => {
+	applyBodySpacing(is_expanded.value)
+	})
+
+	// onBeforeUnmount(): se ejecuta antes de desmontar el componente.
+	// Aquí eliminamos las clases del <body> para evitar que queden activas
+	// si el componente se destruye (por ejemplo, al cambiar de página).
+	onBeforeUnmount(() => {
+	document.body.classList.remove('with-sidebar', 'sidebar-expanded')
+	})
+
+	// watch(): observa la variable reactiva is_expanded.
+	// Cada vez que cambie su valor (por un clic en el botón),
+	// vuelve a ejecutar applyBodySpacing() para actualizar el layout del body.
+	watch(is_expanded, (v) => applyBodySpacing(v))
 </script>
     
 <style lang="scss" scoped>
@@ -98,8 +131,26 @@ const ToggleMenu = () => {
 			/* Transición suave para el cambio de ancho */
 			transition: width 0.2s ease-in-out;
 			
-			/* Posicionamiento estático por defecto */
-			position: static;
+			/* ===========================================
+			   SIDEBAR
+			   ===========================================*/
+
+			/* Mantiene el sidebar SIEMPRE visible aunque hagas scroll */
+			position: fixed;   /* Fixed sirve para 
+
+			/* Lo “pega” al borde superior de la ventana */
+			top: 0;
+
+			/* Lo “pega” al borde izquierdo de la ventana */
+			left: 0;
+
+			/* Hace que el sidebar quede por encima del contenido general
+			(evita que otros elementos lo tapen) */
+			z-index: 99;
+
+			/* Asegura que cubra toda la altura de la pantalla */
+			height: 100vh;
+
 
 			/* Estado expandido del sidebar */
 			&.is-expanded {
@@ -317,14 +368,27 @@ const ToggleMenu = () => {
 				}
 			}
 
-			/* ===========================================
-			   RESPONSIVE ESPECÍFICO
-			   =========================================== */
-			@media (max-width: 1024px) {
-				/* En tablets, posicionamiento absoluto */
-				position: absolute;
-				z-index: 99;
-			}
+			
 		}
 	
+</style>
+
+<style>
+	:root {
+	/* usa tu mismo ancho expandido ya definido en el SCSS */
+	--sidebar-width: var(--sidebar-width);
+	/* ancho cuando el sidebar está contraído (el que ya usas en aside) */
+	--sidebar-collapsed-width: calc(2rem + 32px);
+	}
+
+	/* Reserva de espacio para TODO el contenido cuando existe sidebar */
+	body.with-sidebar {
+	margin-left: var(--sidebar-collapsed-width);
+	transition: margin-left .2s ease-in-out;
+	}
+
+	/* Cuando se expande el sidebar, aumenta el margen del contenido */
+	body.with-sidebar.sidebar-expanded {
+	margin-left: var(--sidebar-width);
+	}
 </style>

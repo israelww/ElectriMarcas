@@ -1,3 +1,5 @@
+
+
 <template>
   <section>
     <header class="header-nuevo">
@@ -8,103 +10,114 @@
       </router-link>
     </header>
     <br>
-    <!-- Componente Buscador -->
+    
     <Buscador v-model="searchQuery" placeholder="Buscar dispositivo..." />
-    <!-- Mostrar resultados filtrados -->
+    
     <section class="navegador">
-    <article v-for="(categoria, idx) in filteredCategorias" :key="idx" class="buscador">
-      <br></br>
-      <article class="cards">
-        <Card
-          v-for="(card, i) in categoria.cards"
-          :key="i"
-          :title="card.title"
-          :description="card.description"
-          :image="card.image"
-          :background-color1="card.backgroundColor1"
-          :background-color2="card.backgroundColor2"
-          buttonText="Agregar"
-        />
+      
+      <div v-if="isLoading" class="loading-state">
+        Cargando lista de dispositivos... ⏳
+      </div>
+      
+      <div v-else-if="error" class="error-state">
+        <p style="color: red;">¡Error al cargar dispositivos! {{ error }}</p>
+      </div>
+
+      <div v-else-if="!filteredCards.length" class="no-results-state">
+        <p>No se encontraron dispositivos que coincidan con la búsqueda.</p>
+      </div>
+      
+      <article v-else class="buscador">
+        <br>
+        <article class="cards">
+          <Card
+            v-for="(card, i) in filteredCards"
+            :key="i"
+            :title="card.title"
+            :description="card.description"
+            :image="card.image"
+            :background-color1="card.backgroundColor1"
+            :background-color2="card.backgroundColor2"
+            buttonText="Agregar"
+          />
+        </article>
       </article>
-    </article>
-     </section>
+    </section>
     
     <footer class="footer-agregar">
       <button class="agregar-no-registrado" @click="abrirFormulario">
         Agregar dispositivo no registrado
       </button>
     </footer>
-    <!-- Formulario modal -->
+    
     <Formulario
       :visible="showForm"
-      :categorias="categorias.map(c => c.name)"
+      :categorias="['Electrodomésticos']" 
       @close="cerrarFormulario"
       @submit="agregarDispositivo"
     />
   </section>
 </template>
 
-<script>
-import Buscador from "../components/Buscador.vue"
-import Card from "../components/Card.vue"
-import Formulario from "../components/formulario.vue"
-import Refrigerador from "../assets/refrigerator.png"
-import Tv from "../assets/tv.png"
-import Lavadora from "../assets/lavadora.png"
-import Aire from "../assets/aire.png"
-import Plancha from "../assets/plancha.png"
-export default {
-  // Cambiar primero la categoria para que con base en la categoria se muestren los dispositivos
-  name: "NuevoDispositivo",
-  components: { Buscador, Card, Formulario },
-  data() {
-    return {
-      searchQuery: "",
-      categorias: [
-        {
-          name: "Electrodomésticos",
-          cards: [
-            { title:"Refrigerador", description: "Frío y eficiente", image: Refrigerador, backgroundColor1:"#3CB300",backgroundColor2:"#46D100"},
-            {title:"Television", description:"Descripcion de la Television", image:Tv, backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"},
-            {title:"Lavadora", description:"Descripcion de la lavadora", image:Lavadora, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
-            {title:"Aire acondicionado", description:"Descripcion del aire acondicionado", image:Aire, backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
-            {title:"Plancha", description:"Descripcion de la plancha", image:Plancha, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},          
-            ]
-        }
-      ],
-      showForm: false,
-    }
-  },
-  computed: {
-    filteredCategorias() {
-      const q = this.searchQuery.toLowerCase().trim()
-      if (!q) return this.categorias
-      return this.categorias
-        .map(cat => {
-          const filteredCards = cat.cards.filter(
-            card =>
-              card.title.toLowerCase().includes(q) ||
-              card.description.toLowerCase().includes(q)
-          )
-          return { ...cat, cards: filteredCards }
-        })
-        .filter(cat => cat.cards.length > 0)
-    }
-  },
-  methods: {
-    abrirFormulario() {
-      this.showForm = true;
-    },
-    cerrarFormulario() {
-      this.showForm = false;
-    },
-    agregarDispositivo(dispositivo) {
-      // Aquí puedes agregar el dispositivo a la lista si lo deseas
-      this.cerrarFormulario();
-    }
+<script setup>
+import { ref, onMounted, computed } from 'vue';
+import { getDispositivosList } from '../services/dataService'; // Función API
+import Buscador from "../components/Buscador.vue";
+import Card from "../components/Card.vue";
+import Formulario from "../components/formulario.vue";
+
+// 1. ESTADO REACTIVO PARA LA CARGA DE DATOS
+const searchQuery = ref("");
+const cardsList = ref([]); // Almacenará la lista dinámica de la DB
+const isLoading = ref(true);
+const error = ref(null);
+const showForm = ref(false);
+
+// 2. FUNCIÓN DE CARGA ASÍNCRONA
+const fetchDispositivos = async () => {
+  isLoading.value = true;
+  error.value = null;
+  try {
+    const data = await getDispositivosList();
+    
+    // La API ya devuelve los datos mapeados al formato Card.vue
+    cardsList.value = data; 
+  } catch (err) {
+    error.value = err.message;
+  } finally {
+    isLoading.value = false;
   }
-}
+};
+
+// 3. CICLO DE VIDA: Llamar a la API al montar
+onMounted(fetchDispositivos);
+
+// 4. LÓGICA COMPUTADA PARA EL BUSCADOR
+const filteredCards = computed(() => {
+  const q = searchQuery.value.toLowerCase().trim();
+  if (!q) return cardsList.value;
+
+  // Filtramos directamente sobre la lista cargada de la DB
+  return cardsList.value.filter(
+    card =>
+      card.title.toLowerCase().includes(q) ||
+      card.description.toLowerCase().includes(q)
+  );
+});
+
+// 5. MÉTODOS DE FORMULARIO (Convertidos a Composition API)
+const abrirFormulario = () => {
+  showForm.value = true;
+};
+const cerrarFormulario = () => {
+  showForm.value = false;
+};
+const agregarDispositivo = (dispositivo) => {
+  // Aquí manejarías la lógica para enviar el nuevo dispositivo a tu backend
+  cerrarFormulario();
+};
 </script>
+
 <style>
     .header-nuevo {
       display: flex;
