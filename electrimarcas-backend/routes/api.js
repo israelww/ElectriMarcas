@@ -200,6 +200,35 @@ router.post('/logout', (req, res) => {
   });
 });
 
+/**
+ * GET /api/municipios
+ * Obtener lista de municipios de Sinaloa
+ */
+router.get('/municipios', async (req, res) => {
+  try {
+    const { pool } = require('../src/db');
+    
+    const result = await pool.request().query(`
+      SELECT id_municipio, municipio 
+      FROM tarifa_municipios 
+      WHERE estado = 'Sinaloa'
+      ORDER BY id_municipio
+    `);
+    
+    res.status(200).json({
+      success: true,
+      data: result.recordset
+    });
+    
+  } catch (error) {
+    console.error('Error al obtener municipios:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error al obtener la lista de municipios'
+    });
+  }
+});
+
 // ===========================================
 // RUTAS PROTEGIDAS (requieren autenticación)
 // ===========================================

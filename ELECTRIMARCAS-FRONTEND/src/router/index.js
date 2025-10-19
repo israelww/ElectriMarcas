@@ -7,6 +7,7 @@ import Estadisticas from '../views/Estadisticas.vue'
 import Consejos_ahorro from '../views/Consejos_ahorro.vue'
 import Nuevo_dispositivo from '../views/Nuevo_dispositivo.vue'
 import InicioSesion from '../views/InicioSesion.vue'
+import Registro from '../views/Registro.vue'
 import authService from '../services/authService.js'
 
 /**
@@ -27,6 +28,12 @@ const router = createRouter({
       path: '/inicio-sesion',       // Página de inicio de sesión (pública)
       name: 'Inicio Sesión',
       component: InicioSesion,
+      meta: { requiresAuth: false }
+    },
+    {
+      path: '/registro',            // Página de registro (pública)
+      name: 'Registro',
+      component: Registro,
       meta: { requiresAuth: false }
     },
     {
@@ -82,8 +89,8 @@ router.beforeEach(async (to, from, next) => {
   
   // Si la ruta no requiere autenticación, permitir acceso
   if (!requiresAuth) {
-    // Si el usuario ya está autenticado y trata de acceder al login, redirigir al inicio
-    if (to.path === '/inicio-sesion' && authService.isAuthenticated()) {
+    // Si el usuario ya está autenticado y trata de acceder al login o registro, redirigir al inicio
+    if ((to.path === '/inicio-sesion' || to.path === '/registro') && authService.isAuthenticated()) {
       next('/Inicio');
     } else {
       next();
