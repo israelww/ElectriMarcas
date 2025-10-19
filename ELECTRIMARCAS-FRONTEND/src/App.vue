@@ -39,6 +39,7 @@ import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Sidebar from './components/Sidebar.vue'
 import HelpPanel from './components/HelpPanel.vue'
+import authService from './services/authService.js'
 
 /**
  * Estado reactivo para controlar la visibilidad del panel de ayuda
@@ -52,9 +53,24 @@ const route = useRoute()
 
 /**
  * Computed para determinar si debe mostrar el sidebar
+ * Solo se muestra si el usuario está autenticado y no está en la página de login
  */
 const shouldShowSidebar = computed(() => {
-  return route.path !== '/Inicio-Sesion'
+  // Refrescar el estado del authService antes de verificar
+  authService.refreshState()
+  
+  const isAuthenticated = authService.isAuthenticated()
+  const isNotLoginPage = route.path !== '/inicio-sesion'
+  
+  // Debug logs
+  console.log('🔍 Debug Sidebar:', {
+    isAuthenticated,
+    isNotLoginPage,
+    currentPath: route.path,
+    shouldShow: isAuthenticated && isNotLoginPage
+  })
+  
+  return isAuthenticated && isNotLoginPage
 })
 
 /**

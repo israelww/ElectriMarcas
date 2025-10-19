@@ -47,6 +47,12 @@
                 <span class="material-icons">help_outline</span>
                 <span class="text">Acerca de la app</span>
             </router-link>
+
+            <!-- Botón para cerrar sesión -->
+            <button class="button logout-btn" @click="cerrarSesion">
+                <span class="material-icons">logout</span>
+                <span class="text">Cerrar Sesión</span>
+            </button>
         </nav>
     </aside>
 </template>
@@ -57,14 +63,27 @@
 	// onMounted -> se ejecuta cuando el componente se monta en el DOM
 	// onBeforeUnmount -> se ejecuta justo antes de desmontar el componente
 	// watch -> observa cambios en variables reactivas
-	import { ref, onMounted, onBeforeUnmount, watch } from 'vue'   // <-- NUEVO
+	import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
+	import { useRouter } from 'vue-router'
+	import authService from '../services/authService.js'
 
 	// Variable reactiva que controla si el sidebar está expandido o no
 	const is_expanded = ref(false)
+	const router = useRouter()
 
 	// Función que alterna el estado del sidebar (expandido <-> contraído)
 	const ToggleMenu = () => {
-	is_expanded.value = !is_expanded.value
+		is_expanded.value = !is_expanded.value
+	}
+
+	// Función para cerrar sesión
+	const cerrarSesion = async () => {
+		try {
+			await authService.logout()
+			router.push('/inicio-sesion')
+		} catch (error) {
+			console.error('Error al cerrar sesión:', error)
+		}
 	}
 
 	/* ============================================================
@@ -314,6 +333,23 @@
 
 						.material-icons, .text {
 							color: var(--primary);
+						}
+					}
+				}
+
+				/* Estilos específicos para el botón de cerrar sesión */
+				&.logout-btn {
+					background-color: transparent;
+					border: none;
+					width: 100%;
+					text-align: left;
+					cursor: pointer;
+					
+					&:hover {
+						background-color: #dc3545 !important;
+						
+						.material-icons, .text {
+							color: white !important;
 						}
 					}
 				}
