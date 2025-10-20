@@ -3,8 +3,7 @@ const express = require('express');
 const router = express.Router();
 //acceso a la bd
 const db = require('../models/consumos.js'); 
-const { formatDataForChartJS } = require('../utils/dataFormatter'); // Función de formato
-const { formatDataForCardList } = require('../utils/dataFormatter');
+const { formatDataForChartJS, formatDataForCardList } = require('../utils/dataFormatter'); // Función de formato
 // La ruta que el frontend de Vue llamará: http://localhost:3000/api/data-grafica
 router.get('/data-grafica', async (req, res) => {
   try {
@@ -12,7 +11,6 @@ router.get('/data-grafica', async (req, res) => {
     const datosRaw = await db.fetchConsumoData(); 
     // 2. Formateo de los datos para la librería de gráficas (Chart.js)
     const datosGrafico = formatDataForChartJS(datosRaw);
-
     // 3. Respuesta de éxito (Status 200 OK)
     res.status(200).json({
       success: true,

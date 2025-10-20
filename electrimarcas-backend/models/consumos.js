@@ -27,7 +27,8 @@ async function fetchElectrodomesticosList() {
             id_electrodomestico, 
             nombre_electrodomestico, 
             descripcion, 
-            potencia 
+            potencia,
+            id_modelo
         FROM 
             electrodomestico 
         ORDER BY 

@@ -17,8 +17,7 @@ export async function getChartData() {
 
 
   } catch (error) {
-    // Esto es clave: manejar el error a nivel de servicio y lanzarlo
-    // para que el componente (UI) decida cómo mostrarlo.
+    //manejar el error a nivel de servicio y lanzarlo para que el componente (UI) decida cómo mostrarlo.
     console.error("Error al obtener datos de la API:", error);
     throw new Error("No se pudo conectar o procesar los datos del servidor.");
   }
