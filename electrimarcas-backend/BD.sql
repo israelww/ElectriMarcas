@@ -132,6 +132,11 @@ ALTER COLUMN descripcion varchar(150);
 -- NUEVO MODELO DE TARIFAS
 -- ================================
 
+CREATE TABLE reglas_dac (
+    clave_tarifa_base VARCHAR(3) PRIMARY KEY,
+    limite_promedio_mensual_kwh INT NOT NULL
+);
+
 CREATE TABLE tarifa_municipios (
     id_municipio INT IDENTITY(1,1) PRIMARY KEY,
     estado VARCHAR(64) NOT NULL DEFAULT 'Sinaloa',
@@ -158,12 +163,8 @@ CREATE TABLE bloques_tarifa (
     orden_bloque INT NOT NULL, -- 1=básico, 2=intermedio, 3=excedente
     limite_kwh INT, -- NULL = sin límite (excedente)
     precio_mxn money NOT NULL, -- precio $/kWh
-    FOREIGN KEY (id_plan) REFERENCES planes_tarifa(id_plan)
-);
-
-CREATE TABLE reglas_dac (
-    clave_tarifa_base VARCHAR(3) PRIMARY KEY,
-    limite_promedio_mensual_kwh INT NOT NULL
+    FOREIGN KEY (id_plan) REFERENCES planes_tarifa(id_plan),
+    CONSTRAINT UQ_bloques_por_plan UNIQUE (id_plan, orden_bloque)
 );
 
 -- ===================================================================
@@ -206,7 +207,6 @@ ADD CONSTRAINT FK_planes_tarifa_municipio FOREIGN KEY (id_municipio) REFERENCES 
 
 ALTER TABLE tarifa_municipios
 ADD CONSTRAINT FK_tarifa_municipios_reglasdac FOREIGN KEY (clave_tarifa_base) REFERENCES reglas_dac(clave_tarifa_base);
-
 GO
 
 INSERT INTO tarifa_municipios (estado, municipio, clave_tarifa_base, inicio_verano, fin_verano) VALUES

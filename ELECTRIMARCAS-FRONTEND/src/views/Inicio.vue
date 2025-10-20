@@ -121,9 +121,9 @@ export default {
     -->
     <section class="inicio">
         <!-- Botón para ir a inicio de sesión -->
-        <button @click="irAInicioSesion" class="login-test-btn">
+        <!-- <button @click="irAInicioSesion" class="login-test-btn">
             Ir a Inicio de Sesión
-        </button>
+        </button> -->
 
         <h1>Categorías de Electrodomésticos</h1>
         <p>Añade un electrodoméstico a su respectiva categoría con sus datos para su calcular su consumo.</p>
