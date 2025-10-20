@@ -3,16 +3,14 @@ const express = require('express');
 const router = express.Router();
 //acceso a la bd
 const db = require('../models/consumos.js'); 
-<<<<<<< HEAD
 const { formatDataForChartJS, formatDataForCardList } = require('../utils/dataFormatter'); // Función de formato
-=======
+
 const { formatDataForChartJS } = require('../utils/dataFormatter'); // Función de formato
 const { formatDataForCardList } = require('../utils/dataFormatter');
 
 // Importar módulos de autenticación
 const authModel = require('../models/auth.js');
 const { generateToken, authenticateToken } = require('../middleware/auth.js');
->>>>>>> a2033eb2d0dd9567d7e3bd96a5af867db989298b
 // La ruta que el frontend de Vue llamará: http://localhost:3000/api/data-grafica
 router.get('/data-grafica', async (req, res) => {
   try {
