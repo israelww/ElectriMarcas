@@ -2,103 +2,6 @@
 USE ELECTRIMARCASS;
 GO
 
--- Crear la tabla de temp_electrodomesticos
-create table #temp_electrodomestico(
-	id_categoria char(6) not null,
-	nombre_categoria varchar(50) not null,
-	id_electrodomestico char(6) not null,
-	nombre_electrodomestico varchar(60) not null,
-	id_marca char(6) not null,
-	nombre_marca varchar(30) not null,
-	id_modelo char(6) not null,
-	nombre_modelo varchar(40) not null,
-	año_fabricacion int not null,
-	descripcion varchar(150) not null,
-	voltaje varchar(10) not null,
-	potencia varchar(10) not null,
-)
-
--- Insertar datos
-BULK INSERT #temp_electrodomestico
-FROM 'C:\csv\tabla_electrodomesticos.csv'
-WITH (
-    FORMAT = 'CSV',
-    FIRSTROW = 2,              -- omitir encabezado si el CSV lo tiene
-    FIELDTERMINATOR = ',',     -- separador de columnas
-    ROWTERMINATOR = '\n',      -- salto de línea
-    TABLOCK
-);
-
--- ===================================================================
--- INSERTS PARA DATOS MAESTROS (Catálogos)
--- Se insertan los datos que no dependen de otros.
--- ===================================================================
-
--- 1. Insertar en la tabla 'categoria'
--- Se insertan las categorías únicas desde la tabla temporal.
--- Usamos DISTINCT para no insertar duplicados si hubiera varios electrodomésticos de la misma categoría.
-
-select * from #temp_electrodomestico
-INSERT INTO categoria (id_categoria, nombre_categoria)
-SELECT DISTINCT
-    -- Asumimos un patrón para generar el id_categoria, por ejemplo 'C' + número.
-    -- En un caso real, podrías tener una tabla de mapeo o una lógica más robusta.
-    CASE WHEN tt.nombre_categoria = 'limpieza' THEN 'C01'
-         WHEN tt.nombre_categoria = 'cocina' THEN 'C02'
-         WHEN tt.nombre_categoria = 'entretenimiento' THEN 'C03'
-         WHEN tt.nombre_categoria = 'climatizacion' THEN 'C04'
-         WHEN tt.nombre_categoria = 'cuidado' THEN 'C05'
-    ELSE 'C99' -- Categoría genérica para otros casos
-    END AS id_categoria,
-    tt.nombre_categoria
-FROM #temp_electrodomestico tt
-WHERE NOT EXISTS (SELECT 1 FROM categoria c WHERE c.nombre_categoria = tt.nombre_categoria);
-
--- 2. Insertar en la tabla 'marca'
--- Se insertan las marcas únicas desde la tabla temporal.
-select * from marca
-INSERT INTO marca (id_marca, nombre_marca)
-SELECT DISTINCT
-    tt.id_marca,
-    tt.nombre_marca
-FROM #temp_electrodomestico tt
-WHERE NOT EXISTS (SELECT 1 FROM marca m WHERE m.id_marca = tt.id_marca);
-
--- ===================================================================
--- INSERTS PARA DATOS DEPENDIENTES
--- Ahora se insertan los datos que tienen claves foráneas.
--- ===================================================================
-
--- 3. Insertar en la tabla 'modelo'
--- Se insertan los modelos únicos, asegurando que su marca ya exista.
-INSERT INTO modelo (id_modelo, id_marca, nombre_modelo, año_fabricacion)
-SELECT DISTINCT
-    tt.id_modelo,
-    tt.id_marca,
-    tt.nombre_modelo,
-    tt.año_fabricacion
-FROM #temp_electrodomestico tt
-WHERE NOT EXISTS (SELECT 1 FROM modelo mo WHERE mo.id_modelo = tt.id_modelo);
-
-
-
--- 4. Insertar en la tabla 'electrodomestico'
--- Finalmente, se inserta la información completa del electrodoméstico.
-INSERT INTO electrodomestico (id_electrodomestico, id_categoria, id_modelo, voltaje, potencia, nombre_electrodomestico, descripcion)
-SELECT DISTINCT
-    tt.id_electrodomestico,
-    -- Obtenemos el id_categoria correspondiente al nombre de la categoría.
-    (SELECT c.id_categoria FROM categoria c WHERE c.nombre_categoria = tt.nombre_categoria),
-    tt.id_modelo,
-    CAST(tt.voltaje AS INT),
-    CAST(tt.potencia AS INT),
-    tt.nombre_electrodomestico,
-    tt.descripcion
-FROM #temp_electrodomestico tt
-WHERE NOT EXISTS (SELECT 1 FROM electrodomestico e WHERE e.id_electrodomestico = tt.id_electrodomestico);
-
-select * from electrodomestico
-
 -- ===================================================================
 -- EJEMPLO DE INSERTS PARA TARIFAS (CFE Tarifa 1F - Sinaloa)
 -- Estos datos son un ejemplo basado en las tarifas de CFE y deben ser actualizados
@@ -238,7 +141,6 @@ INSERT INTO planes_tarifa (clave_tarifa, es_verano, vigente_desde, notas, id_mun
 VALUES ('DAC', 0, '2025-01-01', N'Doméstica de Alto Consumo', @id_municipio_1F);
 SET @id_plan_DAC = SCOPE_IDENTITY();
 
-
 /* ==============================
    INSERCIÓN DE BLOQUES_TARIFA
    ==============================
@@ -292,7 +194,6 @@ INSERT INTO bloques_tarifa (id_plan, orden_bloque, limite_kwh, precio_mxn) VALUE
 (@id_plan_DAC, 1, NULL, 6.0100);
 GO
 
-
 /* -----------------------------------------------------------
    Consulta de verificación:
    - Lista planes con sus bloques, ordenados por clave y temporada
@@ -308,43 +209,6 @@ JOIN bloques_tarifa AS B
   ON P.id_plan = B.id_plan
 ORDER BY P.clave_tarifa, P.es_verano DESC, B.orden_bloque;
 GO
-
---INSERCION DE DATOS EN TABLA CONSUMO 
--- Tarifa 'T01' (Básica/Residencial)
-INSERT INTO consumo (id_consumo, id_electrodomestico, horas_uso_diario, dias_uso_mes, id_tarifa)
-VALUES
-('C00001', 'E00001', 24, 30, 'T01'),  -- Nevera (uso continuo)
-('C00002', 'E00002', 5, 30, 'T01'),   -- Televisor
-('C00003', 'E00003', 8, 25, 'T01'),   -- PC de escritorio
-('C00004', 'E00004', 12, 30, 'T01'),  -- Iluminación general
-('C00005', 'E00005', 1, 28, 'T01'),   -- Cargador de móvil
-('C00006', 'E00006', 4, 30, 'T01'),   -- Router
-('C00007', 'E00007', 10, 25, 'T01'),  -- Servidor NAS
-('C00008', 'E00008', 1, 30, 'T01'),   -- Tablet de pared
-('C00009', 'E00009', 3, 30, 'T01'),   -- Ventilador
-('C00010', 'E00010', 1, 15, 'T01'),   -- Licuadora
-('C00011', 'E00011', 24, 30, 'T01'),  -- Congelador
-('C00012', 'E00012', 5, 25, 'T01'),   -- Equipo de sonido
-('C00013', 'E00013', 8, 30, 'T01'),   -- Luces exteriores
-('C00014', 'E00014', 0.2, 20, 'T01'), -- Secador de manos
-('C00015', 'E00015', 4, 30, 'T01'),   -- Monitor adicional
-
--- Tarifa 'T02' (Pico/Especial)
-('C00016', 'E00016', 2, 12, 'T02'),  -- Lavadora
-('C00017', 'E00017', 0.5, 10, 'T02'), -- Microondas
-('C00018', 'E00018', 3, 15, 'T02'),  -- Secadora de ropa
-('C00019', 'E00019', 6, 20, 'T02'),  -- Estufa de inducción
-('C00020', 'E00020', 2, 8, 'T02'),   -- Plancha
-('C00021', 'E00021', 7, 20, 'T02'),  -- Bomba de piscina
-('C00022', 'E00022', 5, 15, 'T02'),  -- Herramienta de taller
-('C00023', 'E00023', 0.5, 5, 'T02'),  -- Batidora profesional
-('C00024', 'E00024', 9, 28, 'T02'),  -- Calentador de agua
-('C00025', 'E00025', 6, 20, 'T02'),  -- Aire acondicionado
-('C00026', 'E00026', 4, 18, 'T02'),  -- Horno eléctrico
-('C00027', 'E00027', 12, 30, 'T02'), -- Lavavajillas
-('C00028', 'E00028', 8, 10, 'T02'),  -- Consola de juegos
-('C00029', 'E00029', 6, 25, 'T02'),  -- Servidor de oficina
-('C00030', 'E00030', 1, 30, 'T02');  -- Impresora (en stand-by)
 
 -- Verificación de los datos insertados
 SELECT * FROM categoria;
