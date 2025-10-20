@@ -10,7 +10,7 @@
       </router-link>
     </header>
     <br>
-    
+
     <Buscador v-model="searchQuery" placeholder="Buscar dispositivo..." />
     
     <section class="navegador">
@@ -18,7 +18,6 @@
       <div v-if="isLoading" class="loading-state">
         Cargando lista de dispositivos... ⏳
       </div>
-      
       <div v-else-if="error" class="error-state">
         <p style="color: red;">¡Error al cargar dispositivos! {{ error }}</p>
       </div>
@@ -27,21 +26,20 @@
         <p>No se encontraron dispositivos que coincidan con la búsqueda.</p>
       </div>
       
-      <article v-else class="buscador">
-        <br>
-        <article class="cards">
-          <Card
-            v-for="(card, i) in filteredCards"
-            :key="i"
-            :title="card.title"
-            :description="card.description"
-            :image="card.image"
-            :background-color1="card.backgroundColor1"
-            :background-color2="card.backgroundColor2"
-            buttonText="Agregar"
-          />
-        </article>
-      </article>
+      <div class="cards-scroll-container"> 
+          <article class="cards">
+            <Card
+              v-for="(card, i) in filteredCards"
+              :key="i"
+              :title="card.title"
+              :description="card.description"
+              :image="card.image"
+              :background-color1="card.backgroundColor1"
+              :background-color2="card.backgroundColor2"
+              buttonText="Agregar"
+            />
+          </article>
+        </div>
     </section>
     
     <footer class="footer-agregar">
@@ -65,6 +63,12 @@ import { getDispositivosList } from '../services/dataService'; // Función API
 import Buscador from "../components/Buscador.vue";
 import Card from "../components/Card.vue";
 import Formulario from "../components/formulario.vue";
+import RefrigeradorIcon from "../assets/refrigerator.png"
+import LavadoraIcon from "../assets/lavadora.png"
+import AfeitadoraIcon from "../assets/afeitadora.png"
+import AireAcondicionadoIcon from "../assets/aire.png"
+import AspiradoraIcon from "../assets/aspiradora.png"
+
 
 // 1. ESTADO REACTIVO PARA LA CARGA DE DATOS
 const searchQuery = ref("");
@@ -72,6 +76,18 @@ const cardsList = ref([]); // Almacenará la lista dinámica de la DB
 const isLoading = ref(true);
 const error = ref(null);
 const showForm = ref(false);
+const DefaultIcon = '';
+
+//Mapeo de iconos por electrodomestico
+const iconMap = {
+    'Refrigerador': RefrigeradorIcon,
+    'Lavadora':LavadoraIcon,
+    'Hidrolavadora':LavadoraIcon,
+    'Afeitadora el+¬ctrica':AfeitadoraIcon,
+    'Aire acondicionado port+ítil':AireAcondicionadoIcon,
+    'Aire acondicionado split':AireAcondicionadoIcon,
+    'Aspiradora':AspiradoraIcon
+};
 
 // 2. FUNCIÓN DE CARGA ASÍNCRONA
 const fetchDispositivos = async () => {
@@ -79,9 +95,14 @@ const fetchDispositivos = async () => {
   error.value = null;
   try {
     const data = await getDispositivosList();
-    
-    // La API ya devuelve los datos mapeados al formato Card.vue
-    cardsList.value = data; 
+    cardsList.value = data.map(card => {
+            // Buscamos la imagen en el mapa usando el Título de la Card (nombre del electrodoméstico)
+            const imagePath = iconMap[card.title] || DefaultIcon; 
+            return {
+                ...card, // Mantiene id, title, description, colors
+                image: imagePath // <--- Se inyecta la ruta local
+              };
+    });
   } catch (err) {
     error.value = err.message;
   } finally {
@@ -116,6 +137,7 @@ const agregarDispositivo = (dispositivo) => {
   // Aquí manejarías la lógica para enviar el nuevo dispositivo a tu backend
   cerrarFormulario();
 };
+
 </script>
 
 <style>
@@ -171,4 +193,14 @@ const agregarDispositivo = (dispositivo) => {
     .agregar-no-registrado:hover {
       background: #3ea832;
     }
+    .cards-scroll-container {
+    max-height: 50vh; /* Ajusta este valor (ej. 70% del viewport height) */
+  
+    /* 2. Scroll: Asegura que la barra de desplazamiento aparezca solo cuando sea necesario */
+    overflow-y: auto; 
+    /* 3. Estilo: Opcional, para que se vea el borde */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
 </style>

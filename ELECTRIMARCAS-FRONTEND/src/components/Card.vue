@@ -27,6 +27,10 @@ export default {
       type: String,
       required: true
     },
+    modelo: {
+      type: String,
+      required: true
+    },
     image: {
       type: String,
       default: ""

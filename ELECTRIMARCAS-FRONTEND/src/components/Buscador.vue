@@ -38,10 +38,11 @@ export default {
 <style scoped>
 .input-buscar {
   width: 100%;
-  max-width: 400px;
+  max-height: 50vh;
   padding: 0.5rem;
   font-size: 1rem;
   border: 1px solid #ddd;
   border-radius: 6px;
+  margin-bottom:20px;
 }
 </style>
