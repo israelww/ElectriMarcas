@@ -3,7 +3,8 @@ const express = require('express');
 const router = express.Router();
 //acceso a la bd
 const db = require('../models/consumos.js'); 
-const { formatDataForChartJS, formatDataForCardList } = require('../utils/dataFormatter');
+
+const { formatDataForChartJS, formatDataForCardList } = require('../utils/dataFormatter'); // Función de formato
 
 
 // Importar módulos de autenticación
