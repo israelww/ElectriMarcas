@@ -24,11 +24,11 @@
 				</article>
 				<article class="form-group">
 					<label for="voltaje">Voltaje (V)</label>
-					<input v-model="form.voltaje" id="voltaje" type="number" min="0" required placeholder="Ej. 127" />
+					<input v-model="form.voltaje" id="voltaje" type="number" min="0" required placeholder="Ej. 120 V" />
 				</article>
 				<article class="form-group">
 					<label for="potencia">Potencia (W)</label>
-					<input v-model="form.potencia" id="potencia" type="number" min="0" required placeholder="Ej. 150" />
+					<input v-model="form.potencia" id="potencia" type="number" min="0" required placeholder="Ej. 150 W" />
 				</article>
 				<article class="form-group">
 					<label for="descripcion">Descripción</label>
@@ -72,7 +72,16 @@ const form = reactive({
 	descripcion: ''
 })
 
+function resetForm() {
+    form.nombre = ''
+    form.categoria = '' 
+    form.voltaje = ''
+    form.potencia = ''
+    form.descripcion = ''
+}
+
 function close() {
+	resetForm()
 	emit('close')
 }
 

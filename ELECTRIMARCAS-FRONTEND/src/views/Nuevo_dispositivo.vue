@@ -50,7 +50,7 @@
     
     <Formulario
       :visible="showForm"
-      :categorias="['Electrodomésticos']" 
+      :categorias="['Cocina', 'Limpieza', 'Entretenimiento', 'Climatización', 'Cuidado Personal']" 
       @close="cerrarFormulario"
       @submit="agregarDispositivo"
     />

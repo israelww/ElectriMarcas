@@ -13,7 +13,9 @@ const COLOR_PALETTE = [
     { c1: "#C71F00", c2: "#ED2500" },
     // Par 6: Azul Marino/Claro
     { c1: "#E600BF", c2: "#8F0075" },
-];
+    // Par 7: Gris
+    { c1: "#8f8e8eff", c2: "#706f6fff" },
+  ];
 
 function formatDataForChartJS(datosRaw) {
   // Extraer las etiquetas (eje X) y los valores (eje Y)
