@@ -25,10 +25,10 @@
             </router-link>
 
             <!-- Enlace a la sección de dispositivos del usuario -->
-            <router-link class="button" to="/mis-dispositivos">
+            <!-- <router-link class="button" to="/mis-dispositivos">
                 <span class="material-icons">devices</span>
                 <span class="text">Mis Dispositivos</span>
-            </router-link>
+            </router-link> -->
 
             <!-- Enlace a información sobre la aplicación -->
             <router-link class="button" to="/estadisticas">
