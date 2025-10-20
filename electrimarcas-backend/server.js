@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors'); 
 const app = express();
-const PORT = 3000; // Puerto de la API
+const PORT = process.env.PORT || 3001; // Puerto de la API
 
 // 1. MIDDLEWARE: Permite a Express leer JSON en el cuerpo de las peticiones POST/PUT
 app.use(express.json());

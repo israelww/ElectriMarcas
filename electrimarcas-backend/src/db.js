@@ -1,21 +1,18 @@
 // src/db.js
 require('dotenv').config();
 const sql = require('mssql');
+const config = require('../config.js');
 
-const config = {
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  server: process.env.DB_SERVER,      // p.ej. 'localhost'
-  database: process.env.DB_NAME,      // 'ELECTRIMARCAS'
-  port: Number(process.env.DB_PORT) || 1433,
-  options: {
-    encrypt: false,
-    trustServerCertificate: true,
-    instanceName: process.env.DB_INSTANCE || undefined
-  }
+const dbConfig = {
+  user: config.database.user,
+  password: config.database.password,
+  server: config.database.server,
+  database: config.database.database,
+  port: config.database.port,
+  options: config.database.options
 };
 
-const pool = new sql.ConnectionPool(config);
+const pool = new sql.ConnectionPool(dbConfig);
 const poolConnect = pool.connect()
   .then(() => console.log('✅ Conectado a SQL Server'))
   .catch(err => {

@@ -1,8 +1,36 @@
 // src/services/dataService.js
 import axios from 'axios';
+import authService from './authService.js';
 
 // Define la URL base de la API de Node.js
-const API_URL = 'http://localhost:3000/api'; 
+const API_URL = 'http://localhost:3001/api';
+
+// Configurar axios para incluir el token de autenticación automáticamente
+axios.interceptors.request.use(
+  (config) => {
+    const token = authService.getAuthHeader();
+    if (token) {
+      config.headers.Authorization = token;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Interceptor para manejar respuestas 401 (no autorizado)
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Token expirado o inválido, cerrar sesión
+      authService.logout();
+      window.location.href = '/inicio-sesion';
+    }
+    return Promise.reject(error);
+  }
+); 
 
 /**
  * Función para obtener los datos de la gráfica desde el backend.

@@ -7,6 +7,8 @@ import Estadisticas from '../views/Estadisticas.vue'
 import Consejos_ahorro from '../views/Consejos_ahorro.vue'
 import Nuevo_dispositivo from '../views/Nuevo_dispositivo.vue'
 import InicioSesion from '../views/InicioSesion.vue'
+import Registro from '../views/Registro.vue'
+import authService from '../services/authService.js'
 
 /**
  * Configuración del router de Vue
@@ -19,50 +21,98 @@ const router = createRouter({
   // Array de rutas de la aplicación
   routes: [
     {
-      path: '/Inicio',           // Ruta raíz de la aplicación
-      name: 'Inicio',      // Nombre identificador de la ruta
-      component: Inicio    // Componente a renderizar en esta ruta
+      path: '/',                    // Ruta raíz - redirige al login
+      redirect: '/inicio-sesion'
     },
-
     {
-      path: '/Acerca-de',  // Ruta para la página de Acerca de
-      name: 'Acerca de',    // Nombre identificador de la ruta
-      component: Acercade   // Componente a renderizar en esta ruta
+      path: '/inicio-sesion',       // Página de inicio de sesión (pública)
+      name: 'Inicio Sesión',
+      component: InicioSesion,
+      meta: { requiresAuth: false }
     },
-
     {
-      path: '/Mis-dispositivos',  // Ruta para la página de Mis Dispositivos
-      name: 'Mis Dispositivos',    // Nombre identificador de la ruta
-      component: Mis_dispositivos  // Componente a renderizar en esta ruta
+      path: '/registro',            // Página de registro (pública)
+      name: 'Registro',
+      component: Registro,
+      meta: { requiresAuth: false }
     },
-
     {
-      path: '/Estadisticas',  // Ruta para la página de Estadísticas
-      name: 'Estadísticas',    // Nombre identificador de la ruta
-      component: Estadisticas  // Componente a renderizar en esta ruta
+      path: '/Inicio',              // Ruta principal (protegida)
+      name: 'Inicio',
+      component: Inicio,
+      meta: { requiresAuth: true }
     },
-
     {
-      path: '/Consejos-de-ahorro',  // Ruta para la página de Consejos de Ahorro
-      name: 'Consejos de Ahorro',    // Nombre identificador de la ruta
-      component: Consejos_ahorro     // Componente a renderizar en esta ruta
+      path: '/Acerca-de',           // Ruta para la página de Acerca de (protegida)
+      name: 'Acerca de',
+      component: Acercade,
+      meta: { requiresAuth: true }
     },
-
     {
-      path: '/Nuevo_dispositivo',  // Ruta para la página de Nuevo Dispositivo
-      name: 'Nuevo Dispositivo',    // Nombre identificador de la ruta
-      component: Nuevo_dispositivo     // Componente a renderizar en esta ruta
+      path: '/Mis-dispositivos',    // Ruta para la página de Mis Dispositivos (protegida)
+      name: 'Mis Dispositivos',
+      component: Mis_dispositivos,
+      meta: { requiresAuth: true }
     },
-
     {
-      path: '/inicio-sesion',  // Ruta para la página de Inicio de Sesión
-      name: 'Inicio Sesión',    // Nombre identificador de la ruta
-      component: InicioSesion     // Componente a renderizar en esta ruta
+      path: '/Estadisticas',        // Ruta para la página de Estadísticas (protegida)
+      name: 'Estadísticas',
+      component: Estadisticas,
+      meta: { requiresAuth: true }
     },
-
-    // Aquí se pueden agregar más rutas según sea necesario
+    {
+      path: '/Consejos-de-ahorro',  // Ruta para la página de Consejos de Ahorro (protegida)
+      name: 'Consejos de Ahorro',
+      component: Consejos_ahorro,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/Nuevo_dispositivo',   // Ruta para la página de Nuevo Dispositivo (protegida)
+      name: 'Nuevo Dispositivo',
+      component: Nuevo_dispositivo,
+      meta: { requiresAuth: true }
+    }
   ]
 })
+
+// ===========================================
+// GUARD DE NAVEGACIÓN (NAVIGATION GUARD)
+// ===========================================
+
+/**
+ * Guard global que se ejecuta antes de cada navegación
+ * Verifica si el usuario está autenticado para rutas protegidas
+ */
+router.beforeEach(async (to, from, next) => {
+  // Verificar si la ruta requiere autenticación
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  
+  // Si la ruta no requiere autenticación, permitir acceso
+  if (!requiresAuth) {
+    // Si el usuario ya está autenticado y trata de acceder al login o registro, redirigir al inicio
+    if ((to.path === '/inicio-sesion' || to.path === '/registro') && authService.isAuthenticated()) {
+      next('/Inicio');
+    } else {
+      next();
+    }
+    return;
+  }
+
+  // Si la ruta requiere autenticación, verificar si el usuario está logueado
+  if (authService.isAuthenticated()) {
+    // Verificar si el token sigue siendo válido
+    const isValidToken = await authService.verifyToken();
+    if (isValidToken) {
+      next(); // Permitir acceso
+    } else {
+      // Token inválido, redirigir al login
+      next('/inicio-sesion');
+    }
+  } else {
+    // Usuario no autenticado, redirigir al login
+    next('/inicio-sesion');
+  }
+});
 
 // Exporta la instancia del router para ser utilizada en main.js
 export default router
