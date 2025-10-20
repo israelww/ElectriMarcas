@@ -315,6 +315,7 @@
 						/* Estilos para el texto de los botones */
 						color: var(--light);
 						transition: 0.2s ease-in-out;
+						font-size: 1rem;
 					}
 
 					/* Efecto hover: cambia fondo y colores */
@@ -338,22 +339,35 @@
 				}
 
 				/* Estilos específicos para el botón de cerrar sesión */
-				&.logout-btn {
-					background-color: transparent;
-					border: none;
+				.button.logout-btn {
 					width: 100%;
+					border: 0;
+					background: transparent;
 					text-align: left;
 					cursor: pointer;
-					
-					&:hover {
-						background-color: #dc3545 !important;
-						
-						.material-icons, .text {
-							color: white !important;
-						}
+				}
+
+				.button.logout-btn:hover {
+					background: var(--dark-alt);    
+				}
+
+				.button.logout-btn:hover .material-icons,
+				.button.logout-btn:hover .text {
+					color: var(--primary);              
+				}
+
+				/* Estado activo: indica la página actual */
+				&.router-link-exact-active {
+					background-color: var(--dark-alt);
+					border-right: 5px solid var(--primary);
+
+					.material-icons, .text {
+						color: var(--primary);
 					}
 				}
 			}
+			
+			
 
 			/* ===========================================
 			   FOOTER (NO UTILIZADO ACTUALMENTE)
