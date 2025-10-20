@@ -195,12 +195,14 @@ const agregarDispositivo = (dispositivo) => {
     }
     .cards-scroll-container {
     max-height: 50vh; /* Ajusta este valor (ej. 70% del viewport height) */
-  
+    max-width: 1000px;
     /* 2. Scroll: Asegura que la barra de desplazamiento aparezca solo cuando sea necesario */
     overflow-y: auto; 
     /* 3. Estilo: Opcional, para que se vea el borde */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
+    width: 100%;
+    
 }
 </style>

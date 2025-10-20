@@ -1,5 +1,5 @@
 <template>
-  <section class="card":style="{background: `linear-gradient(to right, ${backgroundColor1}, ${backgroundColor2} )` }">
+  <section class="card" :style="{background: `linear-gradient(to right, ${backgroundColor1}, ${backgroundColor2} )` }">
     <article class="card-imagen">
         <img v-if="image" :src="image" alt="Card Image" class="card-image" />
     </article>
