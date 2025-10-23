@@ -83,7 +83,7 @@ const iconMap = {
     'Refrigerador': RefrigeradorIcon,
     'Lavadora':LavadoraIcon,
     'Hidrolavadora':LavadoraIcon,
-    'Afeitadora el+¬ctrica':AfeitadoraIcon,
+    'Afeitadora el+®ctrica':AfeitadoraIcon,
     'Aire acondicionado port+ítil':AireAcondicionadoIcon,
     'Aire acondicionado split':AireAcondicionadoIcon,
     'Aspiradora':AspiradoraIcon
