@@ -1,16 +1,16 @@
 <template>
   <section class="card" :style="{background: `linear-gradient(to right, ${backgroundColor1}, ${backgroundColor2} )` }">
-    <article class="card-imagen">
-        <img v-if="image" :src="image" alt="Card Image" class="card-image" />
+    <article v-if="image" class="card-imagen">
+      <img :src="image" alt="Card Image" class="card-image" />
     </article>
     <article class="card-content">
       <h2 class="card-title">{{ title }}</h2>
-      <p class="card-description">{{ description }}</p>
+      <p class="card-description">{{ description }}</p> 
     </article>
-    <section class="card-actions">
-        <article class="card-boton">
-            <button @click="$emit('eliminar')">{{ buttonText }}</button>
-        </article>
+    <section v-if="buttonText" class="card-actions">
+      <article class="card-boton">
+        <button @click="$emit('eliminar')">{{ buttonText }}</button>
+      </article>
     </section>
   </section>
 </template>
@@ -37,7 +37,7 @@ export default {
     },
     buttonText: {
       type: String,
-      default: "Eliminar"
+      default: null
     },
     backgroundColor1:{
         type:String,

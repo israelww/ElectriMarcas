@@ -4,12 +4,12 @@
 // se añadan todos a la categoría correspondiente y con sus respectivos datos (voltaje, potencia, etc.)
 import Card from '../components/Card.vue'
 import Formulario from '../components/formulario.vue'
-import { getDispositivosList } from '../services/dataService.js'
-import Refrigerador from '../assets/refrigerator.png' 
-import Lavadora from '../assets/lavadora.png'
-import Tv from '../assets/tv.png'
-import Aire from '../assets/aire.png'
-import Plancha from '../assets/plancha.png'
+// import { getDispositivosList } from '../services/dataService.js'
+// import Refrigerador from '../assets/refrigerator.png' 
+// import Lavadora from '../assets/lavadora.png'
+// import Tv from '../assets/tv.png'
+// import Aire from '../assets/aire.png'
+// import Plancha from '../assets/plancha.png'
 
 export default {
     name: 'Inicio',
@@ -88,7 +88,8 @@ export default {
                         description: card.description,
                         image: card.image || '',
                         backgroundColor1: card.backgroundColor1,
-                        backgroundColor2: card.backgroundColor2
+                        backgroundColor2: card.backgroundColor2,
+                        buttonText: "Eliminar"
                     });
                 }
                 sessionStorage.removeItem('selectedDevice');

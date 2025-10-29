@@ -226,6 +226,5 @@ const seleccionar = (card) => {
     border: 1px solid #ccc;
     border-radius: 8px;
     width: 780px;
-    
 }
 </style>

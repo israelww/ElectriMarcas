@@ -8,21 +8,17 @@
         <p> Estos consejos te ayudarán a reducir el consumo de energía en tu hogar, 
             ahorrar dinero en tus recibos de luz y contribuir al cuidado del medio ambiente.</p>
         <nav class="consejos-info">Estos consejos se irán modificando dependiendo en el consumo que realices con los electrodomésticos usados.</nav>
-        <nav class="consejos-lista">
-            <!-- Lista de consejos -->
-            <nav
-                v-for="consejo in consejos"
-                :key="consejo.id"
-                class="consejo-card"
-                :style="{ background: consejo.color }"
-            >
-                <h2>
-                    <span class="consejo-icon">{{ consejo.icono }}</span>
-                    {{ consejo.titulo }}
-                </h2>
-                <p class="consejo-descripcion">{{ consejo.descripcion }}</p>
-            </nav>
-        </nav>
+        <section class="consejos-lista">
+        <article class="cards">
+            <Card
+            v-for="c in consejosCards"
+            :title="c.title"
+            :description="c.description"
+            :background-color1="c.backgroundColor1"
+            :background-color2="c.backgroundColor2"
+            />
+        </article>
+        </section>
     </section>
 </template>
 
@@ -32,39 +28,54 @@
 // Los consejos están definidos de forma fija.
 // En el futuro podrían cargarse dinámicamente desde la base de datos.
 //
+import Card from '../components/Card.vue';
+   
 export default {
-    name: 'Consejos',
-    data() {
-        return {
-            // Lista fija de consejos de ahorro
-            consejos: [
-                {
-                    id: 1,
-                    icono: '🔌',
-                    titulo: 'Desconecta los aparatos que no uses.',
-                    descripcion:
-                        'Muchos dispositivos en “stand by” (televisión, consolas, cargadores) siguen consumiendo energía.',
-                    color: 'linear-gradient(180deg, #ef4444 0%, #dc2626 100%)',
-                },
-                {
-                    id: 2,
-                    icono: '❄️',
-                    titulo: 'Evita abrir y cerrar mucho el refrigerador.',
-                    descripcion:
-                        'Cada vez que lo abres, el motor trabaja más para enfriarlo.',
-                    color: 'linear-gradient(180deg, #3b82f6 0%, #0ea5e9 100%)',
-                },
-                {
-                    id: 3,
-                    icono: '👕',
-                    titulo: 'Usa lavadoras solo con carga completa.',
-                    descripcion:
-                        'Evita el desperdicio de agua y energía lavando pocas prendas por carga.',
-                    color: 'linear-gradient(180deg, #34d399 0%, #22c55e 100%)',
-                },
-            ],
-        };
+  name: 'Consejos',
+  components: { Card },
+  data() {
+    return {
+      consejos: [
+        {
+          id: 1,
+          titulo: 'Desconecta los aparatos que no uses.',
+          descripcion:
+            'Muchos dispositivos en “stand by” (televisión, consolas, cargadores) siguen consumiendo energía.',
+          color1: '#ef4444',
+          color2: '#dc2626',
+        },
+        {
+          id: 2,
+          titulo: 'Evita abrir y cerrar mucho el refrigerador.',
+          descripcion: 'Cada vez que lo abres, el motor trabaja más para enfriarlo.',
+          color1: '#3b82f6',
+          color2: '#0ea5e9',
+        },
+        {
+          id: 3,
+          titulo: 'Usa lavadoras solo con carga completa.',
+          descripcion: 'Evita el desperdicio de agua y energía lavando pocas prendas por carga.',
+          color1: '#34d399',
+          color2: '#22c55e',
+        },
+      ],
+    };
+  },
+  computed: {
+    consejosCards() {
+      return this.consejos.map(c => ({
+        title: c.titulo,
+        description: c.descripcion,
+        backgroundColor1: c.color1,
+        backgroundColor2: c.color2,
+      }));
     },
+  },
+  methods: {
+    verDetalle(c) {
+      console.log('Tip seleccionado:', c.title);
+    },
+  },
 };
 </script>
 
