@@ -37,6 +37,7 @@
               :background-color1="card.backgroundColor1"
               :background-color2="card.backgroundColor2"
               buttonText="Agregar"
+              @eliminar="seleccionar(card)"
             />
           </article>
         </div>
@@ -59,6 +60,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import { getDispositivosList } from '../services/dataService'; // Función API
 import Buscador from "../components/Buscador.vue";
 import Card from "../components/Card.vue";
@@ -77,6 +79,13 @@ const isLoading = ref(true);
 const error = ref(null);
 const showForm = ref(false);
 const DefaultIcon = '';
+const route = useRoute();
+const router = useRouter();
+const categoriaId = computed(() => {
+  const raw = route.query.categoriaId;
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : null;
+});
 
 //Mapeo de iconos por electrodomestico
 const iconMap = {
@@ -136,6 +145,20 @@ const cerrarFormulario = () => {
 const agregarDispositivo = (dispositivo) => {
   // Aquí manejarías la lógica para enviar el nuevo dispositivo a tu backend
   cerrarFormulario();
+};
+
+// Seleccionar un dispositivo existente para añadir a la categoría indicada
+const seleccionar = (card) => {
+  const catId = categoriaId.value;
+  if (!catId) {
+    // Si no viene categoría, solo volver al inicio
+    router.push('/Inicio');
+    return;
+  }
+  try {
+    sessionStorage.setItem('selectedDevice', JSON.stringify({ card, categoriaId: catId }));
+  } catch {}
+  router.push('/Inicio');
 };
 
 </script>

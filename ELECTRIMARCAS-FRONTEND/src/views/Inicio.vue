@@ -4,6 +4,7 @@
 // se añadan todos a la categoría correspondiente y con sus respectivos datos (voltaje, potencia, etc.)
 import Card from '../components/Card.vue'
 import Formulario from '../components/formulario.vue'
+import { getDispositivosList } from '../services/dataService.js'
 import Refrigerador from '../assets/refrigerator.png' 
 import Lavadora from '../assets/lavadora.png'
 import Tv from '../assets/tv.png'
@@ -74,6 +75,29 @@ export default {
             categoriaSeleccionada: null,
         };
     },
+    async created() {
+        // Consumir selección desde Nuevo_dispositivo (sessionStorage)
+        try {
+            const stored = sessionStorage.getItem('selectedDevice');
+            if (stored) {
+                const { card, categoriaId } = JSON.parse(stored);
+                const categoria = this.categorias.find(c => c.id === categoriaId);
+                if (categoria && card) {
+                    categoria.cards.push({
+                        title: card.title,
+                        description: card.description,
+                        image: card.image || '',
+                        backgroundColor1: card.backgroundColor1,
+                        backgroundColor2: card.backgroundColor2
+                    });
+                }
+                sessionStorage.removeItem('selectedDevice');
+            }
+        } catch (e) {
+            console.error(e);
+            sessionStorage.removeItem('selectedDevice');
+        }
+    },
     methods: {
         removeCard(categoriaId, cardIndex) {
             const categoria = this.categorias.find(c => c.id === categoriaId);
@@ -81,9 +105,9 @@ export default {
                 categoria.cards.splice(cardIndex, 1);
             }
         },
-        abrirFormulario(categoriaId) {
-            this.categoriaSeleccionada = categoriaId;
-            this.showForm = true;
+        abrirSelector(categoriaId) {
+            // Navega a la pantalla Nuevo_dispositivo con la categoría seleccionada
+            this.$router.push({ path: '/Nuevo_dispositivo', query: { categoriaId } });
         },
         cerrarFormulario() {
             this.showForm = false;
@@ -144,12 +168,12 @@ export default {
                     :image="card.image"
                     :backgroundColor1="card.backgroundColor1"
                     :backgroundColor2="card.backgroundColor2"
-                    @remove="removeCard(categoria.id,idx)"
+                    @eliminar="removeCard(categoria.id,idx)"
                 />
                 <br>
-                <router-link class="add-button" to="/Nuevo_dispositivo">
+                <button class="add-button" @click="abrirSelector(categoria.id)">
                     <span class="textoBotonAniadir">Añadir dispositivo</span>
-                </router-link>
+                </button>
                 <br>
                 <!-- Botón para abrir el formulario modal -->
 
@@ -279,6 +303,7 @@ export default {
 .textoBotonAniadir{
     color: white;
 }
+
 
 /* Responsive para el botón */
 @media (max-width: 768px) {
