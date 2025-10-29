@@ -4,6 +4,7 @@
 // se añadan todos a la categoría correspondiente y con sus respectivos datos (voltaje, potencia, etc.)
 import Card from '../components/Card.vue'
 import Formulario from '../components/formulario.vue'
+import ConfigDeviceModal from '../components/ConfigDeviceModal.vue'
 // import { getDispositivosList } from '../services/dataService.js'
 // import Refrigerador from '../assets/refrigerator.png' 
 // import Lavadora from '../assets/lavadora.png'
@@ -13,7 +14,7 @@ import Formulario from '../components/formulario.vue'
 
 export default {
     name: 'Inicio',
-    components: { Card, Formulario },
+    components: { Card, Formulario, ConfigDeviceModal },
     data() {
         return {
             categorias: [
@@ -21,51 +22,31 @@ export default {
                     id: 1,
                     nombre: 'Cocina',
                     descripcion: 'Electrodomésticos para cocinar y preparar alimentos.',
-                    cards:[
-                        // {title:"Refrigerador", description:"Descripcion del refrigerador", image:Refrigerador, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
-                        // {title:"Refrigerador 2", description:"Descripcion del refrigerador", image:Refrigerador,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
-                        // {title:"Refrigerador 3", description:"Descripcion del refrigerador", image:Refrigerador,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
-                    ]
+                    cards: []
                 },
                 {
                     id: 2,
                     nombre: 'Limpieza',
                     descripcion: 'Aparatos para limpieza del hogar y ropa.',
-                    cards:[
-                        // {title:"Lavadora", description:"Descripcion de la lavadora", image:Lavadora, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
-                        // {title:"Lavadora 2", description:"Descripcion de la lavadora", image:Lavadora,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
-                        // {title:"Lavadora 3", description:"Descripcion de la lavadora", image:Lavadora,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
-                    ]
+                    cards: []
                 },
                 {
                     id: 3,
                     nombre: 'Entretenimiento',
                     descripcion: 'Dispositivos para ocio y entretenimiento.',
-                    cards:[
-                        // {title:"Television", description:"Descripcion de la Television", image:Tv, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
-                        // {title:"Television 2", description:"Descripcion de la Television", image:Tv,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
-                        // {title:"Television 3", description:"Descripcion de la Television", image:Tv,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
-                    ]
+                    cards: []
                 },
                 {
                     id: 4,
                     nombre: 'Climatización',
                     descripcion: 'Equipos para regular la temperatura y el ambiente.',
-                    cards:[
-                        // {title:"Aire acondicionado", description:"Descripcion del aire acondicionado", image:Aire, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
-                        // {title:"Aire acondicionado 2", description:"Descripcion del aire acondicionado", image:Aire,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
-                        // {title:"Aire acondicionado 3", description:"Descripcion del aire acondicionado", image:Aire,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
-                    ]
+                    cards: []
                 },
                 {
                     id: 5,
                     nombre: 'Cuidado Personal',
                     descripcion: 'Electrodomésticos para el cuidado y bienestar personal.',
-                    cards:[
-                    //     {title:"Plancha", description:"Descripcion de la plancha", image:Plancha, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
-                    //     {title:"Plancha 2", description:"Descripcion de la plancha", image:Plancha,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
-                    //     {title:"Plancha 3", description:"Descripcion de la plancha", image:Plancha,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
-                    ]
+                    cards: []
                 },
                 // Se pueden agregar más categorías aquí
             ],
@@ -73,30 +54,43 @@ export default {
             // Estado para mostrar el formulario y categoría seleccionada
             showForm: false,
             categoriaSeleccionada: null,
+
+            // Estado del modal de configuración
+            showConfigModal: false,
+            configCategoriaId: null,
+            configCardIndex: null,
+            deviceToConfig: null,
         };
     },
     async created() {
-        // Consumir selección desde Nuevo_dispositivo (sessionStorage)
+        // 1) Cargar desde localStorage lo que ya estaba guardado
+        this.loadCategoriasFromStorage();
+
+        // 2) Consumir selección desde Nuevo_dispositivo (sessionStorage) y fusionarla
         try {
-            const stored = sessionStorage.getItem('selectedDevice');
+            const stored = sessionStorage.getItem('selectedDevices');
             if (stored) {
-                const { card, categoriaId } = JSON.parse(stored);
+                const { cards, categoriaId } = JSON.parse(stored);
                 const categoria = this.categorias.find(c => c.id === categoriaId);
-                if (categoria && card) {
-                    categoria.cards.push({
-                        title: card.title,
-                        description: card.description,
-                        image: card.image || '',
-                        backgroundColor1: card.backgroundColor1,
-                        backgroundColor2: card.backgroundColor2,
-                        buttonText: "Eliminar"
+                if (categoria && cards && Array.isArray(cards)) {
+                    // Agregar todos los dispositivos seleccionados
+                    cards.forEach(card => {
+                        categoria.cards.push({
+                            title: card.title,
+                            description: card.description,
+                            image: card.image || '',
+                            backgroundColor1: card.backgroundColor1 || '#B31C00',
+                            backgroundColor2: card.backgroundColor2 || '#FF2B00',
+                            buttonText: "Eliminar"
+                        });
                     });
+                    this.saveCategoriasToStorage();
                 }
-                sessionStorage.removeItem('selectedDevice');
+                sessionStorage.removeItem('selectedDevices');
             }
         } catch (e) {
-            console.error(e);
-            sessionStorage.removeItem('selectedDevice');
+            console.error('Error al cargar dispositivos desde sessionStorage:', e);
+            sessionStorage.removeItem('selectedDevices');
         }
     },
     methods: {
@@ -104,6 +98,7 @@ export default {
             const categoria = this.categorias.find(c => c.id === categoriaId);
             if (categoria) {
                 categoria.cards.splice(cardIndex, 1);
+                this.saveCategoriasToStorage();
             }
         },
         abrirSelector(categoriaId) {
@@ -127,8 +122,91 @@ export default {
                     voltaje: dispositivo.voltaje,
                     potencia: dispositivo.potencia,
                 });
+                this.saveCategoriasToStorage();
             }
             this.cerrarFormulario();
+        },
+        // Abrir modal de configuración para una card específica
+        openConfig(categoriaId, cardIndex) {
+            const categoria = this.categorias.find(c => c.id === categoriaId);
+            if (!categoria) return;
+            const card = categoria.cards[cardIndex];
+            this.configCategoriaId = categoriaId;
+            this.configCardIndex = cardIndex;
+            this.deviceToConfig = { ...card };
+            this.showConfigModal = true;
+        },
+        // Cerrar modal de configuración
+        closeConfig() {
+            this.showConfigModal = false;
+            this.configCategoriaId = null;
+            this.configCardIndex = null;
+            this.deviceToConfig = null;
+        },
+        // Guardar configuración recibida del modal
+        saveConfig(payload) {
+            const categoria = this.categorias.find(c => c.id === this.configCategoriaId);
+            if (!categoria) { this.closeConfig(); return; }
+            const idx = this.configCardIndex;
+            if (idx == null || idx < 0 || idx >= categoria.cards.length) { this.closeConfig(); return; }
+            const current = categoria.cards[idx];
+            categoria.cards.splice(idx, 1, {
+                ...current,
+                cantidad: payload.cantidad,
+                horasUsoPorDia: payload.horasUsoPorDia,
+                diasUsoPorSemana: payload.diasUsoPorSemana,
+                potencia: payload.potencia
+            });
+            this.saveCategoriasToStorage();
+            this.closeConfig();
+        },
+        // Persistencia en localStorage por categoría
+        saveCategoriasToStorage() {
+            try {
+                const map = {};
+                this.categorias.forEach(cat => {
+                    map[cat.id] = (cat.cards || []).map(d => ({
+                        title: d.title,
+                        description: d.description,
+                        image: d.image,
+                        backgroundColor1: d.backgroundColor1,
+                        backgroundColor2: d.backgroundColor2,
+                        cantidad: d.cantidad,
+                        horasUsoPorDia: d.horasUsoPorDia,
+                        diasUsoPorSemana: d.diasUsoPorSemana,
+                        potencia: d.potencia
+                    }));
+                });
+                localStorage.setItem('categoriasCards', JSON.stringify(map));
+            } catch (e) {
+                console.error('No se pudo guardar categoriasCards:', e);
+            }
+        },
+        loadCategoriasFromStorage() {
+            try {
+                const saved = localStorage.getItem('categoriasCards');
+                if (!saved) return;
+                const map = JSON.parse(saved);
+                this.categorias.forEach(cat => {
+                    const arr = map?.[cat.id] || [];
+                    if (Array.isArray(arr)) {
+                        cat.cards = arr.map(d => ({
+                            title: d.title,
+                            description: d.description,
+                            image: d.image || '',
+                            backgroundColor1: d.backgroundColor1 || '#B31C00',
+                            backgroundColor2: d.backgroundColor2 || '#FF2B00',
+                            cantidad: d.cantidad,
+                            horasUsoPorDia: d.horasUsoPorDia,
+                            diasUsoPorSemana: d.diasUsoPorSemana,
+                            potencia: d.potencia,
+                            buttonText: 'Eliminar'
+                        }));
+                    }
+                });
+            } catch (e) {
+                console.error('No se pudo cargar categoriasCards:', e);
+            }
         },
         // Método para ir a inicio de sesión
         irAInicioSesion() {
@@ -169,6 +247,8 @@ export default {
                     :image="card.image"
                     :backgroundColor1="card.backgroundColor1"
                     :backgroundColor2="card.backgroundColor2"
+                    :showConfigure="true"
+                    @configurar="openConfig(categoria.id, idx)"
                     @eliminar="removeCard(categoria.id,idx)"
                 />
                 <br>
@@ -186,6 +266,14 @@ export default {
       :categorias="categorias.map(c => c.nombre)"
       @close="cerrarFormulario"
       @submit="agregarDispositivo"
+    />
+
+    <!-- Modal de configuración de uso -->
+    <ConfigDeviceModal
+      :visible="showConfigModal"
+      :device="deviceToConfig"
+      @close="closeConfig"
+      @save="saveConfig"
     />
     </section>
 </template>
