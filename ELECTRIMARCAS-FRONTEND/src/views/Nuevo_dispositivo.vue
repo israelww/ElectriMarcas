@@ -92,7 +92,7 @@ const iconMap = {
     'Refrigerador': RefrigeradorIcon,
     'Lavadora':LavadoraIcon,
     'Hidrolavadora':LavadoraIcon,
-    'Afeitadora el+®ctrica':AfeitadoraIcon,
+    'Afeitadora el├®ctrica':AfeitadoraIcon,
     'Aire acondicionado port+ítil':AireAcondicionadoIcon,
     'Aire acondicionado split':AireAcondicionadoIcon,
     'Aspiradora':AspiradoraIcon
@@ -222,10 +222,10 @@ const seleccionar = (card) => {
     /* 2. Scroll: Asegura que la barra de desplazamiento aparezca solo cuando sea necesario */
     overflow-y: auto; 
     /* 3. Estilo: Opcional, para que se vea el borde */
-    padding: 10px;
+    padding: 25px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    width: 100%;
+    width: 780px;
     
 }
 </style>

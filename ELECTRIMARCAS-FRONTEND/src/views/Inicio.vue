@@ -22,9 +22,9 @@ export default {
                     nombre: 'Cocina',
                     descripcion: 'Electrodomésticos para cocinar y preparar alimentos.',
                     cards:[
-                        {title:"Refrigerador", description:"Descripcion del refrigerador", image:Refrigerador, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
-                        {title:"Refrigerador 2", description:"Descripcion del refrigerador", image:Refrigerador,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
-                        {title:"Refrigerador 3", description:"Descripcion del refrigerador", image:Refrigerador,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
+                        // {title:"Refrigerador", description:"Descripcion del refrigerador", image:Refrigerador, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
+                        // {title:"Refrigerador 2", description:"Descripcion del refrigerador", image:Refrigerador,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
+                        // {title:"Refrigerador 3", description:"Descripcion del refrigerador", image:Refrigerador,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
                     ]
                 },
                 {
@@ -32,9 +32,9 @@ export default {
                     nombre: 'Limpieza',
                     descripcion: 'Aparatos para limpieza del hogar y ropa.',
                     cards:[
-                        {title:"Lavadora", description:"Descripcion de la lavadora", image:Lavadora, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
-                        {title:"Lavadora 2", description:"Descripcion de la lavadora", image:Lavadora,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
-                        {title:"Lavadora 3", description:"Descripcion de la lavadora", image:Lavadora,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
+                        // {title:"Lavadora", description:"Descripcion de la lavadora", image:Lavadora, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
+                        // {title:"Lavadora 2", description:"Descripcion de la lavadora", image:Lavadora,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
+                        // {title:"Lavadora 3", description:"Descripcion de la lavadora", image:Lavadora,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
                     ]
                 },
                 {
@@ -42,9 +42,9 @@ export default {
                     nombre: 'Entretenimiento',
                     descripcion: 'Dispositivos para ocio y entretenimiento.',
                     cards:[
-                        {title:"Television", description:"Descripcion de la Television", image:Tv, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
-                        {title:"Television 2", description:"Descripcion de la Television", image:Tv,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
-                        {title:"Television 3", description:"Descripcion de la Television", image:Tv,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
+                        // {title:"Television", description:"Descripcion de la Television", image:Tv, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
+                        // {title:"Television 2", description:"Descripcion de la Television", image:Tv,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
+                        // {title:"Television 3", description:"Descripcion de la Television", image:Tv,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
                     ]
                 },
                 {
@@ -52,9 +52,9 @@ export default {
                     nombre: 'Climatización',
                     descripcion: 'Equipos para regular la temperatura y el ambiente.',
                     cards:[
-                        {title:"Aire acondicionado", description:"Descripcion del aire acondicionado", image:Aire, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
-                        {title:"Aire acondicionado 2", description:"Descripcion del aire acondicionado", image:Aire,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
-                        {title:"Aire acondicionado 3", description:"Descripcion del aire acondicionado", image:Aire,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
+                        // {title:"Aire acondicionado", description:"Descripcion del aire acondicionado", image:Aire, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
+                        // {title:"Aire acondicionado 2", description:"Descripcion del aire acondicionado", image:Aire,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
+                        // {title:"Aire acondicionado 3", description:"Descripcion del aire acondicionado", image:Aire,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
                     ]
                 },
                 {
@@ -62,9 +62,9 @@ export default {
                     nombre: 'Cuidado Personal',
                     descripcion: 'Electrodomésticos para el cuidado y bienestar personal.',
                     cards:[
-                        {title:"Plancha", description:"Descripcion de la plancha", image:Plancha, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
-                        {title:"Plancha 2", description:"Descripcion de la plancha", image:Plancha,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
-                        {title:"Plancha 3", description:"Descripcion de la plancha", image:Plancha,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
+                    //     {title:"Plancha", description:"Descripcion de la plancha", image:Plancha, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
+                    //     {title:"Plancha 2", description:"Descripcion de la plancha", image:Plancha,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
+                    //     {title:"Plancha 3", description:"Descripcion de la plancha", image:Plancha,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
                     ]
                 },
                 // Se pueden agregar más categorías aquí
