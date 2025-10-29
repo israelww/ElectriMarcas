@@ -1,5 +1,3 @@
-
-
 <template>
   <section>
     <header class="header-nuevo">
@@ -36,6 +34,7 @@
               :image="card.image"
               :background-color1="card.backgroundColor1"
               :background-color2="card.backgroundColor2"
+              :show-configure="false"
               buttonText="Agregar"
               @eliminar="seleccionar(card)"
             />

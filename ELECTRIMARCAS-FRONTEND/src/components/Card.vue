@@ -121,6 +121,5 @@ button:hover {
   color: red;
 }
 .btn-configurar{
-  margin-right: 8px;
 }
 </style>

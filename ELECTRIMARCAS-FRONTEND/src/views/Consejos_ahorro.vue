@@ -43,7 +43,7 @@
             </div>
         </section>
         
-        <!-- Sección de consejos generales -->
+        <!-- Sección de consejos generales
         <section class="consejos-lista">
             <h2 class="section-title">Consejos generales de ahorro</h2>
             <article class="cards">
@@ -56,7 +56,7 @@
                 :background-color2="c.backgroundColor2"
                 />
             </article>
-        </section>
+        </section> -->
     </section>
 </template>
 
@@ -257,6 +257,7 @@ export default {
     .consejo-card: Tarjeta individual de cada consejo.
 */
 .consejos {
+    line-height: 1.5;
     max-width: 900px;
     width: 100%;
     padding: 2rem;
@@ -267,7 +268,7 @@ export default {
     font-size: 1.5rem;
     font-weight: 700;
     color: #2c3e50;
-    margin-top: 2rem;
+    margin-top: 0.8rem;
     margin-bottom: 0.5rem;
 }
 
@@ -279,8 +280,8 @@ export default {
 
 .alto-consumo-section {
     margin-bottom: 3rem;
-    padding: 1.5rem;
-    background: #f8f9fa;
+    margin-top: 30px;
+    /* background: #f8f9fa; */
     border-radius: 1rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }

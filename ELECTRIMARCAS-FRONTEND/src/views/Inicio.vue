@@ -227,9 +227,10 @@ export default {
         <!-- <button @click="irAInicioSesion" class="login-test-btn">
             Ir a Inicio de Sesión
         </button> -->
-
-        <h1>Categorías de Electrodomésticos</h1>
-        <p>Añade un electrodoméstico a su respectiva categoría con sus datos para su calcular su consumo.</p>
+        <section class="texto">
+            <h1>Categorías de Electrodomésticos</h1>
+            <p>Añade un electrodoméstico a su respectiva categoría con sus datos para su calcular su consumo.</p>
+        </section>
         <nav class="categorias-lista">
             <!-- Lista de categorías fijas -->
             <nav
@@ -389,10 +390,13 @@ export default {
     text-decoration: none;
 }
 
+.texto{
+    line-height: 1.5;
+}
+
 .textoBotonAniadir{
     color: white;
 }
-
 
 /* Responsive para el botón */
 @media (max-width: 768px) {
