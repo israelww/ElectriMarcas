@@ -22,31 +22,52 @@ export default {
                     id: 1,
                     nombre: 'Cocina',
                     descripcion: 'Electrodomésticos para cocinar y preparar alimentos.',
-                    cards: []
+
+
                 },
                 {
                     id: 2,
                     nombre: 'Limpieza',
                     descripcion: 'Aparatos para limpieza del hogar y ropa.',
-                    cards: []
+
+                   
+
                 },
                 {
                     id: 3,
                     nombre: 'Entretenimiento',
                     descripcion: 'Dispositivos para ocio y entretenimiento.',
-                    cards: []
+
+                    cards:[
+                        // {title:"Television", description:"Descripcion de la Television", image:Tv, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
+                        // {title:"Television 2", description:"Descripcion de la Television", image:Tv,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
+                        // {title:"Television 3", description:"Descripcion de la Television", image:Tv,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
+                    ]
+
                 },
                 {
                     id: 4,
                     nombre: 'Climatización',
                     descripcion: 'Equipos para regular la temperatura y el ambiente.',
-                    cards: []
+
+                    cards:[
+                        // {title:"Aire acondicionado", description:"Descripcion del aire acondicionado", image:Aire, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
+                        // {title:"Aire acondicionado 2", description:"Descripcion del aire acondicionado", image:Aire,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
+                        // {title:"Aire acondicionado 3", description:"Descripcion del aire acondicionado", image:Aire,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
+                    ]
+
                 },
                 {
                     id: 5,
                     nombre: 'Cuidado Personal',
                     descripcion: 'Electrodomésticos para el cuidado y bienestar personal.',
-                    cards: []
+
+                    cards:[
+                    //     {title:"Plancha", description:"Descripcion de la plancha", image:Plancha, backgroundColor1:"#B31C00", backgroundColor2:"#FF2B00"},
+                    //     {title:"Plancha 2", description:"Descripcion de la plancha", image:Plancha,backgroundColor1:"#3CB300", backgroundColor2:"#46D100"},
+                    //     {title:"Plancha 3", description:"Descripcion de la plancha", image:Plancha,backgroundColor1:"#005CB3", backgroundColor2:"#0084FF"}
+                    ]
+
                 },
                 // Se pueden agregar más categorías aquí
             ],

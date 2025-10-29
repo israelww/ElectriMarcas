@@ -37,7 +37,7 @@ export default {
 
 <style scoped>
 .input-buscar {
-  width: 100%;
+  width: 780px;
   max-height: 50vh;
   padding: 0.5rem;
   font-size: 1rem;
