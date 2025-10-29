@@ -8,6 +8,9 @@
       <p class="card-description">{{ description }}</p>
     </article>
     <section class="card-actions">
+        <article class="card-boton" v-if="showConfigure">
+            <button class="btn-configurar" @click="$emit('configurar')">Configurar</button>
+        </article>
         <article class="card-boton">
             <button @click="$emit('eliminar')">{{ buttonText }}</button>
         </article>
@@ -46,6 +49,10 @@ export default {
     backgroundColor2:{
         type:String,
         default:"white"
+    },
+    showConfigure: {
+      type: Boolean,
+      default: true
     }
   }
 };
@@ -113,5 +120,8 @@ button {
 button:hover {
   background-color: #f3f1f1;
   color: red;
+}
+.btn-configurar{
+  margin-right: 8px;
 }
 </style>

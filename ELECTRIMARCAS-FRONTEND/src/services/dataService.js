@@ -63,3 +63,42 @@ export async function getDispositivosList() {
         throw new Error("No se pudo cargar la lista de dispositivos desde el servidor.");
     }
 }
+
+export async function getDispositivosByCategoria(categoriaId) {
+    try {
+        const response = await axios.get(`${API_URL}/dispositivos-lista/${categoriaId}`);
+        
+        // Devolvemos el array de objetos Card listos para ser usados
+        return response.data.data; 
+
+    } catch (error) {
+        console.error("Error al obtener la lista de dispositivos por categoría:", error);
+        throw new Error("No se pudo cargar la lista de dispositivos de la categoría desde el servidor.");
+    }
+}
+
+// Lee los dispositivos guardados en localStorage y devuelve un resumen kWh
+export function getConsumoResumen() {
+  try {
+    const saved = localStorage.getItem('categoriasCards');
+    if (!saved) return { diarioKWh: 0, semanalKWh: 0, mensualKWh: 0, anualKWh: 0 };
+    const map = JSON.parse(saved);
+    const resumen = { diarioKWh: 0, semanalKWh: 0, mensualKWh: 0, anualKWh: 0 };
+    Object.values(map || {}).forEach(arr => {
+      (arr || []).forEach(d => {
+        const cantidad = d.cantidad ?? 1;
+        const horas = d.horasUsoPorDia ?? 0;
+        const diasSemana = d.diasUsoPorSemana ?? 7;
+        const potencia = d.potencia ?? 0;
+        const diario = (potencia * horas * cantidad) / 1000;
+        resumen.diarioKWh += diario;
+        resumen.semanalKWh += diario * diasSemana;
+        resumen.mensualKWh += diario * 30;
+        resumen.anualKWh += diario * 365;
+      });
+    });
+    return resumen;
+  } catch {
+    return { diarioKWh: 0, semanalKWh: 0, mensualKWh: 0, anualKWh: 0 };
+  }
+}

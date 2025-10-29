@@ -3,7 +3,7 @@
 <template>
   <section>
     <header class="header-nuevo">
-      <h1>Agregar dispositivo</h1>
+      <h1>{{ getTituloCategoria() }}</h1>
       <router-link to="/Inicio" class="volver-inicio-btn">
         <span class="material-icons">arrow_back</span>
         Volver al inicio
@@ -47,6 +47,10 @@
       <button class="agregar-no-registrado" @click="abrirFormulario">
         Agregar dispositivo no registrado
       </button>
+      <span style="width: 1rem;"></span>
+      <button class="agregar-no-registrado" @click="guardarSeleccion" :disabled="!selectedCards.length">
+        Guardar selección ({{ selectedCards.length }})
+      </button>
     </footer>
     
     <Formulario
@@ -61,7 +65,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { getDispositivosList } from '../services/dataService'; // Función API
+import { getDispositivosList, getDispositivosByCategoria } from '../services/dataService'; // Función API
 import Buscador from "../components/Buscador.vue";
 import Card from "../components/Card.vue";
 import Formulario from "../components/formulario.vue";
@@ -79,6 +83,7 @@ const isLoading = ref(true);
 const error = ref(null);
 const showForm = ref(false);
 const DefaultIcon = '';
+const selectedCards = ref([]); // acumulador de selección múltiple
 const route = useRoute();
 const router = useRouter();
 const categoriaId = computed(() => {
@@ -86,6 +91,15 @@ const categoriaId = computed(() => {
   const n = Number(raw);
   return Number.isFinite(n) ? n : null;
 });
+
+// Mapeo de categorías del frontend a IDs de la base de datos
+const categoriaMapping = {
+  1: 'C01', // Cocina
+  2: 'C02', // Limpieza
+  3: 'C03', // Entretenimiento
+  4: 'C04', // Climatización
+  5: 'C05'  // Cuidado Personal
+};
 
 //Mapeo de iconos por electrodomestico
 const iconMap = {
@@ -103,7 +117,17 @@ const fetchDispositivos = async () => {
   isLoading.value = true;
   error.value = null;
   try {
-    const data = await getDispositivosList();
+    let data;
+    
+    // Si hay una categoría seleccionada, obtener solo dispositivos de esa categoría
+    if (categoriaId.value && categoriaMapping[categoriaId.value]) {
+      const dbCategoriaId = categoriaMapping[categoriaId.value];
+      data = await getDispositivosByCategoria(dbCategoriaId);
+    } else {
+      // Si no hay categoría, obtener todos los dispositivos
+      data = await getDispositivosList();
+    }
+    
     cardsList.value = data.map(card => {
             // Buscamos la imagen en el mapa usando el Título de la Card (nombre del electrodoméstico)
             const imagePath = iconMap[card.title] || DefaultIcon; 
@@ -147,18 +171,41 @@ const agregarDispositivo = (dispositivo) => {
   cerrarFormulario();
 };
 
-// Seleccionar un dispositivo existente para añadir a la categoría indicada
+// Seleccionar (toggle) sin navegar; se guardará con el botón Guardar selección
 const seleccionar = (card) => {
-  const catId = categoriaId.value;
-  if (!catId) {
-    // Si no viene categoría, solo volver al inicio
-    router.push('/Inicio');
-    return;
+  const idx = selectedCards.value.findIndex(c => c.title === card.title && c.description === card.description);
+  if (idx >= 0) {
+    selectedCards.value.splice(idx, 1);
+  } else {
+    selectedCards.value.push(card);
   }
+};
+
+// Persistir selección acumulada y regresar a Inicio
+const guardarSeleccion = () => {
+  const catId = categoriaId.value;
+  if (!catId || selectedCards.value.length === 0) return;
   try {
-    sessionStorage.setItem('selectedDevice', JSON.stringify({ card, categoriaId: catId }));
+    sessionStorage.setItem('selectedDevices', JSON.stringify({ cards: selectedCards.value, categoriaId: catId }));
   } catch {}
   router.push('/Inicio');
+};
+
+// Función para obtener el título de la categoría
+const getTituloCategoria = () => {
+  const nombresCategoria = {
+    1: 'Cocina',
+    2: 'Limpieza', 
+    3: 'Entretenimiento',
+    4: 'Climatización',
+    5: 'Cuidado Personal'
+  };
+  
+  const catId = categoriaId.value;
+  if (catId && nombresCategoria[catId]) {
+    return `Agregar dispositivo - ${nombresCategoria[catId]}`;
+  }
+  return 'Agregar dispositivo';
 };
 
 </script>
