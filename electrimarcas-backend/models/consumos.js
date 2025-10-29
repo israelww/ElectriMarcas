@@ -24,15 +24,19 @@ async function fetchElectrodomesticosList() {
     // Consulta simple: Obtener todos los campos necesarios para la Card.
     const query = `
         SELECT 
-            id_electrodomestico, 
-            nombre_electrodomestico, 
-            descripcion, 
-            potencia,
-            id_modelo
+            e.id_electrodomestico, 
+            e.nombre_electrodomestico, 
+            e.descripcion, 
+            e.potencia,
+            e.id_modelo,
+            c.id_categoria,
+            c.nombre_categoria
         FROM 
-            electrodomestico 
+            electrodomestico e
+        INNER JOIN 
+            categoria c ON e.id_categoria = c.id_categoria
         ORDER BY 
-            nombre_electrodomestico;
+            e.nombre_electrodomestico;
     `;
     try {
         const result = await pool.query(query);
@@ -44,4 +48,39 @@ async function fetchElectrodomesticosList() {
     }
 }
 
-module.exports = { fetchConsumoData, fetchElectrodomesticosList };
+/**
+ * Obtiene la lista de electrodomésticos filtrada por categoría.
+ * @param {string} categoriaId - ID de la categoría a filtrar
+ * @returns {Promise<Array>} Array de electrodomésticos de la categoría especificada.
+ */
+async function fetchElectrodomesticosByCategoria(categoriaId) {
+    const query = `
+        SELECT 
+            e.id_electrodomestico, 
+            e.nombre_electrodomestico, 
+            e.descripcion, 
+            e.potencia,
+            e.id_modelo,
+            c.id_categoria,
+            c.nombre_categoria
+        FROM 
+            electrodomestico e
+        INNER JOIN 
+            categoria c ON e.id_categoria = c.id_categoria
+        WHERE 
+            c.id_categoria = @categoriaId
+        ORDER BY 
+            e.nombre_electrodomestico;
+    `;
+    try {
+        const request = pool.request();
+        request.input('categoriaId', categoriaId);
+        const result = await request.query(query);
+        return result.recordset || result.rows || []; 
+    } catch (error) {
+        console.error("❌ Error en la consulta fetchElectrodomesticosByCategoria:", error);
+        throw error;
+    }
+}
+
+module.exports = { fetchConsumoData, fetchElectrodomesticosList, fetchElectrodomesticosByCategoria };

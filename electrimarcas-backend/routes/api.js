@@ -58,6 +58,32 @@ router.get('/dispositivos-lista', async (req, res) => {
     }
 });
 
+// ENDPOINT para obtener dispositivos por categoría
+router.get('/dispositivos-lista/:categoriaId', async (req, res) => {
+    try {
+        const { categoriaId } = req.params;
+        
+        // 1. Obtención de datos brutos de la DB filtrados por categoría
+        const dispositivosRaw = await db.fetchElectrodomesticosByCategoria(categoriaId); 
+
+        // 2. Formateo de los datos para la Card
+        const cardList = formatDataForCardList(dispositivosRaw);
+
+        // 3. Respuesta de éxito (Status 200 OK)
+        res.status(200).json({
+            success: true,
+            data: cardList // Array de Cards listos para Vue
+        });
+
+    } catch (error) {
+        console.error('❌ Error en la ruta /dispositivos-lista/:categoriaId:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Error al obtener la lista de dispositivos por categoría.' 
+        });
+    }
+});
+
 // ===========================================
 // RUTAS DE AUTENTICACIÓN
 // ===========================================
@@ -278,6 +304,32 @@ router.get('/dispositivos-lista', authenticateToken, async (req, res) => {
         res.status(500).json({ 
             success: false, 
             message: 'Error al obtener la lista de dispositivos.' 
+        });
+    }
+});
+
+// ENDPOINT para obtener dispositivos por categoría (protegido)
+router.get('/dispositivos-lista/:categoriaId', authenticateToken, async (req, res) => {
+    try {
+        const { categoriaId } = req.params;
+        
+        // 1. Obtención de datos brutos de la DB filtrados por categoría
+        const dispositivosRaw = await db.fetchElectrodomesticosByCategoria(categoriaId); 
+
+        // 2. Formateo de los datos para la Card
+        const cardList = formatDataForCardList(dispositivosRaw);
+
+        // 3. Respuesta de éxito (Status 200 OK)
+        res.status(200).json({
+            success: true,
+            data: cardList // Array de Cards listos para Vue
+        });
+
+    } catch (error) {
+        console.error('❌ Error en la ruta /dispositivos-lista/:categoriaId:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Error al obtener la lista de dispositivos por categoría.' 
         });
     }
 });
