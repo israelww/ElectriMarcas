@@ -75,12 +75,17 @@ export default {
                 if (categoria && cards && Array.isArray(cards)) {
                     // Agregar todos los dispositivos seleccionados
                     cards.forEach(card => {
+                        const potenciaFromDesc = this.extractPotenciaFromText(card?.description);
+                        const potenciaValue = typeof card?.potencia === 'number' ? card.potencia : (potenciaFromDesc ?? 0);
+                        const fromDb = potenciaValue > 0; // si detectamos potencia desde catálogo/desc, se bloquea edición
                         categoria.cards.push({
                             title: card.title,
                             description: card.description,
                             image: card.image || '',
                             backgroundColor1: card.backgroundColor1 || '#B31C00',
                             backgroundColor2: card.backgroundColor2 || '#FF2B00',
+                            potencia: potenciaValue,
+                            potenciaFromDb: fromDb,
                             buttonText: "Eliminar"
                         });
                     });
@@ -121,6 +126,8 @@ export default {
                     backgroundColor2: '#FF2B00',
                     voltaje: dispositivo.voltaje,
                     potencia: dispositivo.potencia,
+                    potenciaFromDb: false, // no registrado: editable en el modal
+                    buttonText: 'Eliminar'
                 });
                 this.saveCategoriasToStorage();
             }
@@ -155,7 +162,7 @@ export default {
                 cantidad: payload.cantidad,
                 horasUsoPorDia: payload.horasUsoPorDia,
                 diasUsoPorSemana: payload.diasUsoPorSemana,
-                potencia: payload.potencia
+                potencia: typeof current.potencia === 'number' && current.potenciaFromDb ? current.potencia : payload.potencia,
             });
             this.saveCategoriasToStorage();
             this.closeConfig();
@@ -174,7 +181,8 @@ export default {
                         cantidad: d.cantidad,
                         horasUsoPorDia: d.horasUsoPorDia,
                         diasUsoPorSemana: d.diasUsoPorSemana,
-                        potencia: d.potencia
+                        potencia: d.potencia,
+                        potenciaFromDb: d.potenciaFromDb === true
                     }));
                 });
                 localStorage.setItem('categoriasCards', JSON.stringify(map));
@@ -200,6 +208,7 @@ export default {
                             horasUsoPorDia: d.horasUsoPorDia,
                             diasUsoPorSemana: d.diasUsoPorSemana,
                             potencia: d.potencia,
+                            potenciaFromDb: d.potenciaFromDb === true,
                             buttonText: 'Eliminar'
                         }));
                     }
@@ -208,10 +217,11 @@ export default {
                 console.error('No se pudo cargar categoriasCards:', e);
             }
         },
-        // Método para ir a inicio de sesión
-        irAInicioSesion() {
-            this.$router.push('/Inicio-Sesion');
-        },
+        extractPotenciaFromText(text) {
+            if (!text || typeof text !== 'string') return null;
+            const m = text.match(/(\d+)\s*W/i) || text.match(/Potencia:\s*(\d+)/i);
+            return m ? parseInt(m[1]) : null;
+        }
     },
 };
 </script>
