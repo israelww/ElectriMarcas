@@ -79,9 +79,9 @@ export default {
                             title: card.title,
                             description: card.description,
                             image: card.image || '',
-                            backgroundColor1: card.backgroundColor1 || '#B31C00',
-                            backgroundColor2: card.backgroundColor2 || '#FF2B00',
-                            buttonText: "Eliminar"
+                            backgroundColor1: card.backgroundColor1 || 'white',
+                            buttonText: "Eliminar",
+                            
                         });
                     });
                     this.saveCategoriasToStorage();
@@ -117,8 +117,7 @@ export default {
                     title: dispositivo.nombre,
                     description: dispositivo.descripcion,
                     image: '', // Puedes pedir imagen en el formulario si lo deseas
-                    backgroundColor1: '#B31C00',
-                    backgroundColor2: '#FF2B00',
+                    backgroundColor1: 'white',
                     voltaje: dispositivo.voltaje,
                     potencia: dispositivo.potencia,
                 });
@@ -170,7 +169,6 @@ export default {
                         description: d.description,
                         image: d.image,
                         backgroundColor1: d.backgroundColor1,
-                        backgroundColor2: d.backgroundColor2,
                         cantidad: d.cantidad,
                         horasUsoPorDia: d.horasUsoPorDia,
                         diasUsoPorSemana: d.diasUsoPorSemana,
@@ -194,8 +192,7 @@ export default {
                             title: d.title,
                             description: d.description,
                             image: d.image || '',
-                            backgroundColor1: d.backgroundColor1 || '#B31C00',
-                            backgroundColor2: d.backgroundColor2 || '#FF2B00',
+                            backgroundColor1: d.backgroundColor1 || 'white',
                             cantidad: d.cantidad,
                             horasUsoPorDia: d.horasUsoPorDia,
                             diasUsoPorSemana: d.diasUsoPorSemana,
@@ -247,8 +244,8 @@ export default {
                     :buttonText="card.buttonText"
                     :image="card.image"
                     :backgroundColor1="card.backgroundColor1"
-                    :backgroundColor2="card.backgroundColor2"
                     :showConfigure="true"
+                    :showDelete="true"
                     @configurar="openConfig(categoria.id, idx)"
                     @eliminar="removeCard(categoria.id,idx)"
                 />

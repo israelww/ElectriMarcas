@@ -1,5 +1,5 @@
 <template>
-  <section class="card" :style="{background: `linear-gradient(to right, ${backgroundColor1}, ${backgroundColor2} )` }">
+  <section class="card" :style="{background: $backgroundColor1  }">
     <article class="card-imagen">
         <img v-if="image" :src="image" alt="Card Image" class="card-image" />
     </article>
@@ -11,8 +11,11 @@
         <article class="card-boton" v-if="showConfigure">
             <button class="btn-configurar" @click="$emit('configurar')">Configurar</button>
         </article>
-        <article class="card-boton">
-            <button @click="$emit('eliminar')">{{ buttonText }}</button>
+        <article class="boton" v-if="showDelete">
+            <button class="boton-eliminar"@click="$emit('eliminar')">{{ buttonText }}</button>
+        </article>
+        <article class="card-boton" v-if="showAdd">
+            <button class="btn-agregar" @click="$emit('agregar')">{{ buttonText }}</button>
         </article>
     </section>
   </section>
@@ -44,15 +47,19 @@ export default {
     },
     backgroundColor1:{
         type:String,
-        default:"black"
-    },
-    backgroundColor2:{
-        type:String,
         default:"white"
     },
     showConfigure: {
       type: Boolean,
-      default: true
+      default: false
+    },
+    showAdd: {
+      type: Boolean,
+      default: false
+    },
+    showDelete: {
+      type: Boolean,
+      default: false
     }
   }
 };
@@ -67,6 +74,7 @@ export default {
   transition: transform 0.2s;
   display: flex;
   max-width: 700px;
+  border-left: 4px solid #4ec145;
 }
 
 .card-imagen{
@@ -78,10 +86,8 @@ export default {
 }
 
 .card-content{
-    
-    width: 81%;
+    width: 70%;
     margin-left: 1em;
-
 }   
 
 .card:hover {
@@ -96,30 +102,39 @@ export default {
   font-size: 1.2rem;
   margin-top: 20px;
   margin-bottom: 2px;
-  color: white;
+  color: #2c3e50;
 }
 .card-description {
   font-size: 0.9rem;
-  color: white;
+  color: #2c3e50;
+  width: 90%;
 
 }
 .card-actions {
   margin-top: 15px;
   text-align: right;
 }
-button {
+  button {
   padding: 6px 12px;
-  margin-top: 10%;
+  margin-top: 25%;
   border: none;
-  background-color: white;
-  color: black;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
 }
 button:hover {
-  background-color: #f3f1f1;
-  color: red;
+  background: linear-gradient(135deg, #126831, #16a34a);
+  
 }
-.btn-configurar{
+
+.boton-eliminar{
+  background: red;
 }
+
+.boton-eliminar:hover{
+  background: rgb(154, 3, 3);
+}
+
 </style>

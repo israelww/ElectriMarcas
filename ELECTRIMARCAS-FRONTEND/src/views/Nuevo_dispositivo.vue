@@ -34,9 +34,9 @@
               :image="card.image"
               :background-color1="card.backgroundColor1"
               :background-color2="card.backgroundColor2"
-              :show-configure="false"
+              :showAdd="true"
               buttonText="Agregar"
-              @eliminar="seleccionar(card)"
+              @agregar="seleccionar(card)"
             />
           </article>
         </div>
