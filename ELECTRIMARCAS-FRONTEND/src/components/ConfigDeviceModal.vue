@@ -18,8 +18,8 @@
         </article>
         <article class="form-group">
           <label>Potencia (W)</label>
-          <input v-model.number="local.potencia" type="number" min="0" :disabled="potenciaDetectada" />
-          <small v-if="potenciaDetectada">Detectada desde la base de datos</small>
+          <input v-model.number="local.potencia" type="number" min="0" disabled readonly />
+          <small>Valor de potencia establecido por catálogo</small>
         </article>
         <article class="grid">
           <div class="form-group">
@@ -56,23 +56,20 @@ const emit = defineEmits(['close','save'])
 
 const local = reactive({ cantidad: 1, horasUsoPorDia: 1, diasUsoPorSemana: 7, potencia: 0 })
 
-const potenciaDetectada = computed(() => typeof local.potencia === 'number' && local.potencia > 0 && props.device?.potenciaFromDb === true)
-
 watch(() => props.device, (d) => {
   if (!d) return;
   // Inicializar con valores existentes
   local.cantidad = d.cantidad ?? 1
   local.horasUsoPorDia = d.horasUsoPorDia ?? 1
   local.diasUsoPorSemana = d.diasUsoPorSemana ?? 7
-  // Intentar detectar potencia del texto si no viene en el objeto
+
+  // Determinar potencia según el dispositivo (catálogo o descripción)
   let pot = d.potencia
-  let fromDb = false
-  if (!pot && typeof d.description === 'string') {
-    const m = d.description.match(/Potencia:\s*(\d+)W/i)
-    if (m) { pot = Number(m[1]); fromDb = true }
+  if ((!pot || typeof pot !== 'number') && typeof d.description === 'string') {
+    const m = d.description.match(/Potencia:\s*(\d+)W/i) || d.description.match(/(\d+)\s*W/i)
+    if (m) { pot = Number(m[1]); }
   }
   local.potencia = typeof pot === 'number' ? pot : 0
-  d.potenciaFromDb = fromDb
 }, { immediate: true })
 
 function onSubmit(){
@@ -100,5 +97,6 @@ function onSubmit(){
 .submit-btn { background: var(--primary, #4ec145); color: #fff; border: none; border-radius: 8px; padding: 0.6rem 1.2rem; cursor: pointer; }
 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
 </style>
+
 
 
