@@ -7,8 +7,7 @@
         <h1>Consejos de ahorro</h1>
         <p> Estos consejos te ayudarán a reducir el consumo de energía en tu hogar, 
             ahorrar dinero en tus recibos de luz y contribuir al cuidado del medio ambiente.</p>
-        <nav class="consejos-info">Estos consejos se irán modificando dependiendo en el consumo que realices con los electrodomésticos usados.</nav>
-        
+                    
         <!-- Sección de dispositivos que más consumen -->
         <section v-if="dispositivosAltoConsumo.length > 0" class="alto-consumo-section">
             <h2 class="section-title">💡 Dispositivos que más consumen energía</h2>

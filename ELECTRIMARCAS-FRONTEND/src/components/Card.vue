@@ -46,8 +46,8 @@ export default {
       default: null
     },
     backgroundColor1:{
-        type:String,
-        default:"white"
+      type:String,
+      default:"white"
     },
     showConfigure: {
       type: Boolean,
@@ -78,16 +78,16 @@ export default {
 }
 
 .card-imagen{
-    flex: 0 0 80px;
-    max-width: 200px;
-    padding: 10px;
-    background-color: white;
-    border-radius: 10px;
+  flex: 0 0 80px;
+  max-width: 200px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
 }
 
 .card-content{
-    width: 70%;
-    margin-left: 1em;
+  width: 70%;
+  margin-left: 1em;
 }   
 
 .card:hover {
@@ -114,7 +114,7 @@ export default {
   margin-top: 15px;
   text-align: right;
 }
-  button {
+button {
   padding: 6px 12px;
   margin-top: 25%;
   border: none;

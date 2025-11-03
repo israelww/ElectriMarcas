@@ -79,23 +79,68 @@ function onSubmit(){
 
 <style scoped>
 .form-modal-overlay {
-    position: fixed; 
-    inset: 0; 
-    background: rgba(0,0,0,0.4); 
-    z-index: 2000; 
-    display: flex;
-    align-items: center; 
-    justify-content: center; 
+  position: fixed; 
+  inset: 0; 
+  background: rgba(0,0,0,0.4); 
+  z-index: 2000; 
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
 }
-.form-modal { background: #fff; border-radius: 1rem; box-shadow: 0 4px 24px rgba(0,0,0,0.18); width: 100%; max-width: 800px; padding: 1.5rem; }
-.form-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-.close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #666; }
-.form-body { display: flex; flex-direction: column; gap: 0.8rem; }
-.form-group { display: flex; flex-direction: column; gap: 0.3rem; }
-.form-group input, .form-group textarea { border: 1px solid #ccc; border-radius: 8px; padding: 0.5rem; font-size: 1rem; }
-.form-footer { display:flex; justify-content: flex-end; margin-top: 0.5rem; }
-.submit-btn { background: var(--primary, #4ec145); color: #fff; border: none; border-radius: 8px; padding: 0.6rem 1.2rem; cursor: pointer; }
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+.form-modal { 
+  background: #fff; 
+  border-radius: 1rem; 
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  width: 100%;
+  max-width: 800px;
+  padding: 1.5rem;
+}
+.form-header { 
+  display: flex; 
+  justify-content: space-between;
+  align-items: center; 
+  margin-bottom: 1rem; 
+}
+.close-btn {
+  background: none;
+  border: none; 
+  font-size: 1.5rem; 
+  cursor: pointer; 
+  color: #666; 
+}
+.form-body { 
+  display: flex; 
+  flex-direction: column;
+  gap: 0.8rem; 
+}
+.form-group {
+  display: flex;
+  flex-direction: column; 
+  gap: 0.3rem; 
+}
+.form-group input, .form-group textarea { 
+  border: 1px solid #ccc;
+  border-radius: 8px; 
+  padding: 0.5rem; 
+  font-size: 1rem; 
+}
+.form-footer {
+  display:flex; 
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+.submit-btn { 
+  background: var(--primary, #4ec145);
+  color: #fff; border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer; 
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 0.8rem; 
+}
 </style>
 
 

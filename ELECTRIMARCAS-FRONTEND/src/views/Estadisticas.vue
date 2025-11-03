@@ -20,9 +20,6 @@
             </div>
         </article>
 
-        
-        <!-- Descripción de la página -->
-        <p>Esta es la pantalla de estadísticas</p>
     </section>
 </template>
 
