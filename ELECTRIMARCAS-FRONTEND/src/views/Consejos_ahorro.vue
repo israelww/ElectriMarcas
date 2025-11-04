@@ -530,10 +530,10 @@ export default {
 
 .alto-consumo-section {
     margin-bottom: 3rem;
-    margin-top: 30px;
+    margin-top: 30px; 
     /* background: #f8f9fa; */
     border-radius: 1rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); */
 }
 
 .dispositivos-consumo-lista {
