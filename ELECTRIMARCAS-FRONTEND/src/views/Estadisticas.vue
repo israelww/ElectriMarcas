@@ -1,6 +1,6 @@
 <template>
     <section class="estadisticas">
-        <h1>📊 Estadísticas de Consumo Energético</h1>
+        <h1>Estadísticas de Consumo Energético</h1>
         <p class="descripcion">Visualiza el consumo de tus 5 dispositivos que más energía consumen</p>
         
         <article class="grafica-container">
@@ -96,78 +96,96 @@
     onMounted(fetchData);
     
     // Opciones de la gráfica
-    const chartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                display: true,
-                position: 'top',
-                labels: {
-                    font: {
-                        size: 12
-                    },
-                    padding: 15
-                }
-            },
-            title: {
-                display: true,
-                text: 'Top 5 Dispositivos con Mayor Consumo Eléctrico',
-                font: {
-                    size: 18,
-                    weight: 'bold'
-                },
-                padding: {
-                    top: 10,
-                    bottom: 20
-                }
-            },
-            tooltip: {
-                callbacks: {
-                    label: function(context) {
-                        let label = context.dataset.label || '';
-                        if (label) {
-                            label += ': ';
-                        }
-                        label += context.parsed.y.toFixed(2) + ' kWh';
-                        return label;
-                    }
-                }
-            }
+   const chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: true,
+      position: 'top',
+      labels: {
+        color: '#000000', // ← color de texto en la leyenda
+        font: {
+          size: 12
         },
-        scales: {
-            y: {
-                beginAtZero: true,
-                title: {
-                    display: true,
-                    text: 'Consumo Energético (kWh)',
-                    font: {
-                        size: 14,
-                        weight: 'bold'
-                    }
-                },
-                ticks: {
-                    callback: function(value) {
-                        return value.toFixed(1) + ' kWh';
-                    }
-                }
-            },
-            x: {
-                title: {
-                    display: true,
-                    text: 'Dispositivos',
-                    font: {
-                        size: 14,
-                        weight: 'bold'
-                    }
-                },
-                ticks: {
-                    maxRotation: 45,
-                    minRotation: 45
-                }
-            }
+        padding: 15
+      }
+    },
+    title: {
+      display: true,
+      text: 'Top 5 Dispositivos con Mayor Consumo Eléctrico',
+      color: '#0f172a', // ← color del título general
+      font: {
+        size: 18,
+        weight: 'bold'
+      },
+      padding: {
+        top: 10,
+        bottom: 20
+      }
+    },
+    tooltip: {
+      callbacks: {
+        label: function(context) {
+          let label = context.dataset.label || '';
+          if (label) label += ': ';
+          label += context.parsed.y.toFixed(2) + ' kWh';
+          return label;
         }
-    };
+      }
+    }
+  },
+  scales: {
+    y: {
+      beginAtZero: true,
+      title: {
+        display: true,
+        text: 'Consumo Energético (kWh)',
+        color: '#1e293b', // ← color del título del eje Y
+        font: {
+          size: 14,
+          weight: 'bold'
+        },
+        padding: {
+        bottom: 25   // separa el título de los números (aumenta o reduce este valor)
+        }
+      },
+      ticks: {
+        color: '#1e293b', // ← color de los números del eje Y
+        callback: function(value) {
+          return value.toFixed(1) + ' kWh';
+        }
+      },
+      grid: {
+        color: 'rgba(0,0,0,0.1)'
+      }
+    },
+    x: {
+      title: {
+        display: true,
+        text: 'Dispositivos',
+        color: '#1e293b', // ← color del título del eje X
+        font: {
+          size: 14,
+          weight: 'bold'
+        }
+      },
+      ticks: {
+        color: '#1e293b', // 🎯 ← AQUÍ se cambia el color de los nombres de los electrodomésticos
+        maxRotation: 45,
+        minRotation: 45,
+        font: {
+          size: 13,
+        //   weight: '600'
+        }
+      },
+      grid: {
+        color: 'rgba(0,0,0,0.05)'
+      }
+    }
+  }
+};
+
 </script>
 
 <style scoped>
