@@ -102,3 +102,87 @@ export function getConsumoResumen() {
     return { diarioKWh: 0, semanalKWh: 0, mensualKWh: 0, anualKWh: 0 };
   }
 }
+
+/**
+ * Extrae el valor de potencia de la descripción del dispositivo
+ */
+function extraerPotencia(description) {
+  if (!description || typeof description !== 'string') return null;
+  const match = description.match(/(\d+)\s*W/i) || description.match(/Potencia:\s*(\d+)/i);
+  return match ? parseInt(match[1]) : null;
+}
+
+/**
+ * Obtiene los 5 dispositivos con mayor consumo eléctrico
+ * Retorna array con datos calculados de consumo
+ */
+export function getTop5DispositivosConsumo() {
+  try {
+    // Intentar obtener desde localStorage
+    const saved = localStorage.getItem('categoriasCards');
+    if (!saved) {
+      // También intentar desde sessionStorage
+      const sessionData = sessionStorage.getItem('selectedDevices');
+      if (sessionData) {
+        const { cards } = JSON.parse(sessionData);
+        return procesarDispositivosParaTop5(cards);
+      }
+      return [];
+    }
+    
+    const map = JSON.parse(saved);
+    const allDevices = [];
+    
+    // Recolectar todos los dispositivos de todas las categorías
+    Object.values(map || {}).forEach(arr => {
+      if (Array.isArray(arr)) {
+        arr.forEach(d => {
+          if (d && d.title) {
+            allDevices.push(d);
+          }
+        });
+      }
+    });
+    
+    return procesarDispositivosParaTop5(allDevices);
+  } catch (error) {
+    console.error('Error al obtener top 5 dispositivos:', error);
+    return [];
+  }
+}
+
+/**
+ * Procesa dispositivos y retorna los top 5 por consumo
+ */
+function procesarDispositivosParaTop5(devices) {
+  if (!Array.isArray(devices) || devices.length === 0) return [];
+  
+  const dispositivosConConsumo = devices
+    .map(device => {
+      const cantidad = device.cantidad ?? 1;
+      const horas = device.horasUsoPorDia ?? 1;
+      const diasSemana = device.diasUsoPorSemana ?? 7;
+      const potencia = device.potencia ?? extraerPotencia(device.description) ?? 0;
+      
+      // Calcular consumos en kWh
+      const consumoDiario = (potencia * horas * cantidad) / 1000;
+      const consumoSemanal = consumoDiario * 7;
+      const consumoMensual = consumoDiario * 30;
+      
+      return {
+        nombre: device.title,
+        potencia,
+        horasUsoPorDia: horas,
+        diasUsoPorSemana: diasSemana,
+        cantidad,
+        consumoDiario: parseFloat(consumoDiario.toFixed(2)),
+        consumoSemanal: parseFloat(consumoSemanal.toFixed(2)),
+        consumoMensual: parseFloat(consumoMensual.toFixed(2))
+      };
+    })
+    .filter(d => d.consumoDiario > 0) // Solo dispositivos con consumo
+    .sort((a, b) => b.consumoDiario - a.consumoDiario) // Ordenar por consumo descendente
+    .slice(0, 5); // Top 5
+  
+  return dispositivosConConsumo;
+}
