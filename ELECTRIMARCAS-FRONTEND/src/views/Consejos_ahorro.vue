@@ -60,11 +60,56 @@
 </template>
 
 <script>
-//
-// Componente de vista de consejos de ahorro energético.
-// Los consejos están definidos de forma fija.
-// En el futuro podrían cargarse dinámicamente desde la base de datos.
-//
+/**
+ * ============================================================================
+ * COMPONENTE: Consejos_ahorro.vue
+ * ============================================================================
+ * 
+ * DESCRIPCIÓN:
+ * Este componente muestra consejos personalizados de ahorro energético basados
+ * en los dispositivos que el usuario tiene configurados. Analiza el consumo
+ * de cada dispositivo y genera recomendaciones específicas según:
+ * - Tipo de dispositivo (refrigerador, aire acondicionado, lavadora, etc.)
+ * - Nivel de consumo diario (muy alto, alto, medio, bajo)
+ * - Horas de uso diarias
+ * 
+ * FUNCIONALIDAD PRINCIPAL:
+ * 1. Carga los dispositivos desde localStorage (donde se guardan al configurarlos)
+ * 2. Calcula el consumo diario y mensual de cada dispositivo
+ * 3. Identifica los 5 dispositivos que más consumen energía
+ * 4. Genera consejos personalizados según el tipo y consumo de cada uno
+ * 5. Muestra los dispositivos ordenados por consumo con badges de color
+ * 
+ * FLUJO DE DATOS:
+ * localStorage.getItem('categoriasCards') → procesarDispositivos() → 
+ * calcularConsumo() → generarConsejo() → mostrar en UI
+ * 
+ * ESTRUCTURA DE DATOS ESPERADA (localStorage):
+ * {
+ *   "1": [{ // ID de categoría
+ *     title: "Refrigerador",
+ *     description: "Modelo: MD001 | Potencia: 120W",
+ *     potencia: 120,
+ *     cantidad: 1,
+ *     horasUsoPorDia: 24,
+ *     diasUsoPorSemana: 7
+ *   }],
+ *   "2": [...]
+ * }
+ * 
+ * FÓRMULA DE CÁLCULO:
+ * consumoDiario (kWh) = (potencia * horasUsoPorDia * cantidad) / 1000
+ * consumoMensual (kWh) = consumoDiario * 30
+ * 
+ * NIVELES DE CONSUMO:
+ * - muy-alto: > 10 kWh/día (rojo)
+ * - alto: > 5 kWh/día (naranja)
+ * - medio: > 2 kWh/día (azul)
+ * - bajo: ≤ 2 kWh/día (verde)
+ * 
+ * @author Equipo ElectriMarcas
+ * @version 1.0
+ */
 import Card from '../components/Card.vue';
 import { getConsumoResumen } from '../services/dataService.js';
    
@@ -73,6 +118,18 @@ export default {
   components: { Card },
   data() {
     return {
+      /**
+       * Array de consejos generales de ahorro energético.
+       * Actualmente están definidos de forma estática, pero en el futuro
+       * podrían cargarse dinámicamente desde la base de datos.
+       * 
+       * @type {Array<Object>}
+       * @property {number} id - Identificador único del consejo
+       * @property {string} titulo - Título del consejo
+       * @property {string} descripcion - Descripción detallada del consejo
+       * @property {string} color1 - Color de gradiente inicial (hex)
+       * @property {string} color2 - Color de gradiente final (hex)
+       */
       consejos: [
         {
           id: 1,
@@ -97,10 +154,36 @@ export default {
           color2: '#22c55e',
         },
       ],
+      /**
+       * Array que almacena los dispositivos con mayor consumo energético.
+       * Se calcula automáticamente al montar el componente y contiene
+       * los top 5 dispositivos ordenados por consumo diario descendente.
+       * 
+       * Estructura de cada elemento:
+       * {
+       *   title: string,              // Nombre del dispositivo
+       *   potencia: number,            // Potencia en watts
+       *   horasUsoPorDia: number,      // Horas de uso diario
+       *   diasUsoPorSemana: number,    // Días de uso por semana
+       *   cantidad: number,            // Cantidad de dispositivos
+       *   consumoDiario: number,       // Consumo diario en kWh
+       *   consumoMensual: number,      // Consumo mensual en kWh
+       *   nivelConsumo: string,        // 'muy-alto' | 'alto' | 'medio' | 'bajo'
+       *   consejo: string              // Consejo personalizado generado
+       * }
+       * 
+       * @type {Array<Object>}
+       */
       dispositivosAltoConsumo: []
     };
   },
   computed: {
+    /**
+     * Computed property que transforma los consejos estáticos
+     * en el formato esperado por el componente Card.
+     * 
+     * @returns {Array<Object>} Array de consejos formateados para Card
+     */
     consejosCards() {
       return this.consejos.map(c => ({
         id: c.id,
@@ -111,13 +194,40 @@ export default {
       }));
     },
   },
+  /**
+   * Hook del ciclo de vida: Se ejecuta cuando el componente se monta.
+   * Carga los dispositivos de alto consumo desde el almacenamiento local.
+   */
   mounted() {
     this.cargarDispositivosAltoConsumo();
   },
   methods: {
+    /**
+     * Método auxiliar para ver detalles de un consejo (actualmente no implementado).
+     * @param {Object} c - Objeto del consejo
+     */
     verDetalle(c) {
       console.log('Tip seleccionado:', c.title);
     },
+    
+    /**
+     * ========================================================================
+     * MÉTODO PRINCIPAL: cargarDispositivosAltoConsumo()
+     * ========================================================================
+     * 
+     * Carga los dispositivos configurados por el usuario desde el almacenamiento
+     * local del navegador. Busca en dos ubicaciones:
+     * 1. localStorage.getItem('categoriasCards') - Dispositivos guardados permanentemente
+     * 2. sessionStorage.getItem('selectedDevices') - Dispositivos agregados recientemente
+     * 
+     * PROCESO:
+     * 1. Intenta leer desde localStorage (datos persistidos)
+     * 2. Si no hay datos en localStorage, intenta sessionStorage
+     * 3. Recolecta todos los dispositivos de todas las categorías
+     * 4. Procesa los dispositivos para calcular consumos y generar consejos
+     * 
+     * @throws {Error} Si hay un error al parsear JSON o acceder al almacenamiento
+     */
     cargarDispositivosAltoConsumo() {
       try {
         // Intentar obtener desde localStorage (datos guardados con ConfigDeviceModal)
@@ -151,6 +261,37 @@ export default {
         console.error('Error al cargar dispositivos de alto consumo:', error);
       }
     },
+    
+    /**
+     * ========================================================================
+     * MÉTODO: procesarDispositivos(devices)
+     * ========================================================================
+     * 
+     * Procesa un array de dispositivos para calcular su consumo energético
+     * y generar consejos personalizados. Solo incluye dispositivos con consumo > 0.
+     * 
+     * PROCESO:
+     * 1. Para cada dispositivo, calcula consumo diario y mensual
+     * 2. Determina el nivel de consumo (muy-alto, alto, medio, bajo)
+     * 3. Genera un consejo personalizado según tipo y consumo
+     * 4. Filtra dispositivos sin consumo (potencia = 0 o sin datos)
+     * 5. Ordena por consumo diario descendente
+     * 6. Selecciona solo los top 5 dispositivos
+     * 
+     * FÓRMULAS:
+     * - consumoDiario (kWh) = (potencia × horasUsoPorDia × cantidad) / 1000
+     * - consumoMensual (kWh) = consumoDiario × 30
+     * 
+     * @param {Array<Object>} devices - Array de dispositivos a procesar
+     * @param {string} devices[].title - Nombre del dispositivo
+     * @param {number} [devices[].potencia] - Potencia en watts (se extrae de description si no existe)
+     * @param {number} [devices[].cantidad=1] - Cantidad de dispositivos
+     * @param {number} [devices[].horasUsoPorDia=1] - Horas de uso diario
+     * @param {number} [devices[].diasUsoPorSemana=7] - Días de uso por semana
+     * @param {string} [devices[].description] - Descripción que puede contener la potencia
+     * 
+     * @returns {void} Actualiza this.dispositivosAltoConsumo con los top 5 dispositivos
+     */
     procesarDispositivos(devices) {
       if (!Array.isArray(devices) || devices.length === 0) return;
       
@@ -182,21 +323,105 @@ export default {
       
       this.dispositivosAltoConsumo = dispositivosConConsumo;
     },
+    
+    /**
+     * ========================================================================
+     * MÉTODO: extraerPotencia(description)
+     * ========================================================================
+     * 
+     * Extrae el valor de potencia (en watts) de la descripción del dispositivo
+     * usando expresiones regulares. Busca patrones como:
+     * - "Potencia: 120W"
+     * - "120W"
+     * 
+     * @param {string|null} description - Descripción del dispositivo que puede contener la potencia
+     * @returns {number|null} Potencia en watts o null si no se encuentra
+     * 
+     * @example
+     * extraerPotencia("Modelo: MD001 | Potencia: 120W") // returns 120
+     * extraerPotencia("Aspiradora 850W de potencia")    // returns 850
+     * extraerPotencia("Sin información")                 // returns null
+     */
     extraerPotencia(description) {
       if (!description || typeof description !== 'string') return null;
       const match = description.match(/(\d+)\s*W/i) || description.match(/Potencia:\s*(\d+)/i);
       return match ? parseInt(match[1]) : null;
     },
+    
+    /**
+     * ========================================================================
+     * MÉTODO: obtenerNivelConsumo(consumoDiario)
+     * ========================================================================
+     * 
+     * Determina el nivel de consumo energético de un dispositivo basado
+     * en su consumo diario en kWh. Se usa para asignar colores y estilos
+     * visuales a las tarjetas de dispositivos.
+     * 
+     * RANGOS:
+     * - muy-alto: > 10 kWh/día (rojo - #ef4444)
+     * - alto: > 5 kWh/día (naranja - #f59e0b)
+     * - medio: > 2 kWh/día (azul - #3b82f6)
+     * - bajo: ≤ 2 kWh/día (verde - #22c55e)
+     * 
+     * @param {number} consumoDiario - Consumo diario en kWh
+     * @returns {string} Nivel de consumo: 'muy-alto' | 'alto' | 'medio' | 'bajo'
+     * 
+     * @example
+     * obtenerNivelConsumo(12.5)  // returns 'muy-alto'
+     * obtenerNivelConsumo(7)     // returns 'alto'
+     * obtenerNivelConsumo(3)     // returns 'medio'
+     * obtenerNivelConsumo(1.5)   // returns 'bajo'
+     */
     obtenerNivelConsumo(consumoDiario) {
       if (consumoDiario > 10) return 'muy-alto';
       if (consumoDiario > 5) return 'alto';
       if (consumoDiario > 2) return 'medio';
       return 'bajo';
     },
+    
+    /**
+     * ========================================================================
+     * MÉTODO: generarConsejo(nombre, consumoDiario, potencia, horas)
+     * ========================================================================
+     * 
+     * Genera un consejo personalizado de ahorro energético basado en:
+     * - Tipo de dispositivo (refrigerador, aire acondicionado, etc.)
+     * - Nivel de consumo diario
+     * - Horas de uso diarias
+     * 
+     * ESTRATEGIA:
+     * 1. Primero busca consejos específicos por tipo de dispositivo
+     * 2. Si el consumo es muy alto, da consejos más urgentes
+     * 3. Si no hay consejo específico, da consejos generales según consumo
+     * 
+     * DISPOSITIVOS CON CONSEJOS ESPECÍFICOS:
+     * - Refrigerador/Refrigeradora
+     * - Aire acondicionado/Climatización
+     * - Lavadora
+     * - Televisor/TV
+     * - Plancha
+     * 
+     * @param {string} nombre - Nombre del dispositivo
+     * @param {number} consumoDiario - Consumo diario en kWh
+     * @param {number} potencia - Potencia en watts
+     * @param {number} horas - Horas de uso diario
+     * @returns {string} Consejo personalizado de ahorro energético
+     * 
+     * @example
+     * generarConsejo("Refrigerador", 8.5, 120, 24)
+     * // "Considera revisar el sello de la puerta y ajustar la temperatura a 4-5°C..."
+     * 
+     * generarConsejo("Lámpara LED", 0.5, 10, 5)
+     * // "Asegúrate de desconectarlo cuando no lo estés usando..."
+     */
     generarConsejo(nombre, consumoDiario, potencia, horas) {
       const nombreLower = nombre.toLowerCase();
       
-      // Consejos específicos por tipo de dispositivo
+      // ======================================================================
+      // CONSEJOS ESPECÍFICOS POR TIPO DE DISPOSITIVO
+      // ======================================================================
+      
+      // REFRIGERADOR: Consumo alto por estar encendido 24/7
       if (nombreLower.includes('refrigerador') || nombreLower.includes('refrigeradora')) {
         if (consumoDiario > 5) {
           return 'Considera revisar el sello de la puerta y ajustar la temperatura a 4-5°C. Evita abrir la puerta frecuentemente.';
@@ -204,6 +429,7 @@ export default {
         return 'Mantén la puerta cerrada y verifica que el sello esté en buen estado.';
       }
       
+      // AIRE ACONDICIONADO: Uno de los mayores consumidores
       if (nombreLower.includes('aire') || nombreLower.includes('climatiz')) {
         if (consumoDiario > 8) {
           return 'Usa el modo ventilador cuando sea posible y mantén la temperatura en 24-26°C. Cierra ventanas y puertas mientras esté encendido.';
@@ -211,6 +437,7 @@ export default {
         return 'Ajusta la temperatura a 24-26°C y limpia los filtros regularmente.';
       }
       
+      // LAVADORA: Consumo en ciclos de lavado
       if (nombreLower.includes('lavadora')) {
         if (consumoDiario > 3) {
           return 'Usa siempre cargas completas y elige ciclos de agua fría cuando sea posible. Reduce la frecuencia de uso si es posible.';
@@ -218,6 +445,7 @@ export default {
         return 'Usa cargas completas y programas de lavado eficientes.';
       }
       
+      // TELEVISOR: Consumo por horas de uso
       if (nombreLower.includes('televisor') || nombreLower.includes('tv')) {
         if (horas > 8) {
           return 'Reduce las horas de uso diario. Activa el modo de ahorro de energía y apágalo cuando no estés viéndolo.';
@@ -225,23 +453,32 @@ export default {
         return 'Desconéctalo cuando no lo uses y activa el modo de ahorro de energía.';
       }
       
+      // PLANCHA: Alto consumo en cortos periodos
       if (nombreLower.includes('plancha')) {
         return 'Úsala solo cuando tengas suficiente ropa para planchar. Desconéctala inmediatamente después de usar.';
       }
       
-      // Consejos generales basados en consumo
+      // ======================================================================
+      // CONSEJOS GENERALES BASADOS EN NIVEL DE CONSUMO
+      // ======================================================================
+      // Si no hay consejo específico, se aplican consejos según el consumo
+      
+      // Consumo muy alto (> 10 kWh/día): Recomendaciones urgentes
       if (consumoDiario > 10) {
         return `Este dispositivo consume mucha energía (${consumoDiario.toFixed(2)} kWh/día). Considera reducir las horas de uso o buscar una alternativa más eficiente.`;
       }
       
+      // Consumo alto (5-10 kWh/día): Recomendaciones moderadas
       if (consumoDiario > 5) {
         return `Modera el uso de este dispositivo. Cada hora adicional representa ${(potencia/1000).toFixed(2)} kWh más en tu factura.`;
       }
       
+      // Uso prolongado (> 12 horas/día): Recomendación de reducir tiempo
       if (horas > 12) {
         return 'Este dispositivo está encendido muchas horas al día. Considera apagarlo cuando no sea necesario.';
       }
       
+      // Consejo por defecto: Reducir consumo en stand-by
       return 'Asegúrate de desconectarlo cuando no lo estés usando para evitar consumo en modo stand-by.';
     }
   },
@@ -249,12 +486,26 @@ export default {
 </script>
 
 <style scoped>
-/*
-    Estilos para la vista de consejos de ahorro.
-    .consejos: Contenedor principal.
-    .consejos-lista: Grid de tarjetas.
-    .consejo-card: Tarjeta individual de cada consejo.
-*/
+/**
+ * ============================================================================
+ * ESTILOS: Consejos_ahorro.vue
+ * ============================================================================
+ * 
+ * Estilos scoped (solo aplican a este componente) para la vista de consejos
+ * de ahorro energético. Incluye:
+ * 
+ * - Estilos para la sección principal de consejos
+ * - Estilos para las tarjetas de dispositivos de alto consumo
+ * - Badges de color según nivel de consumo (muy-alto, alto, medio, bajo)
+ * - Panel de consejos personalizados
+ * - Diseño responsive para dispositivos móviles
+ * 
+ * COLORES POR NIVEL DE CONSUMO:
+ * - muy-alto: Rojo (#ef4444, #dc2626)
+ * - alto: Naranja (#f59e0b, #d97706)
+ * - medio: Azul (#3b82f6, #2563eb)
+ * - bajo: Verde (#22c55e, #16a34a)
+ */
 .consejos {
     line-height: 1.5;
     max-width: 900px;
