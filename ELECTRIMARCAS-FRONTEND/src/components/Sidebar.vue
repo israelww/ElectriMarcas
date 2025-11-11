@@ -49,12 +49,25 @@
             </router-link>
 
             <!-- Botón para cerrar sesión -->
-            <button class="button logout-btn" @click="cerrarSesion">
+            <!-- (ÚNICO CAMBIO AQUÍ: usar openLogoutConfirm en lugar de cerrarSesion directo) -->
+            <button class="button logout-btn" @click="openLogoutConfirm">
                 <span class="material-icons">logout</span>
                 <span class="text">Cerrar Sesión</span>
             </button>
         </nav>
     </aside>
+
+    <!-- ====== AÑADIDO: Modal de confirmación de Cerrar sesión ====== -->
+    <div v-if="showConfirmLogout" class="logout-modal-overlay" tabindex="-1" @keydown.esc="cancelLogout">
+      <div class="logout-modal-card" role="dialog" aria-modal="true" aria-labelledby="logout-title">
+        <h3 id="logout-title">Confirmar cierre de sesión</h3>
+        <p>¿Deseas salir de tu cuenta ahora?<br>Podrás volver a iniciar sesión cuando quieras.</p>
+        <div class="logout-modal-buttons">
+          <button class="btn-cancel" @click="cancelLogout" autofocus>Cancelar</button>
+          <button class="btn-logout" @click="confirmLogout">Cerrar sesión</button>
+        </div>
+      </div>
+    </div>
 </template>
 
 <script setup>
@@ -76,7 +89,7 @@
 		is_expanded.value = !is_expanded.value
 	}
 
-	// Función para cerrar sesión
+	// Función para cerrar sesión (SE MANTIENE IGUAL)
 	const cerrarSesion = async () => {
 		try {
 			await authService.logout()
@@ -120,6 +133,27 @@
 	// Cada vez que cambie su valor (por un clic en el botón),
 	// vuelve a ejecutar applyBodySpacing() para actualizar el layout del body.
 	watch(is_expanded, (v) => applyBodySpacing(v))
+
+  // ====== AÑADIDO: Estado y handlers del modal de Cerrar sesión ======
+  const showConfirmLogout = ref(false)
+
+  const openLogoutConfirm = () => {
+    showConfirmLogout.value = true
+    // dar foco al overlay para que funcione ESC
+    requestAnimationFrame(() => {
+      document.querySelector('.logout-modal-overlay')?.focus()
+    })
+  }
+
+  const cancelLogout = () => {
+    showConfirmLogout.value = false
+  }
+
+  // Reutiliza tu cerrarSesion original cuando confirma
+  const confirmLogout = async () => {
+    await cerrarSesion()
+    showConfirmLogout.value = false
+  }
 </script>
     
 <style lang="scss" scoped>
@@ -421,6 +455,83 @@
 			
 		}
 	
+/* ===== Modal confirmación Cerrar Sesión (AÑADIDO) ===== */
+.logout-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  outline: none;
+}
+
+.logout-modal-card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  padding: 2rem;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  animation: fadeIn 0.25s ease;
+}
+
+.logout-modal-card h3 {
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.logout-modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-cancel, .btn-logout {
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Cancelar resaltado para retención */
+.btn-cancel {
+//   background-color: #ffffff;
+  background-color: var(--primary);
+//   color: #2c3e50;
+  color: #fff;
+  border: 2px solid var(--primary);
+  font-weight: 600;
+  box-shadow: 0 0 4px rgba(0,0,0,0.05);
+}
+.btn-cancel:hover {
+  background-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 0 8px rgba(0,0,0,0.5);
+}
+
+.btn-logout {
+  background-color: #ffffff;
+  color: #2c3e50;
+  border: 2px solid #c0392b; 
+  font-weight: 600;
+  box-shadow: 0 0 4px rgba(0,0,0,0.05);	
+}
+.btn-logout:hover {
+  background-color: #c0392b;
+  color: #fff; 
+  box-shadow: 0 0 8px rgba(0,0,0,0.5);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
 </style>
 
 <style>
