@@ -520,6 +520,43 @@ export function getConsumoTotalMensual() {
   return consumoTotal;
 }
 
+/**
+ * Agregar nuevo electrodoméstico a la base de datos
+ * 
+ * @param {Object} dispositivoData - Datos completos del dispositivo
+ * @param {string} dispositivoData.nombre - Nombre del electrodoméstico
+ * @param {string} dispositivoData.marca - Marca del electrodoméstico
+ * @param {string} dispositivoData.modelo - Modelo del electrodoméstico
+ * @param {string} dispositivoData.categoria - Categoría (Cocina, Limpieza, etc.)
+ * @param {number} dispositivoData.voltaje - Voltaje en V
+ * @param {number} dispositivoData.potencia - Potencia en W
+ * @param {string} dispositivoData.descripcion - Descripción opcional
+ * @returns {Promise<Object>} Respuesta del servidor con el dispositivo creado
+ */
+export async function agregarNuevoDispositivo(dispositivoData) {
+  try {
+    console.log('📤 Enviando dispositivo al servidor:', dispositivoData);
+    
+    const response = await axios.post(`${API_URL}/dispositivo/nuevo`, {
+      nombre: dispositivoData.nombre,
+      marca: dispositivoData.marca,
+      modelo: dispositivoData.modelo,
+      categoria: dispositivoData.categoria,
+      voltaje: parseInt(dispositivoData.voltaje),
+      potencia: parseInt(dispositivoData.potencia),
+      descripcion: dispositivoData.descripcion || ''
+    });
+    
+    console.log('✅ Respuesta del servidor:', response.data);
+    return response.data;
+    
+  } catch (error) {
+    console.error('❌ Error al agregar dispositivo:', error);
+    console.error('Detalles del error:', error.response?.data);
+    throw error;
+  }
+}
+
 // ============================================================================
 // FIN DEL ARCHIVO dataService.js
 // ============================================================================

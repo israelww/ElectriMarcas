@@ -334,4 +334,183 @@ router.get('/dispositivos-lista/:categoriaId', authenticateToken, async (req, re
     }
 });
 
+// ENDPOINT para agregar un nuevo electrodoméstico
+router.post('/dispositivo/nuevo', async (req, res) => {
+    try {
+        const { nombre, marca, modelo, categoria, voltaje, potencia, descripcion } = req.body;
+
+        console.log('📥 Datos recibidos:', { nombre, marca, modelo, categoria, voltaje, potencia, descripcion });
+
+        // Validar campos requeridos
+        if (!nombre || !marca || !modelo || !categoria || !voltaje || !potencia) {
+            return res.status(400).json({
+                success: false,
+                message: 'Los campos nombre, marca, modelo, categoría, voltaje y potencia son obligatorios'
+            });
+        }
+        
+        // Usar año 2025 por defecto
+        const anio_fabricacion = 2025;
+
+        // Mapeo de categorías
+        const categoriaMap = {
+            'Limpieza': 'C01',
+            'Cocina': 'C02',
+            'Entretenimiento': 'C03',
+            'Climatización': 'C04',
+            'Cuidado Personal': 'C05'
+        };
+
+        const id_categoria = categoriaMap[categoria];
+        
+        if (!id_categoria) {
+            return res.status(400).json({
+                success: false,
+                message: 'Categoría no válida. Debe ser: Cocina, Limpieza, Entretenimiento, Climatización o Cuidado Personal'
+            });
+        }
+
+        // Obtener pool de conexión
+        const { pool } = require('../src/db');
+        const sql = require('mssql');
+
+        // Primero, necesitamos obtener o crear la marca
+        console.log('🔍 Buscando o creando marca:', marca);
+        
+        let id_marca;
+        const checkMarca = await pool.request()
+            .input('nombre_marca', sql.VarChar(30), marca.trim())
+            .query(`
+                SELECT id_marca FROM marca 
+                WHERE LOWER(LTRIM(RTRIM(nombre_marca))) = LOWER(LTRIM(RTRIM(@nombre_marca)))
+            `);
+
+        if (checkMarca.recordset.length > 0) {
+            id_marca = checkMarca.recordset[0].id_marca;
+            console.log('✅ Marca encontrada:', id_marca);
+        } else {
+            // Crear nueva marca
+            id_marca = 'M' + Date.now().toString().slice(-5);
+            await pool.request()
+                .input('id_marca', sql.Char(6), id_marca)
+                .input('nombre_marca', sql.VarChar(30), marca.trim())
+                .query(`INSERT INTO marca (id_marca, nombre_marca) VALUES (@id_marca, @nombre_marca)`);
+            console.log('✅ Nueva marca creada:', id_marca);
+        }
+
+        // Luego, necesitamos obtener o crear el modelo
+        console.log('🔍 Buscando o creando modelo:', modelo);
+        
+        let id_modelo;
+        const checkModelo = await pool.request()
+            .input('id_marca', sql.Char(6), id_marca)
+            .input('nombre_modelo', sql.VarChar(30), modelo.trim())
+            .query(`
+                SELECT id_modelo FROM modelo 
+                WHERE id_marca = @id_marca 
+                  AND LOWER(LTRIM(RTRIM(nombre_modelo))) = LOWER(LTRIM(RTRIM(@nombre_modelo)))
+            `);
+
+        if (checkModelo.recordset.length > 0) {
+            id_modelo = checkModelo.recordset[0].id_modelo;
+            console.log('✅ Modelo encontrado:', id_modelo);
+        } else {
+            // Crear nuevo modelo
+            id_modelo = 'MD' + Date.now().toString().slice(-4);
+            await pool.request()
+                .input('id_modelo', sql.Char(6), id_modelo)
+                .input('id_marca', sql.Char(6), id_marca)
+                .input('nombre_modelo', sql.VarChar(40), modelo.trim())
+                .input('año_fabricacion', sql.Int, parseInt(anio_fabricacion))
+                .query(`INSERT INTO modelo (id_modelo, id_marca, nombre_modelo, año_fabricacion) VALUES (@id_modelo, @id_marca, @nombre_modelo, @año_fabricacion)`);
+            console.log('✅ Nuevo modelo creado:', id_modelo);
+        }
+
+        // ⚠️ VALIDAR SI YA EXISTE el mismo electrodoméstico (nombre + modelo)
+        console.log('🔍 Verificando si ya existe el electrodoméstico...');
+        
+        const checkExisting = await pool.request()
+            .input('id_modelo', sql.Char(6), id_modelo)
+            .input('nombre', sql.VarChar(60), nombre.trim())
+            .query(`
+                SELECT e.id_electrodomestico, e.nombre_electrodomestico, m.nombre_modelo, ma.nombre_marca
+                FROM electrodomestico e
+                INNER JOIN modelo m ON e.id_modelo = m.id_modelo
+                INNER JOIN marca ma ON m.id_marca = ma.id_marca
+                WHERE e.id_modelo = @id_modelo
+                  AND LOWER(LTRIM(RTRIM(e.nombre_electrodomestico))) = LOWER(LTRIM(RTRIM(@nombre)))
+            `);
+
+        // Si ya existe, retornar error informativo
+        if (checkExisting.recordset.length > 0) {
+            const existente = checkExisting.recordset[0];
+            console.log('⚠️ Dispositivo duplicado encontrado:', existente);
+            
+            return res.status(409).json({
+                success: false,
+                message: `Este dispositivo ya existe en la base de datos`,
+                detalles: `${existente.nombre_marca} ${existente.nombre_modelo} - ${existente.nombre_electrodomestico}`,
+                sugerencia: 'Verifica los datos o busca el dispositivo en la lista existente',
+                dispositivoExistente: {
+                    id: existente.id_electrodomestico,
+                    nombre: existente.nombre_electrodomestico,
+                    marca: existente.nombre_marca,
+                    modelo: existente.nombre_modelo
+                }
+            });
+        }
+
+        console.log('✅ No se encontraron duplicados, procediendo con la inserción...');
+
+        // Generar ID único para el electrodoméstico (máximo 6 caracteres)
+        const id_electrodomestico = 'E' + Date.now().toString().slice(-5);
+
+        console.log('🆔 ID generado:', id_electrodomestico);
+        console.log('📂 Categoría mapeada:', id_categoria);
+        console.log('🏷️ ID Marca:', id_marca);
+        console.log('📦 ID Modelo:', id_modelo);
+
+        // Insertar en la base de datos
+        await pool.request()
+            .input('id_electrodomestico', sql.Char(6), id_electrodomestico)
+            .input('id_categoria', sql.Char(6), id_categoria)
+            .input('id_modelo', sql.Char(6), id_modelo)
+            .input('voltaje', sql.Int, parseInt(voltaje))
+            .input('potencia', sql.Int, parseInt(potencia))
+            .input('nombre_electrodomestico', sql.VarChar(60), nombre.trim())
+            .input('descripcion', sql.VarChar(150), descripcion ? descripcion.trim() : '')
+            .query(`
+                INSERT INTO electrodomestico 
+                (id_electrodomestico, id_categoria, id_modelo, voltaje, potencia, nombre_electrodomestico, descripcion)
+                VALUES 
+                (@id_electrodomestico, @id_categoria, @id_modelo, @voltaje, @potencia, @nombre_electrodomestico, @descripcion)
+            `);
+
+        console.log('✅ Dispositivo insertado exitosamente');
+
+        res.status(201).json({
+            success: true,
+            message: 'Dispositivo agregado exitosamente',
+            data: {
+                id_electrodomestico,
+                nombre,
+                marca,
+                modelo,
+                categoria,
+                voltaje,
+                potencia
+            }
+        });
+
+    } catch (error) {
+        console.error('❌ Error al insertar dispositivo:', error);
+        console.error('Stack:', error.stack);
+        res.status(500).json({
+            success: false,
+            message: 'Error al agregar el dispositivo a la base de datos',
+            error: error.message
+        });
+    }
+});
+
 module.exports = router;

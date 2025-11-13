@@ -12,27 +12,35 @@
 			</header>
 			<form @submit.prevent="submitForm" class="form-body">
 				<article class="form-group">
-					<label for="nombre">Nombre del dispositivo</label>
+					<label for="nombre">Nombre del dispositivo *</label>
 					<input v-model="form.nombre" id="nombre" type="text" required placeholder="Ej. Refrigerador" />
 				</article>
 				<article class="form-group">
-					<label for="categoria">Categoría</label>
+					<label for="marca">Marca *</label>
+					<input v-model="form.marca" id="marca" type="text" required placeholder="Ej. Samsung, LG, Whirlpool" />
+				</article>
+				<article class="form-group">
+				<label for="modelo">Modelo *</label>
+				<input v-model="form.modelo" id="modelo" type="text" required placeholder="Ej. RT35K5930SL" />
+			</article>
+			<article class="form-group">
+					<label for="categoria">Categoría *</label>
 					<select v-model="form.categoria" id="categoria" required>
 						<option value="" disabled>Selecciona una categoría</option>
 						<option v-for="cat in categorias" :key="cat" :value="cat">{{ cat }}</option>
 					</select>
 				</article>
 				<article class="form-group">
-					<label for="voltaje">Voltaje (V)</label>
+					<label for="voltaje">Voltaje (V) *</label>
 					<input v-model="form.voltaje" id="voltaje" type="number" min="0" required placeholder="Ej. 120 V" />
 				</article>
 				<article class="form-group">
-					<label for="potencia">Potencia (W)</label>
+					<label for="potencia">Potencia (W) *</label>
 					<input v-model="form.potencia" id="potencia" type="number" min="0" required placeholder="Ej. 150 W" />
 				</article>
 				<article class="form-group">
-					<label for="descripcion">Descripción</label>
-					<textarea v-model="form.descripcion" id="descripcion" rows="2" placeholder="Opcional"></textarea>
+					<label for="descripcion">Descripción (Opcional)</label>
+					<textarea v-model="form.descripcion" id="descripcion" rows="2" placeholder="Información adicional del dispositivo"></textarea>
 				</article>
 				<footer class="form-footer">
 					<button type="submit" class="submit-btn">Añadir</button>
@@ -66,14 +74,21 @@ const emit = defineEmits(['close', 'submit'])
 
 const form = reactive({
 	nombre: '',
+	marca: '',
+	modelo: '',
 	categoria: '',
 	voltaje: '',
 	potencia: '',
 	descripcion: ''
 })
 
+// Obtener el año actual para validación
+const currentYear = new Date().getFullYear()
+
 function resetForm() {
     form.nombre = ''
+    form.marca = ''
+    form.modelo = ''
     form.categoria = '' 
     form.voltaje = ''
     form.potencia = ''
@@ -86,11 +101,23 @@ function close() {
 }
 
 function submitForm() {
-	// Validación simple
-	if (!form.nombre || !form.categoria || !form.voltaje || !form.potencia) return
+	// Validación de campos requeridos
+	if (!form.nombre || !form.marca || !form.modelo || !form.categoria || !form.voltaje || !form.potencia) {
+		alert('Por favor completa todos los campos obligatorios (*)');
+		return;
+	}
+	
+	// Validar que voltaje y potencia sean números positivos
+	if (form.voltaje <= 0 || form.potencia <= 0) {
+		alert('El voltaje y la potencia deben ser valores mayores a 0');
+		return;
+	}
+	
 	emit('submit', { ...form })
 	// Limpiar formulario
 	form.nombre = ''
+	form.marca = ''
+	form.modelo = ''
 	form.categoria = ''
 	form.voltaje = ''
 	form.potencia = ''

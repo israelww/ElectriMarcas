@@ -64,7 +64,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { getDispositivosList, getDispositivosByCategoria } from '../services/dataService'; // Función API
+import { getDispositivosList, getDispositivosByCategoria, agregarNuevoDispositivo } from '../services/dataService'; // Función API
 import Buscador from "../components/Buscador.vue";
 import Card from "../components/Card.vue";
 import Formulario from "../components/formulario.vue";
@@ -93,8 +93,8 @@ const categoriaId = computed(() => {
 
 // Mapeo de categorías del frontend a IDs de la base de datos
 const categoriaMapping = {
-  1: 'C01', // Cocina
-  2: 'C02', // Limpieza
+  1: 'C01', // Limpieza
+  2: 'C02', // Cocina
   3: 'C03', // Entretenimiento
   4: 'C04', // Climatización
   5: 'C05'  // Cuidado Personal
@@ -165,9 +165,40 @@ const abrirFormulario = () => {
 const cerrarFormulario = () => {
   showForm.value = false;
 };
-const agregarDispositivo = (dispositivo) => {
-  // Aquí manejarías la lógica para enviar el nuevo dispositivo a tu backend
-  cerrarFormulario();
+
+const agregarDispositivo = async (dispositivo) => {
+  try {
+    console.log('📤 Enviando dispositivo a la BD:', dispositivo);
+    
+    // Llamar a la función del servicio para insertar en la BD
+    const resultado = await agregarNuevoDispositivo(dispositivo);
+    
+    if (resultado.success) {
+      alert(`✅ ${resultado.message}\n\nDispositivo: ${dispositivo.nombre}`);
+      
+      // Recargar la lista para mostrar el nuevo dispositivo
+      await fetchDispositivos();
+      
+      // Cerrar el formulario
+      cerrarFormulario();
+    }
+  } catch (error) {
+    console.error('❌ Error al agregar dispositivo:', error);
+    
+    // Manejo especial para dispositivos duplicados (error 409)
+    if (error.response?.status === 409) {
+      const errorData = error.response.data;
+      alert(
+        `⚠️ Dispositivo Duplicado\n\n` +
+        `${errorData.message}\n\n` +
+        `Dispositivo existente:\n${errorData.detalles}\n\n` +
+        `${errorData.sugerencia}`
+      );
+    } else {
+      // Otros errores
+      alert(`❌ Error al agregar dispositivo:\n\n${error.response?.data?.message || error.message}`);
+    }
+  }
 };
 
 // Seleccionar (toggle) sin navegar; se guardará con el botón Guardar selección
@@ -193,8 +224,8 @@ const guardarSeleccion = () => {
 // Función para obtener el título de la categoría
 const getTituloCategoria = () => {
   const nombresCategoria = {
-    1: 'Cocina',
-    2: 'Limpieza', 
+    1: 'Limpieza',
+    2: 'Cocina',
     3: 'Entretenimiento',
     4: 'Climatización',
     5: 'Cuidado Personal'

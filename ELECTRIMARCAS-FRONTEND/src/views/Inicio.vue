@@ -20,14 +20,14 @@ export default {
       categorias: [
         {
           id: 1,
-          nombre: 'Cocina',
-          descripcion: 'Electrodomésticos para cocinar y preparar alimentos.',
+          nombre: 'Limpieza',
+          descripcion: 'Electrodomésticos para limpiar el hogar y la ropa.',
           cards: []
         },
         {
           id: 2,
-          nombre: 'Limpieza',
-          descripcion: 'Aparatos para limpieza del hogar y ropa.',
+          nombre: 'Cocina',
+          descripcion: 'Electrodomésticos para cocinar y preparar alimentos.',
           cards: []
         },
         {
