@@ -25,21 +25,21 @@
       </div>
       
       <div class="cards-scroll-container"> 
-          <article class="cards">
-            <Card
-              v-for="(card, i) in filteredCards"
-              :key="i"
-              :title="card.title"
-              :description="card.description"
-              :image="card.image"
-              :background-color1="card.backgroundColor1"
-              :background-color2="card.backgroundColor2"
-              :showAdd="true"
-              buttonText="Agregar"
-              @agregar="seleccionar(card)"
-            />
-          </article>
-        </div>
+        <article class="cards">
+          <Card
+            v-for="(card, i) in filteredCards"
+            :key="i"
+            :title="card.title"
+            :description="card.description"
+            :image="card.image"
+            :background-color1="card.backgroundColor1"
+            :background-color2="card.backgroundColor2"
+            :showAdd="true"
+            buttonText="Agregar"
+            @agregar="seleccionar(card)"
+          />
+        </article>
+      </div>
     </section>
     
     <footer class="footer-agregar">
@@ -47,7 +47,11 @@
         Agregar dispositivo no registrado
       </button>
       <span style="width: 1rem;"></span>
-      <button class="agregar-no-registrado" @click="guardarSeleccion" :disabled="!selectedCards.length">
+      <button
+        class="agregar-no-registrado"
+        @click="guardarSeleccion"
+        :disabled="!selectedCards.length"
+      >
         Guardar selección ({{ selectedCards.length }})
       </button>
     </footer>
@@ -58,6 +62,21 @@
       @close="cerrarFormulario"
       @submit="agregarDispositivo"
     />
+
+    <!-- ====== NUEVO: Modal de resultado del insert ====== -->
+    <div v-if="showResultModal" class="modal-overlay">
+      <div class="modal-card">
+        <h3>{{ resultModal.titulo }}</h3>
+        <!-- Usamos v-html para poder meter saltos de línea y <strong> -->
+        <p v-html="resultModal.mensaje"></p>
+        <div class="modal-buttons">
+          <button class="btn-cancel" @click="cerrarResultado" autofocus>
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- ================================================ -->
   </section>
 </template>
 
@@ -89,6 +108,14 @@ const categoriaId = computed(() => {
   const raw = route.query.categoriaId;
   const n = Number(raw);
   return Number.isFinite(n) ? n : null;
+});
+
+// ====== NUEVO: estado del modal de resultado ======
+const showResultModal = ref(false);
+const resultModal = ref({
+  titulo: '',
+  mensaje: '',
+  esError: false
 });
 
 // Mapeo de categorías del frontend a IDs de la base de datos
@@ -128,12 +155,12 @@ const fetchDispositivos = async () => {
     }
     
     cardsList.value = data.map(card => {
-            // Buscamos la imagen en el mapa usando el Título de la Card (nombre del electrodoméstico)
-            const imagePath = iconMap[card.title] || DefaultIcon; 
-            return {
-                ...card, // Mantiene id, title, description, colors
-                image: imagePath // <--- Se inyecta la ruta local
-              };
+      // Buscamos la imagen en el mapa usando el Título de la Card (nombre del electrodoméstico)
+      const imagePath = iconMap[card.title] || DefaultIcon; 
+      return {
+        ...card, // Mantiene id, title, description, colors
+        image: imagePath // <--- Se inyecta la ruta local
+      };
     });
   } catch (err) {
     error.value = err.message;
@@ -158,7 +185,7 @@ const filteredCards = computed(() => {
   );
 });
 
-// 5. MÉTODOS DE FORMULARIO (Convertidos a Composition API)
+// 5. MÉTODOS DE FORMULARIO
 const abrirFormulario = () => {
   showForm.value = true;
 };
@@ -166,6 +193,7 @@ const cerrarFormulario = () => {
   showForm.value = false;
 };
 
+// ====== AQUÍ SE MODIFICA PARA USAR EL MODAL EN VEZ DE alert() ======
 const agregarDispositivo = async (dispositivo) => {
   try {
     console.log('📤 Enviando dispositivo a la BD:', dispositivo);
@@ -174,8 +202,14 @@ const agregarDispositivo = async (dispositivo) => {
     const resultado = await agregarNuevoDispositivo(dispositivo);
     
     if (resultado.success) {
-      alert(`✅ ${resultado.message}\n\nDispositivo: ${dispositivo.nombre}`);
-      
+      // Armamos el mensaje bonito para el modal
+      resultModal.value = {
+        titulo: 'Dispositivo registrado',
+        mensaje: `✅ ${resultado.message}<br><br>Dispositivo: <strong>${dispositivo.nombre}</strong>`,
+        esError: false
+      };
+      showResultModal.value = true;
+
       // Recargar la lista para mostrar el nuevo dispositivo
       await fetchDispositivos();
       
@@ -188,17 +222,31 @@ const agregarDispositivo = async (dispositivo) => {
     // Manejo especial para dispositivos duplicados (error 409)
     if (error.response?.status === 409) {
       const errorData = error.response.data;
-      alert(
-        `⚠️ Dispositivo Duplicado\n\n` +
-        `${errorData.message}\n\n` +
-        `Dispositivo existente:\n${errorData.detalles}\n\n` +
-        `${errorData.sugerencia}`
-      );
+      resultModal.value = {
+        titulo: 'Dispositivo duplicado',
+        mensaje:
+          `⚠️ Dispositivo Duplicado<br><br>` +
+          `${errorData.message}<br><br>` +
+          `<strong>Dispositivo existente:</strong><br>${errorData.detalles}<br><br>` +
+          `${errorData.sugerencia}`,
+        esError: true
+      };
     } else {
       // Otros errores
-      alert(`❌ Error al agregar dispositivo:\n\n${error.response?.data?.message || error.message}`);
+      const msg = error.response?.data?.message || error.message;
+      resultModal.value = {
+        titulo: 'Error al agregar dispositivo',
+        mensaje: `❌ Ocurrió un error al agregar el dispositivo.<br><br>Detalle:<br>${msg}`,
+        esError: true
+      };
     }
+    showResultModal.value = true;
   }
+};
+
+// cerrar el modal de resultado
+const cerrarResultado = () => {
+  showResultModal.value = false;
 };
 
 // Seleccionar (toggle) sin navegar; se guardará con el botón Guardar selección
@@ -294,14 +342,92 @@ const getTituloCategoria = () => {
       background: #3ea832;
     }
     .cards-scroll-container {
-    max-height: 50vh; /* Ajusta este valor (ej. 70% del viewport height) */
-    max-width: 1000px;
-    /* 2. Scroll: Asegura que la barra de desplazamiento aparezca solo cuando sea necesario */
-    overflow-y: auto; 
-    /* 3. Estilo: Opcional, para que se vea el borde */
-    padding: 25px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    width: 780px;
-}
+      max-height: 50vh; /* Ajusta este valor (ej. 70% del viewport height) */
+      max-width: 1000px;
+      overflow-y: auto; 
+      padding: 25px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 780px;
+    }
+
+    /* ====== DISEÑO DEL MODAL (MISMO QUE EL DE ELIMINAR) ====== */
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .modal-card {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      padding: 2rem;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .modal-card h3 {
+      margin-bottom: 1rem;
+      color: #2c3e50;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn-cancel,
+    .btn-delete {
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-cancel {
+      background-color: var(--primary);
+      color: #fff;
+      border: 2px solid var(--primary);
+      font-weight: 600;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    }
+
+    .btn-cancel:hover {
+      color: #fff;
+      background-color: var(--primary);
+      box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    }
+
+    .btn-delete {
+      background-color: #ffffff;
+      color: #2c3e50;
+      border: 2px solid #c0392b; 
+      font-weight: 600;
+    }
+
+    .btn-delete:hover {
+      background-color: #c0392b;
+      color: #fff; 
+      box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
 </style>
