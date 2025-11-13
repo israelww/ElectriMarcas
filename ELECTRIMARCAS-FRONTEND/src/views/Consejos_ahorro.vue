@@ -12,6 +12,27 @@
         <section v-if="dispositivosAltoConsumo.length > 0" class="alto-consumo-section">
             <h2 class="section-title">💡 Dispositivos que más consumen energía</h2>
             <p class="section-description">Estos son tus dispositivos con mayor consumo. Aplica estos consejos para reducir tu factura:</p>
+            
+            <!-- Simbología de niveles de consumo -->
+            <div class="simbologia-consumo">
+                <span class="simbologia-item">
+                    <span class="simbologia-badge muy-alto"></span>
+                    <span class="simbologia-texto">Muy Alto (>10 kWh/día)</span>
+                </span>
+                <span class="simbologia-item">
+                    <span class="simbologia-badge alto"></span>
+                    <span class="simbologia-texto">Alto (5-10 kWh/día)</span>
+                </span>
+                <span class="simbologia-item">
+                    <span class="simbologia-badge medio"></span>
+                    <span class="simbologia-texto">Medio (2-5 kWh/día)</span>
+                </span>
+                <span class="simbologia-item">
+                    <span class="simbologia-badge bajo"></span>
+                    <span class="simbologia-texto">Bajo (<2 kWh/día)</span>
+                </span>
+            </div>
+            
             <div class="dispositivos-consumo-lista">
                 <article 
                     v-for="(disp, idx) in dispositivosAltoConsumo" 
@@ -528,6 +549,53 @@ export default {
     margin-bottom: 1.5rem;
 }
 
+/* Simbología de colores */
+.simbologia-consumo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.simbologia-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.simbologia-badge {
+    width: 20px;
+    height: 20px;
+    border-radius: 0.25rem;
+    display: inline-block;
+}
+
+.simbologia-badge.muy-alto {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.simbologia-badge.alto {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.simbologia-badge.medio {
+    background: linear-gradient(135deg, #e2cc03, #b69501);
+}
+
+.simbologia-badge.bajo {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.simbologia-texto {
+    font-size: 0.9rem;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
 .alto-consumo-section {
     margin-bottom: 3rem;
     margin-top: 30px; 
@@ -564,7 +632,7 @@ export default {
 }
 
 .dispositivo-consumo-card.medio {
-    border-left-color: #3b82f6;
+    border-left-color: #e2cc03;
 }
 
 .dispositivo-consumo-card.bajo {
@@ -602,7 +670,7 @@ export default {
 }
 
 .consumo-badge.medio {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    background: linear-gradient(135deg, #e2cc03, #b69501);
 }
 
 .consumo-badge.bajo {
