@@ -51,3 +51,4 @@ JOIN planes_tarifa pt ON pt.id_municipio = tm.id_municipio
 WHERE pt.vigente_hasta IS NULL  -- o fecha actual entre desde / hasta
   AND pt.clave_tarifa = '1F';
 
+SELECT * FROM electrodomestico

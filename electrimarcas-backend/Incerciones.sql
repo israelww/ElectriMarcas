@@ -1,5 +1,5 @@
 -- Usar la base de datos
-USE ELECTRIMARCAS;
+USE ELECTRIMARCASS;
 GO
 
 -- Crear la tabla de temp_electrodomesticos
@@ -26,6 +26,7 @@ WITH (
     FIRSTROW = 2,              -- omitir encabezado si el CSV lo tiene
     FIELDTERMINATOR = ',',     -- separador de columnas
     ROWTERMINATOR = '\n',      -- salto de línea
+    CODEPAGE = '65001',
     TABLOCK
 );
 

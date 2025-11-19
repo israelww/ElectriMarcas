@@ -14,50 +14,7 @@
         
         <!-- 
           ========================================================================
-          APARTADO 1: GRÁFICA DE CONSUMO
-          ========================================================================
-          Muestra una gráfica de barras con 3 datasets:
-          - Consumo diario (azul)
-          - Consumo semanal (verde)
-          - Consumo mensual (rojo)
-        -->
-        <article class="grafica-container">
-            <!-- ESTADO: CARGANDO -->
-            <div v-if="isLoading" class="loading-state">
-                <div class="spinner"></div>
-                <p>Cargando estadísticas... ⏳</p>
-            </div>
-            
-            <!-- ESTADO: ERROR -->
-            <div v-else-if="error" class="error-state">
-                <div class="error-icon">⚠️</div>
-                <p class="error-message">{{ error }}</p>
-                <!-- Botón para ir a agregar dispositivos -->
-                <router-link to="/Inicio" class="btn-add-devices">
-                    ➕ Agregar dispositivos
-                </router-link>
-            </div>
-            
-            <!-- ESTADO: DATOS DISPONIBLES - Mostrar gráfica -->
-            <div v-else-if="chartData" class="grafica-wrapper">
-                <!-- 
-                  Componente Chart.js para renderizar la gráfica
-                  Props:
-                  - chartData: Datos en formato Chart.js (labels + datasets)
-                  - chartOptions: Configuración de la gráfica
-                -->
-                <bar-chart :chartData="chartData" :chartOptions="chartOptions" />
-            </div>
-            
-            <!-- ESTADO: SIN DATOS -->
-            <div v-else class="empty-state">
-                <p>No se encontraron datos para mostrar.</p>
-            </div>
-        </article>
-
-        <!-- 
-          ========================================================================
-          APARTADO 2: DESGLOSE DE COSTOS MENSUALES
+          APARTADO 1: DESGLOSE DE COSTOS MENSUALES
           ========================================================================
           Solo se muestra si:
           - Hay datos de costo calculados (costoMensual existe)
@@ -242,7 +199,50 @@
                 </p>
             </div>
         </article>
+        <!-- 
+          ========================================================================
+          APARTADO 2: GRÁFICA DE CONSUMO
+          ========================================================================
+          Muestra una gráfica de barras con 3 datasets:
+          - Consumo diario (azul)
+          - Consumo semanal (verde)
+          - Consumo mensual (rojo)
+        -->
+        <article class="grafica-container">
+            <!-- ESTADO: CARGANDO -->
+            <div v-if="isLoading" class="loading-state">
+                <div class="spinner"></div>
+                <p>Cargando estadísticas... ⏳</p>
+            </div>
+            
+            <!-- ESTADO: ERROR -->
+            <div v-else-if="error" class="error-state">
+                <div class="error-icon">⚠️</div>
+                <p class="error-message">{{ error }}</p>
+                <!-- Botón para ir a agregar dispositivos -->
+                <router-link to="/Inicio" class="btn-add-devices">
+                    ➕ Agregar dispositivos
+                </router-link>
+            </div>
+            
+            <!-- ESTADO: DATOS DISPONIBLES - Mostrar gráfica -->
+            <div v-else-if="chartData" class="grafica-wrapper">
+                <!-- 
+                  Componente Chart.js para renderizar la gráfica
+                  Props:
+                  - chartData: Datos en formato Chart.js (labels + datasets)
+                  - chartOptions: Configuración de la gráfica
+                -->
+                <bar-chart :chartData="chartData" :chartOptions="chartOptions" />
+            </div>
+            
+            <!-- ESTADO: SIN DATOS -->
+            <div v-else class="empty-state">
+                <p>No se encontraron datos para mostrar.</p>
+            </div>
+        </article>
     </section>
+    
 </template>
 
 <script setup>
@@ -610,6 +610,10 @@ const chartOptions = {
 */
 
 /* Contenedor principal de la vista */
+article{
+    margin-bottom: 30px;
+}
+
 .estadisticas {
     padding: 2rem;
     max-width: 1400px;

@@ -73,6 +73,24 @@ import LavadoraIcon from "../assets/lavadora.png"
 import AfeitadoraIcon from "../assets/afeitadora.png"
 import AireAcondicionadoIcon from "../assets/aire.png"
 import AspiradoraIcon from "../assets/aspiradora.png"
+import lavavajillasIcon from "../assets/lavavajillas.png"
+import planchaPeloIcon from "../assets/planchapelo.png"
+import planchaRopaIcon from "../assets/plancharopa.png"
+import secadoraIcon from "../assets/secadora.png"
+import vaporetaIcon from "../assets/vaporeta.png"
+import batidoraIcon from "../assets/batidora.png"
+import cafeteraIcon from "../assets/cafetera.png"
+import hornoElectricoIcon from "../assets/hornoelectrico.png"
+import licuadoraIcon from "../assets/licuadora.png"
+import microondasIcon from "../assets/microondas.png"
+import tostadoraIcon from "../assets/tostadora.png"
+import tvIcon from "../assets/tv.png"
+import barraSonidoIcon from "../assets/barrasonido.png"
+import consolaIcon from "../assets/consola.png"
+import laptopIcon from "../assets/laptop.png"
+import proyectorIcon from "../assets/proyector.png"
+import tabletIcon from "../assets/tablet.png"
+import teatroIcon from "../assets/teatro.png"
 
 
 // 1. ESTADO REACTIVO PARA LA CARGA DE DATOS
@@ -105,10 +123,34 @@ const iconMap = {
     'Refrigerador': RefrigeradorIcon,
     'Lavadora':LavadoraIcon,
     'Hidrolavadora':LavadoraIcon,
-    'Afeitadora el├®ctrica':AfeitadoraIcon,
+    'Afeitadora electrica':AfeitadoraIcon,
     'Aire acondicionado port+ítil':AireAcondicionadoIcon,
     'Aire acondicionado split':AireAcondicionadoIcon,
-    'Aspiradora':AspiradoraIcon
+    'Aspiradora':AspiradoraIcon,
+    'Lavavajillas':lavavajillasIcon,
+    'PlanchaPelo':planchaPeloIcon,
+    'Plancha':planchaRopaIcon,
+    'Plancha para cabello':planchaPeloIcon,
+    'Secadora':secadoraIcon,
+    'Vaporeta':vaporetaIcon,
+    'Batidora':batidoraIcon,
+    'Cafetera':cafeteraIcon,
+    'Horno Electrico':hornoElectricoIcon,
+    'Licuadora':licuadoraIcon,
+    'Microondas':microondasIcon,
+    'Tostadora':tostadoraIcon,
+    'Televisor':tvIcon,
+    'Barra de Sonido':barraSonidoIcon,
+    'Consola de Videojuegos':consolaIcon,
+    'Laptop Gamer':laptopIcon,
+    'Proyector':proyectorIcon,
+    'Tablet':tabletIcon,
+    'Teatro en Casa':teatroIcon,
+
+
+
+  
+
 };
 
 // 2. FUNCIÓN DE CARGA ASÍNCRONA
