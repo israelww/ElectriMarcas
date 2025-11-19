@@ -110,6 +110,17 @@ import laptopIcon from "../assets/laptop.png"
 import proyectorIcon from "../assets/proyector.png"
 import tabletIcon from "../assets/tablet.png"
 import teatroIcon from "../assets/teatro.png"
+import airePortatilIcon from "../assets/aireportatil.png"
+import calefactorIcon from "../assets/calefactor.png"
+import calefactorAceiteIcon from "../assets/calefactoraceite.png"
+import deshumificadorIcon from "../assets/desumificador.png"
+import climatizadorPortatilIcon from "../assets/climatizador.png"
+import estufaElectriaIcon from "../assets/estufa.png"
+import extractorIcon from "../assets/extractoraire.png"
+import purificadorIcon from "../assets/purificador.png"
+import ventiladorTechoIcon from "../assets/ventiladortecho.png"
+import ventiladorTorreIcon from "../assets/ventiladortorre.png"
+
 
 
 // 1. ESTADO REACTIVO PARA LA CARGA DE DATOS
@@ -150,8 +161,8 @@ const iconMap = {
     'Refrigerador': RefrigeradorIcon,
     'Lavadora':LavadoraIcon,
     'Hidrolavadora':LavadoraIcon,
-    'Afeitadora electrica':AfeitadoraIcon,
-    'Aire acondicionado port+ítil':AireAcondicionadoIcon,
+    'Afeitadora eléctrica':AfeitadoraIcon,
+    'Aire acondicionado portátil':airePortatilIcon,
     'Aire acondicionado split':AireAcondicionadoIcon,
     'Aspiradora':AspiradoraIcon,
     'Lavavajillas':lavavajillasIcon,
@@ -173,10 +184,15 @@ const iconMap = {
     'Proyector':proyectorIcon,
     'Tablet':tabletIcon,
     'Teatro en Casa':teatroIcon,
-
-
-
-  
+    'Calefactor eléctrico':calefactorIcon,
+    'Calefactor de aceite':calefactorAceiteIcon,
+    'Deshumidificador':deshumificadorIcon,
+    'Climatizador portátil':climatizadorPortatilIcon,
+    'Estufa eléctrica':estufaElectriaIcon,
+    'Extractor de aire':extractorIcon,
+    'Purificador de aire':purificadorIcon,
+    'Ventilador de techo':ventiladorTechoIcon,
+    'Ventilador de torre':ventiladorTorreIcon,  
 
 };
 
